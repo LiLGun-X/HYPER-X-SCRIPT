@@ -27,7 +27,7 @@ systemctl start vnstat.service
 scrip="https://raw.githubusercontent.com/tokssa/SAVAT/master"
 clear
 cd /usr/bin
-wget -q -O ByX "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/%C9%AA%C9%B4s%E1%B4%9B%E1%B4%80%CA%9F%CA%9F/ByX"
+wget -q -O ByX "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/ByX"
 chmod +x /usr/bin/ByX
 if [[ $(id -g) != "0" ]] ; then
     echo ""
