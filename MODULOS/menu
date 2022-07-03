@@ -62,7 +62,9 @@ fun_tst () {
 speedtest --share > speed
 }
 echo ""
-echo -e "   \033[1;32mTESTANDO A VELOCIDADE DO SERVIDOR !\033[0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"|lolcat
+echo -e "   \033[1;32m 🚀 กำลัง...ทดสอบความเร็วของเซิร์ฟเวอร์ 🚀\033[0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"|lolcat
 echo ""
 aguarde 'fun_tst'
 echo ""
