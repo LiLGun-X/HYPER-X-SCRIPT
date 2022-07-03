@@ -72,9 +72,11 @@ fun_atts () {
 
 echo -e "                              \033[1;31mBy kiritosshxd\033[1;36m"
 
-echo -e "   SSHPlus" | figlet
-
-echo " "
+echo ""
+echo "          ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
+echo "          ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
+echo "          ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
+echo "
 
 echo -e "   \033[1;32mVERIFICANDO ATUALIZACOES DISPONIVEIS\033[0m\n"
 
