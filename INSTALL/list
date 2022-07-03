@@ -62,7 +62,7 @@ clear
 #INICIO AUTOMATICO' >/etc/autostart
 	chmod +x /etc/autostart
 } || {
-	[[ $(ps x | grep "bot_plus" | grep -v grep | wc -l) != '0' ]] && wget -qO- https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/%E1%B4%8D%E1%B4%8F%E1%B4%85%E1%B4%9C%CA%9F%E1%B4%8Fs/ShellBot.sh
+	[[ $(ps x | grep "bot_plus" | grep -v grep | wc -l) != '0' ]] && wget -qO- https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/ShellBot.sh
 	for proc in $(ps x | grep 'dmS' | grep -v 'grep' | awk {'print $1'}); do
 		screen -r -S "$proc" -X quit	
 done
@@ -81,7 +81,7 @@ crontab -r >/dev/null 2>&1
 	echo "0 */6 * * * /bin/uexpired"
 ) | crontab -
 echo "$_lvk" | sed -n '1 p' | cut -d' ' -f2 >/bin/versao && cat /bin/versao >/home/sshplus
-wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/%C9%AA%C9%B4s%E1%B4%9B%E1%B4%80%CA%9F%CA%9F/jq-linux64 >/dev/null 2>&1
+wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/jq-linux64 >/dev/null 2>&1
 chmod +x jq-linux64 && mv jq-linux64 $(which jq)
 service cron restart >/dev/null 2>&1
 service ssh restart >/dev/null 2>&1
