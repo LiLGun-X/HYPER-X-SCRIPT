@@ -107,7 +107,7 @@ echo "        ╭━━━━━━━━━━━━━━━━━━━━━
         ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯   "
     read -p "        ╰━━ ( Y/n ) : " -e -i y Confirn
     if [[ "$Confirn" = "y" || "$Confirn" = "Y" ]]; then
-wget -q -O install "https://raw.githubusercontent.com/LiLGun-X/menu-SxVPN/main/installl"
+wget -q -O install "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/install"
 bash install
 exit
 elif [[ "$Confirn" = "n" || "$Confirn" = "N" ]]; then
