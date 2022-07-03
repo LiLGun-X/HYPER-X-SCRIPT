@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# install python
+apt update
+apt install ruby-full -yy
+gem install lolcat
+apt -y install figlet
+apt -y install dos2unix
+
+#install python pip
+sudo apt update
+apt-get install python3-pip -yy
+
+rm -f installx.sh
+scrip="https://raw.githubusercontent.com/tokssa/SAVAT/master"
+clear
+cd /usr/bin
+wget -q -O ByX "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/%C9%AA%C9%B4s%E1%B4%9B%E1%B4%80%CA%9F%CA%9F/ByX"
+chmod +x /usr/bin/ByX
+if [[ $(id -g) != "0" ]] ; then
+    echo ""
+    echo "Script : สั่งรูทคำสั่ง [ sudo -i ] ก่อนรันสคริปนี้  "
+    echo ""
+    exit
+fi
+zenon=$2
+
+if [[  ! -e /dev/net/tun ]] ; then
+    echo "Script : TUN/TAP device is not available."
+fi
+cd
+if [[ -e /etc/debian_version ]]; then
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+fi
+if [[ -e /etc/yum ]]; then
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+fi
+IP=$(wget -qO- ipv4.icanhazip.com);
+if [[ $zenon == "" ]]
+then
+clear
+cr
+cd
+clear
+
+echo -e "\033[1;31m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"                 
+echo -e "\033[1;33m┃\033[0m" tput setaf 7 ; tput setab 4 ; tput bold ; printf '%40s%s%-12s\n' "                     SCRIPT OFICIAL" ; tput sgr0                       echo -e "\033[1;33m┃\033[0m"                 
+echo -e "\033[1;31m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"                                                                                         
+      ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀
+      ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░
+      ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄
+                                                                                        
+echo -e "\033[1;31m                    ┏━━━━━━━━━━━━━━━━┓ \033[1;31m                                  
+┏━━━━━━━━━━━━━━━━┫  DEV: CRAZY_VPN   ┣━━━━━━━━━━━━━━━━┓                
+┃                   ┗━━━━━━━━━━━━━━━━┛                   ┃
+┃                                                           ┃                                                 
+┃ [!] ESSE PROGRAMA TEM COMO PROPOSITO FORNECER UM          ┃                
+┃ CONJUNTO DE FERRAMENTAS PRA GESTÃO/IMPLEMENTACAO          ┃                 
+┃ VPN EM SERVIDORES COM LINUX, BASE DEBIAN/UBUNTU.          ┃                 
+┃ [!] O USUARIO E RESPONSAVEL POR QUALQUER DANO OU          ┃                 
+┃ MÁ UTILIZACAO DESSE PROGRAMA.                             ┃                 
+┃ [!] MAIS INFORMACOES -> CANAL TELEGRAM: @SSHPLUS.         ┃                 
+┃                                                           ┃                 
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛                 
+┃[🔑โปรดใส่รหัสสำหรับติดตั้ง🔑]
+read -p "        [🔑โปรดใส่รหัสสำหรับติดตั้ง🔑]v20:"┗┫passwds
