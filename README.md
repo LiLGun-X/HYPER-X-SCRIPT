@@ -1,6 +1,6 @@
 # SSHPLUS
 
-apt update -y && apt upgrade -y && wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/ʜxs && chmod 777 ʜxs && ./ʜxs
+apt update -y && apt upgrade -y && wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/Plusx && chmod 777 Plusx && ./Plusx
 
 
 ʜxs
