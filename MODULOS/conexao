@@ -1421,6 +1421,7 @@ exit 0' >$RCLOCAL
 			echo -e "\033[1;32mREINICIANDO O OPENVPN"
 			echo ""
 			fun_bar 'fun_ropen'
+                        SQ=$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)
 			IP2=$(wget -4qO- "http://whatismyip.akamai.com/")
 			if [[ "$IP" != "$IP2" ]]; then
 				IP="$IP2"
