@@ -14,7 +14,7 @@ SCOLOR='\033[0m'
 	ram2=$(free -h | grep -i mem | awk {'print $4'})
 	ram3=$(free -h | grep -i mem | awk {'print $3'})
 	uso=$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')
-        SQ=$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
+        SQ=$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)
 	system=$(cat /etc/issue.net)
 	fun_bar() {
 		comando[0]="$1"
