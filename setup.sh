@@ -4,6 +4,7 @@
 apt update 
 apt install ruby-full -yy 
 gem install lolcat
+apt -y install lolcat
 apt -y install figlet 
 apt -y install dos2unix 
 rm -f setup.sh
