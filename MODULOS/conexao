@@ -275,7 +275,7 @@ SCOLOR='\033[0m'
 			echo ""
 			sed -i "/http_port $pt/d" $var_sqd
 			fun_bar 'sleep 3'
-			echo -e "\n\033[1;32mรีเซ็ต SQUID!""
+			echo -e "\n\033[1;32mรีเซ็ต SQUID!"
 			echo ""
 			fun_bar 'service squid restart' 'service squid3 restart'
 			echo -e "\n\033[1;32mลบ PORT สำเร็จ!"
