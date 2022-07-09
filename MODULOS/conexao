@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================
-#	@kiritosshxd
+#	@Lil Gunx
 #====================================================
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
@@ -896,14 +896,14 @@ SCOLOR='\033[0m'
 				echo ""
 				echo -e "\033[1;33mPORTA\033[1;37m: \033[1;32m$opnp"
 				echo ""
-				echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA"
-				echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER OPENVPN"
-				echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mOVPN VIA LINK $ovpnweb"
-				echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mMULTILOGIN OVPN $mult"
-				echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mALTERAR HOST DNS"
-				echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR"
+				echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mเปลี่ยน PORT"
+				echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mลบ OPENVPN"
+				echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mเปิด/ปินการสร้างลิ้งเพื่อดาวโหลด $ovpnweb"
+				echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mเปิด/ปิดการเชื่อมต่อแบบไม่จำกัด $mult"
+				echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mเปลี่ยน HOST DNS"
+				echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mออก"
 				echo ""
-				echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
+				echo -ne "\033[1;32mเลือกคำสั่งที่ต้องการใช่ \033[1;33m?\033[1;31m?\033[1;37m "
 				read option
 				case $option in
 				1)
@@ -1229,28 +1229,28 @@ SCOLOR='\033[0m'
 			done
 		} || {
 			clear
-			echo -e "\E[44;1;37m              INSTALADOR OPENVPN               \E[0m"
+			echo -e "\E[44;1;37m              ติดตั้ง OPENVPN               \E[0m"
 			echo ""
-			echo -e "\033[1;33mRESPONDA AS QUESTOES PARA INICIAR A INSTALACAO"
+			echo -e "\033[1;33mตอบคำถามเพื่อการติดตั้ง"
 			echo ""
-			echo -ne "\033[1;32mPARA CONTINUAR CONFIRME SEU IP: \033[1;37m"
+			echo -ne "\033[1;32mพิมพ์ไอพีเพื่อยืนยัน IP: \033[1;37m"
 			read -e -i $IP IP
 			[[ -z "$IP" ]] && {
 				echo ""
-				echo -e "\033[1;31mIP invalido!"
+				echo -e "\033[1;31mIP ไม่ถูกต้อง!"
 				sleep 3
 				fun_conexao
 			}
 			echo ""
-			read -p "$(echo -e "\033[1;32mQUAL PORTA DESEJA UTILIZAR? \033[1;37m")" -e -i 1194 porta
+			read -p "$(echo -e "\033[1;32mพิมพ์ Port ที่ต้องการใช้: \033[1;37m")" -e -i 1194 porta
 			[[ -z "$porta" ]] && {
 				echo ""
-				echo -e "\033[1;31mPorta invalida!"
+				echo -e "\033[1;31mPorta ไม่ถูดต้อง!"
 				sleep 2
 				fun_conexao
 			}
 			echo ""
-			echo -e "\033[1;33mVERIFICANDO PORTA..."
+			echo -e "\033[1;33mกำลังตรวจสอบ PORTA..."
 			verif_ptrs $porta
 			echo ""
 			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;33mSistema"
@@ -1261,12 +1261,12 @@ SCOLOR='\033[0m'
 			echo -e "\033[1;31m[\033[1;36m6\033[1;31m] \033[1;33mVerisign"
 			echo -e "\033[1;31m[\033[1;36m7\033[1;31m] \033[1;33mDNS Performace\033[0m"
 			echo ""
-			read -p "$(echo -e "\033[1;32mQUAL DNS DESEJA UTILIZAR? \033[1;37m")" -e -i 2 DNS
+			read -p "$(echo -e "\033[1;32mเลือก DNSที่ต้องการใช่? \033[1;37m")" -e -i 2 DNS
 			echo ""
 			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;33mUDP"
 			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;33mTCP (\033[1;32mRecomendado\033[1;33m)"
 			echo ""
-			read -p "$(echo -e "\033[1;32mQUAL PROTOCOLO DESEJA UTILIZAR NO OPENVPN? \033[1;37m")" -e -i 2 resp
+			read -p "$(echo -e "\033[1;32mเลือก PROTOCOLO สำหรับ OPENVPN? \033[1;37m")" -e -i 2 resp
 			if [[ "$resp" = '1' ]]; then
 				PROTOCOL=udp
 			elif [[ "$resp" = '2' ]]; then
@@ -1276,14 +1276,14 @@ SCOLOR='\033[0m'
 			fi
 			echo ""
 			[[ "$OS" = 'debian' ]] && {
-				echo -e "\033[1;32mATUALIZANDO O SISTEMA"
+				echo -e "\033[1;32mกำลังอัปเดต...ระบบ"
 				echo ""
 				fun_attos() {
 					apt-get update-y
 				}
 				fun_bar 'fun_attos'
 				echo ""
-				echo -e "\033[1;32mINSTALANDO DEPENDENCIAS"
+				echo -e "\033[1;32mกำลังติดตั้ง"
 				echo ""
 				fun_instdep() {
 					apt-get install openvpn iptables openssl ca-certificates -y
@@ -1300,15 +1300,15 @@ SCOLOR='\033[0m'
 			# Adquirindo easy-rsa
 			echo ""
 			fun_dep() {
-				wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/kiritosshxd/SSHPLUS/raw/main/Install/EasyRSA-3.0.1.tgz"
-				[[ ! -e $HOME/EasyRSA-3.0.1.tgz ]] && {
-					wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/kiritosshxd/SSHPLUS/raw/main/Install/EasyRSA-3.0.1.tgz"
+				wget -O ~/EasyRSA-3.1.0.tgz "https://github.com/LiLGun-X/HYPER-X-SCRIPT/blob/main/INSTALL/EasyRSA-3.1.0.tgz?raw=true"
+				[[ ! -e $HOME/EasyRSA-3.1.0.tgz ]] && {
+					wget -O ~/EasyRSA-3.1.0.tgz "https://github.com/LiLGun-X/HYPER-X-SCRIPT/blob/main/INSTALL/EasyRSA-3.1.0.tgz?raw=true"
 				}
-				tar xzf ~/EasyRSA-3.0.1.tgz -C ~/
-				mv ~/EasyRSA-3.0.1/ /etc/openvpn/
-				mv /etc/openvpn/EasyRSA-3.0.1/ /etc/openvpn/easy-rsa/
+				tar xzf ~/EasyRSA-3.1.0.tgz -C ~/
+				mv ~/EasyRSA-3.1.0/ /etc/openvpn/
+				mv /etc/openvpn/EasyRSA-3.1.0/ /etc/openvpn/easy-rsa/
 				chown -R root:root /etc/openvpn/easy-rsa/
-				rm -rf ~/EasyRSA-3.0.1.tgz
+				rm -rf ~/EasyRSA-3.1.0.tgz
 				cd /etc/openvpn/easy-rsa/
 				./easyrsa init-pki
 				./easyrsa --batch build-ca nopass
@@ -1375,7 +1375,7 @@ group $GROUPNAME
 persist-key
 persist-tun
 status openvpn-status.log
-management localhost 7505
+management localhost 
 verb 3
 crl-verify crl.pem
 client-to-client
@@ -1421,7 +1421,7 @@ exit 0' >$RCLOCAL
 					fi
 				fi
 			}
-			echo -e "\033[1;32mINSTALANDO O OPENVPN  \033[1;31m(\033[1;33mPODE DEMORAR!\033[1;31m)"
+			echo -e "\033[1;32mกำลังติดตั้ง OPENVPN  \033[1;31m(\033[1;33mอาจจะใช้เวลารอนานหน่อย!\033[1;31m)"
 			echo ""
 			fun_bar 'fun_dep > /dev/null 2>&1'
 			fun_ropen() {
@@ -1442,7 +1442,7 @@ exit 0' >$RCLOCAL
 				}
 			}
 			echo ""
-			echo -e "\033[1;32mREINICIANDO O OPENVPN"
+			echo -e "\033[1;32mกำลังรีเซ็ต  OPENVPN"
 			echo ""
 			fun_bar 'fun_ropen'
 			IP2=$(wget -4qO- "http://whatismyip.akamai.com/")
@@ -1474,7 +1474,7 @@ exit 0' >$RCLOCAL
 				float
 			EOF
 			# gerar client.ovpn
-			newclient "SSHPLUS"
+			newclient "LilGunX"
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
