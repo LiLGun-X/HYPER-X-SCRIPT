@@ -1350,7 +1350,7 @@ group $GROUPNAME
 persist-key
 persist-tun
 status openvpn-status.log
-management localhost 
+management localhost 555
 verb 3
 crl-verify crl.pem
 client-to-client
