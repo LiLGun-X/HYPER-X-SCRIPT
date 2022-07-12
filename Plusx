@@ -62,13 +62,13 @@ echo -e "\n\033[1;36mกำลังตรวจสอบ... ระบบ\033[1;
 echo -e "\n\033[1;32mสำเร็จ!\033[1;32m"
 sleep 1s
 echo ""
-[[ -f "$HOME/usuarios.db" ]] && {
+[[ -f "$HOME/userlist.gzn" ]] && {
     clear
     echo -e "\n\033[0;34m═════════════════════════════════════════════════\033[0m"
     echo ""
 	echo -e "                 \033[1;33m• \033[1;31mคำเตือน! \033[1;33m• \033[0m"
 	echo ""
-    echo -e "\033[1;33mฐานข้อมูลผู้ใช้ \033[1;32m(usuarios.db) \033[1;33mคือ" 
+    echo -e "\033[1;33mฐานข้อมูลผู้ใช้ \033[1;32m(userlist.gzn) \033[1;33mคือ" 
     echo -e "มีแล้ว! คุณต้องการที่จะใช้ข้อมูลปัจจุบันนี้ ใช่หรือไม่?"
 	echo -e "บัญชีผู้ใช้งานปัจจุบัน? หรือคุณต้องการ"
     echo -e "สร้างฐานข้อมูลใหม่?\033[0m"
@@ -76,11 +76,11 @@ echo ""
 	echo -e "\033[1;37m[\033[1;31m2\033[1;37m] \033[1;33mสร้างฐานข้อมูลใหม่\033[0m"
 	echo -e "\n\033[0;34m═════════════════════════════════════════════════\033[0m"
     echo ""
-	tput setaf 2 ; tput bold ; read -p "Opção ?: " -e -i 1 optiondb ; tput sgr0
+	tput setaf 2 ; tput bold ; read -p "เลือก ?: " -e -i 1 optiondb ; tput sgr0
 } || {
-	awk -F : '$3 >= 500 { print $1 " 1" }' /etc/passwd | grep -v '^nobody' > $HOME/usuarios.db
+	awk -F : '$3 >= 500 { print $1 " 1" }' /etc/passwd | grep -v '^nobody' > $HOME/userlist.gzn
 }
-[[ "$optiondb" = '2' ]] && awk -F : '$3 >= 500 { print $1 " 1" }' /etc/passwd | grep -v '^nobody' > $HOME/usuarios.db
+[[ "$optiondb" = '2' ]] && awk -F : '$3 >= 500 { print $1 " 1" }' /etc/passwd | grep -v '^nobody' > $HOME/userlist.gzn
 clear
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%35s%s%-18s\n' " รอการติดตั้ง..." ; tput sgr0
 echo ""
