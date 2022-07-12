@@ -378,12 +378,12 @@ case "$x" in
    1 | 01)
    clear
    criarusuario
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    2 | 02)
    clear
    criarteste
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    3 | 03)
    clear
@@ -393,7 +393,7 @@ case "$x" in
    4 | 04)
    clear
    sshmonitor
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;      
    5 | 05)
    clear
@@ -419,7 +419,7 @@ case "$x" in
    9 | 09)
    clear
    infousers
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    10)
    conexao
@@ -428,7 +428,7 @@ case "$x" in
    11)
    clear
    velocity
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    12)
    clear
@@ -444,11 +444,11 @@ case "$x" in
    14)
    clear
    otimizar
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    15)
    userbackup
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    16)
    swapmemory
@@ -458,11 +458,11 @@ case "$x" in
    ;;
    b1)
    BW
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    b2)
    BWU
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
 tm)
    ajuda
@@ -478,7 +478,7 @@ tm)
    20)
    clear
    detalhes
-   echo -ne "\n\033[1;31mกดENTER \033[1;33mเพื่อกลับเข้าสู่ \033[1;32mMENU!\033[0m"; read
+   echo -ne "\033[1;31mENTER \033[1;33mBACK \033[1;32mMENU!\033[0m"; read
    ;;
    21)
    menu2
