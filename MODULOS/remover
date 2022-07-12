@@ -58,7 +58,7 @@ else
 		pkill -f "$user" > /dev/null 2>&1
 		deluser --force $user > /dev/null 2>&1
 		echo -e "\E[41;1;37m Usuario $user removido com sucesso! \E[0m"
-		grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
+		grep -v ^$user[[:space:]] /root/userlist.gzn > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 		rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 		if [[ -e /etc/openvpn/server.conf ]]; then
 			remove_ovp $user
@@ -70,7 +70,7 @@ else
 			deluser --force $user > /dev/null 2>&1
 			echo ""
 			echo -e "\E[41;1;37m Usuario $user removido com sucesso! \E[0m"
-			grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
+			grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/userlist.gzn
 			rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
 				remove_ovp $user
@@ -82,7 +82,7 @@ else
 			pkill -f "$user" > /dev/null 2>&1
 			deluser --force $user > /dev/null 2>&1
 			echo -e "\E[41;1;37m Usuario $user removido com sucesso! \E[0m"
-			grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
+			grep -v ^$user[[:space:]] /root/userlist.gzn > /tmp/ph ; cat /tmp/ph > /root/userlist.gzn
 			rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
 				remove_ovp $user
@@ -107,7 +107,7 @@ elif [[ "$resp" = "2" ]]; then
 		   remove_ovp $user
 		fi
 		done
-		rm $HOME/usuarios.db && touch $HOME/usuarios.db
+		rm $HOME/userlist.gzn && touch $HOME/userlist.gzn
         rm *.zip > /dev/null 2>&1
 		echo -e "\n\033[1;32mUSUARIOS REMOVIDOS COM SUCESSO!\033[0m"
 		sleep 2
