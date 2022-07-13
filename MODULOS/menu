@@ -475,6 +475,9 @@ tm)
    19)
    onapp_ssh
    ;;
+test)
+   test
+   ;;
    20)
    clear
    detalhes
