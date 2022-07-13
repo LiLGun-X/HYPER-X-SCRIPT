@@ -9,7 +9,6 @@ if [[ ! -e /usr/local/bin/Banwidth-Per-Client ]]; then
 	chmod +x /usr/local/bin/Banwidth-Per-Client
 	clear
 echo ""
-echo ""
 echo "          ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
 echo "          ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
 echo "          ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
@@ -18,13 +17,4 @@ echo "
 	Banwidth-Per-Client
 	echo ""
 else
-	clear
-echo ""
-echo ""
-echo "          ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
-echo "          ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
-echo "          ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
-echo "
-	Banwidth-Per-Client
-	echo ""
 fi
