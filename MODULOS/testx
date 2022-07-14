@@ -1,5 +1,13 @@
 #!/bin/bash
 #DEV BY ZENON.TK
+if [ -e '/usr/bin/cr' ]; then
+	echo 
+else
+echo "" > /usr/bin/cr
+chmod +x /usr/bin/cr
+sed -i '/^$/d' /usr/bin/cr
+fi
+
 clear
 clear
 if [[ -e /etc/debian_version ]]; then
