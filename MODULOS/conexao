@@ -2,6 +2,11 @@
 #====================================================
 #	@kiritosshxd
 #====================================================
+#OS
+if [[ -e /etc/debian_version ]]; then
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+fi
+
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
 scor='\033[0m'
@@ -225,6 +230,23 @@ addpt_sqd () {
 }
 
 add_ip () {
+# IP Address
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+if [ -e '/etc/squid3/squid.txt' ]; then
+echo ""
+clear
+else
+echo "" > /etc/squid3/squid.txt
+fi
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="10"' ]]; then
+if [ -e '/etc/squid/squid.txt' ]; then
+echo ""
+clear
+else
+echo "" > /etc/squid/squid.txt
+fi
+fi
+
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣  เลือกใช้คำสั่ง โดยการพิมพ์ตัวเลข"
 echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
