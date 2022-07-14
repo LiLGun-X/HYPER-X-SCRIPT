@@ -11,6 +11,19 @@ IP=$(wget -qO- ipv4.icanhazip.com);
 if [[ "$IP" = "" ]]; then
     IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | grep -v '192.168'`;
 fi
+
+ok() {
+    echo -e '\e[32m'$1'\e[m';
+}
+
+die() {
+    echo -e '\e[1;35m'$1'\e[m';
+}
+
+des() {
+    echo -e '\e[1;31m'$1'\e[m'; exit 1;
+}
+
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
 scor='\033[0m'
