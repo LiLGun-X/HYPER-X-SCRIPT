@@ -49,6 +49,11 @@ cd /usr/bin
 wget -q -O mx "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 chmod +x mx
 
+echo -e " \033[1;35m➤ กำลังติดตั้งmenu.V2 \033[0m" 
+cd /usr/bin
+wget -q -O v2 "https://raw.githubusercontent.com/LiLGun-X/D-script-1.0/master/menu"
+chmod +x v2
+
 
 #แจ้งเตือนคนรันสคิป
 IP=$(wget -qO- ipv4.icanhazip.com);
