@@ -187,14 +187,14 @@ fi
 
  
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst $ipdovps-$ipdovps\/255.255.255.255" /etc/squid3/squid.conf
 sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid3/squid.conf
 echo " ┈┣ $SERVER_IP " >> /etc/squid3/squid.txt
 ok "❯❯❯ service squid3 restart"
 service squid3 restart -q > /dev/null 2>&1
 elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
-sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst $ipdovps-$ipdovps\/255.255.255.255" /etc/squid/squid.conf
+sed -i "s/$ipdovps/$SERVER_IP/g" /etc/squid/squid.conf
 echo " ┈┣ $SERVER_IP " >> /etc/squid/squid.txt
 ok "❯❯❯ service squid restart"
 service squid restart -q > /dev/null 2>&1
@@ -325,8 +325,8 @@ sed -i $SERVER_IP2 /etc/squid3/squid.txt
 sed -i $SERVER_IP2 /etc/squid3/squid.conf
 sed -i '/^$/d' /etc/squid3/squid.txt
 sed -i '/^$/d' /etc/squid3/squid.conf
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
-sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid3/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst $ipdovps-$ipdovps\/255.255.255.255" /etc/squid3/squid.conf
+sed -i "s/$ipdovps/$IP/g" /etc/squid3/squid.conf
 echo "" > /etc/squid3/squid.txt
 sed -i '/^$/d' /etc/squid3/squid.txt
 ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
@@ -336,8 +336,8 @@ SERVER_IP2="/255.255.255.255/d";
 sed -i $SERVER_IP2 /etc/squid/squid.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
 sed -i '/^$/d' /etc/squid/squid.conf
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
-sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst $ipdovps-$ipdovps\/255.255.255.255" /etc/squid/squid.conf
+sed -i "s/$ipdovps/$IP/g" /etc/squid/squid.conf
 echo "" > /etc/squid/squid.txt
 sed -i '/^$/d' /etc/squid/squid.txt
 ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
