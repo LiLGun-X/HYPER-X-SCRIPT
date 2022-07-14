@@ -224,6 +224,209 @@ addpt_sqd () {
 	fun_squid
 }
 
+add_ip () {
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  เลือกใช้คำสั่ง โดยการพิมพ์ตัวเลข"
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+echo " ┈┣  1. เพิ่มไอพี "
+echo " ┈┣  2. เช็คไอพี     "
+echo " ┈┣  3. ลบไอพี          "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+echo " "
+ read -p " ┈┣ พิมพ์ตัวเลข : " Selet
+ if [[ "$Selet" = "" ]]; then
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  โปรดพิมพ์คำสั่งโดยใส่ตัวเลข "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+ exit
+fi
+ if [[ $Selet = 1 ]]; then
+ read -p " ┈┣ ใส่เลขไอพีที่จะใช้งานพร็อกซี่นี้ : " SERVER_IP
+ read -p " ┈┣ บันทึกการตั้งค่านี้ Y/N : " YN
+ if [[ n = $YN || N = $YN ]]; then
+ clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  $SERVER_IP ไม่ได้ยืนยันการใช้งาน "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit 
+ fi
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
+fi
+if [ $? -eq 0 ]; then
+ clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  $SERVER_IP มีอยู่ในระบบแล้ว "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit
+else
+echo
+fi
+
+ 
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
+sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid3/squid.conf
+echo  " ┈┣ $SERVER_IP " >> /etc/squid3/squid.txt
+ok "❯❯❯ service squid3 restart"
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
+sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
+echo " ┈┣ $SERVER_IP " >> /etc/squid/squid.txt
+ok "❯❯❯ service squid restart"
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  เปิดใช้งาน $SERVER_IP เรียบร้อย "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit 
+elif [[ $Selet = 2 ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^http_access allow all" /etc/squid/squid.conf >/dev/null
+fi
+ if [ $? -eq 0 ]; then
+ clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  สถานะปัจจุบัน ใช้ใด้ทุก Server "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit
+else
+
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  ไอพีที่เปิดใช้งานอยู่ในปัจจุบัน "
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+echo " ┈┣ $IP  "
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+cat /etc/squid3/squid.txt
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯
+"
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+cat /etc/squid/squid.txt
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯"
+fi
+exit
+fi
+elif [[ $Selet = 3 ]]; then
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  เลือกใช้คำสั่ง โดยการพิมพ์ตัวเลข"
+echo " ┈┣  ลบไอพีพร็อกซี่"
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+echo " ┈┣  1. ลบบางไอพี  "
+echo " ┈┣  2. รีเซ็ตค่าเดิม  "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+read -p " ┈┣ พิมพ์ตัวเลข : " Selet1
+if [[ $Selet1 = 1 ]]; then
+read -p " ┈┣ ใส่เลขไอพีที่จะลบ : " SERVER_IP
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
+fi
+
+if [ $? -eq 0 ]; then
+if [[ $SERVER_IP = $IP ]]; then
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  ไม่อณุญาตให้ลบไอพีของเซิร์ฟเวอร์นี้ "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+ exit
+fi
+ read -p " ┈┣ ยืนยันการลบไอพี Y/N : " YN
+else
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  ไม่พบ IP $SERVER_IP ในระบบ "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit
+fi
+
+if [[ $YN = N || $YN = n ]]; then
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  ยกเลิกการเปลี่ยนแปลง "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+ exit
+fi
+
+
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+SERVER_IP2="/$SERVER_IP/d";
+sed -i $SERVER_IP2 /etc/squid3/squid.txt
+sed -i $SERVER_IP2 /etc/squid3/squid.conf
+sed -i '/^$/d' /etc/squid3/squid.txt
+sed -i '/^$/d' /etc/squid3/squid.conf
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+SERVER_IP2="/$SERVER_IP/d";
+sed -i $SERVER_IP2 /etc/squid/squid.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/squid.txt
+sed -i '/^$/d' /etc/squid/squid.conf
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  ลบไอพี $SERVER_IP เรียบร้อย "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit
+elif [[ $Selet1 = 2 ]]; then
+read -p " ┈┣ ยืนยันการลบไอพีทั้งหมด Y/N : " YN
+if [[ $YN = N || $YN = n ]]; then
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  ยกเลิกการเปลี่ยนแปลง "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+ exit
+fi
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+SERVER_IP2="/255.255.255.255/d";
+sed -i $SERVER_IP2 /etc/squid3/squid.txt
+sed -i $SERVER_IP2 /etc/squid3/squid.conf
+sed -i '/^$/d' /etc/squid3/squid.txt
+sed -i '/^$/d' /etc/squid3/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
+sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid3/squid.conf
+echo "" > /etc/squid3/squid.txt
+sed -i '/^$/d' /etc/squid3/squid.txt
+ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+SERVER_IP2="/255.255.255.255/d";
+sed -i $SERVER_IP2 /etc/squid/squid.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
+sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid/squid.conf
+echo "" > /etc/squid/squid.txt
+sed -i '/^$/d' /etc/squid/squid.txt
+ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  ลบไอพีทั้งหมด เรียบร้อย"
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit
+fi
+fi
+clear
+	fun_squid
+}
+
 rempt_sqd () {
 	echo -e "\E[41;1;37m        ลบ PORT PROXY        \E[0m"
 	echo -e "\n\033[1;33mPORT ใช้งาน: \033[1;32m$sqdp\n"
@@ -291,6 +494,9 @@ case $x in
 	;;
 	3|03)
 	rempt_sqd
+	;;
+        t|t)
+	add_ip
 	;;
 	0|00)
 	echo -e "\033[1;31mกลับ...\033[0m"
