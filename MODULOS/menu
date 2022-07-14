@@ -477,7 +477,7 @@ tm)
    ;;
    tx)
    clear
-   testx
+   testc
    ;;
    20)
    clear
