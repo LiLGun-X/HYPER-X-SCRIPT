@@ -135,7 +135,6 @@ acl localnet src 10.0.0.0/8
 acl localnet src 172.16.0.0/12
 acl localnet src 192.168.0.0/16
 acl payload url_regex -i "$var_pay"
-acl SSL_ports port 443
 acl url1 dstdomain -i 127.0.0.1
 acl Safe_ports port 80
 acl Safe_ports port 21
