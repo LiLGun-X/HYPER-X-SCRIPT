@@ -28,8 +28,8 @@ systemctl start vnstat.service
 scrip="https://raw.githubusercontent.com/tokssa/SAVAT/master"
 clear
 cd /usr/bin
-wget -q -O ByX "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/ByX"
-chmod +x /usr/bin/ByX
+wget -q -O cr "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/cr"
+chmod +x /usr/bin/cr
 if [[ $(id -g) != "0" ]] ; then
     echo ""
     echo "Script : สั่งรูทคำสั่ง [ sudo -i ] ก่อนรันสคริปนี้  "
