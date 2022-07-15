@@ -51,11 +51,11 @@ chmod +x mx
 
 echo -e " \033[1;35m➤ กำลังติดตั้งmenu.V2 \033[0m" 
 cd /usr/bin
-wget -q -O v2 "https://raw.githubusercontent.com/LiLGun-X/DxS/master/menux"
+wget -q -O v2 "https://raw.githubusercontent.com/LiLGun-X/DxS/master/menu"
 chmod +x v2
 
 echo -e " \033[1;35m➤ กำลังติดตั้งmenu.V3 \033[0m" 
-cd /usr/bin
+cd /usr/local/bin
 wget -q -O v3 "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/menu-sm.sh"
 chmod +x v3
 
