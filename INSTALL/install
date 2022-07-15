@@ -54,12 +54,6 @@ cd /usr/bin
 wget -q -O v2 "https://raw.githubusercontent.com/LiLGun-X/DxS/master/menu"
 chmod +x v2
 
-echo -e " \033[1;35m➤ กำลังติดตั้งmenu.V3 \033[0m" 
-cd /usr/local/bin
-wget -q -O v3 "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/menu-sm.sh"
-chmod +x v3
-
-
 #แจ้งเตือนคนรันสคิป
 IP=$(wget -qO- ipv4.icanhazip.com);
 curl -X POST -H 'Authorization: โค๊คapi line' -F 'message='" 
