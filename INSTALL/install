@@ -51,7 +51,7 @@ chmod +x mx
 
 echo -e " \033[1;35m➤ กำลังติดตั้งmenu.V2 \033[0m" 
 cd /usr/bin
-wget -q -O v2 "https://raw.githubusercontent.com/LiLGun-X/DxS/master/menu"
+wget -q -O v2 "https://raw.githubusercontent.com/LiLGun-X/DxS/master/menu-sm.sh"
 chmod +x v2
 
 
