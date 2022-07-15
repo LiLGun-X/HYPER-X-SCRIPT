@@ -963,7 +963,7 @@ case $x in
 			[[ "$resposta" = 's' ]] && {
 				echo -e "\n\033[1;33mDEFINA UMA PORTA PARA O SSL TUNNEL !\033[0m"
 				echo ""
-				read -p "$(echo -e "\033[1;32mQUAL PORTA DESEJA UTILIZAR? \033[1;37m")" -e -i 443 porta
+				read -p "$(echo -e "\033[1;32mQUAL PORTA DESEJA UTILIZAR? \033[1;37m")" -e -i 442 porta
 				[[ -z "$porta" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
@@ -1015,9 +1015,9 @@ case $x in
 				cd /etc/stunnel/
 				rm -rf stunnel.conf
 				rm -rf stunnel.pem
-				wget https://raw.githubusercontent.com/kiritosshxd/SSHPLUS/master/Install/cert
-				wget https://raw.githubusercontent.com/kiritosshxd/SSHPLUS/master/Install/key
-				wget https://raw.githubusercontent.com/kiritosshxd/SSHPLUS/master/Install/stunnel
+				wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/cert
+				wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/key
+				wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/stunnel
 				mv cert cert.pem
 				mv key key.pem
 				mv stunnel stunnel.conf
