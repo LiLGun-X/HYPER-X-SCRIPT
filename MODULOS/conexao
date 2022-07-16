@@ -154,12 +154,14 @@ fi
 				acl url2 dstdomain -i localhost
 				acl url3 dstdomain -i $ipdovps
 				acl url4 dstdomain -i LiLGunX
+                                acl SSH dst $ipdovps-$ipdovps/255.255.255.255
 				acl payload url_regex -i "$var_pay"
 				acl all src 0.0.0.0/0
 				http_access allow url1
 				http_access allow url2
 				http_access allow url3
 				http_access allow url4
+                                http_access allow SSH
 				http_access allow payload
 				http_access deny all
 				 
