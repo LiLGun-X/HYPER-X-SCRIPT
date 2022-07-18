@@ -133,8 +133,7 @@ for porta in $(echo -e $portass); do
 	verif_ptrs $porta
 done
 echo -e "\n\033[1;32mติดตั้ง SQUID PROXY\033[0m"
-apt-get update -y 
-apt-get -y install squid
+fun_bar 'apt update -y' 'apt-get -y install squid'
 sleep 1
 if [[ -d "/etc/squid/" ]]; then
 var_sqd="/etc/squid/squid.conf"
