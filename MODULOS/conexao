@@ -2519,7 +2519,6 @@ echo ""
 	;;
 esac
 fun_conexao
-fi
 }
 
 	x="ok"
