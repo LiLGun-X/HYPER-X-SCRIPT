@@ -135,27 +135,9 @@ inst_sqd() {
 			for porta in $(echo -e $portass); do
 				verif_ptrs $porta
 			done
-			[[ $(grep -wc '14' /etc/issue.net) != '0' ]] || [[ $(grep -wc '8' /etc/issue.net) != '0' ]] && {
-				echo -e " \033[1;35m➤ install Proxy\033[0m"
-                                apt-get -y install squid -q > /dev/null 2>&1
-			} || {
-				echo -e "\n\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.3.X\n\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.5.X\033[0m\n"
-				read -p "$(echo -e "\033[1;32mINFORME UMA OPÇÃO \033[1;37m: ")" -e -i 1 opc
-				[[ -z "$opc" ]] && {
-					echo -e "\n\033[1;31mOpcao invalida!"
-					sleep 2
-					fun_conexao
-				}
-				[[ "$opc" != '1' ]] && {
-					[[ "$opc" != '2' ]] && {
-						echo -e "\n\033[1;31mOpcao invalida !"
-						sleep 2
-						fun_conexao
-					}
-				}
-				echo -e "\n\033[1;32mINSTALANDO SQUID PROXY\033[0m\n"
-				fun_bar 'apt update -y' "instsqd $opc"
-			}
+			echo -e " \033[1;35m➤ INSTLL PROXY\033[0m"
+                        apt-get -y install squid -q > /dev/null 2>&1
+                       
 			if [[ -d "/etc/squid/" ]]; then
 				var_sqd="/etc/squid/squid.conf"
 				var_pay="/etc/squid/payload.txt"
@@ -2575,7 +2557,7 @@ fun_conexao
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-			echo -e "\E[44;1;37m                โหมดเชื่อมต่อต่างๆv2                 \E[0m\n"
+			echo -e "\E[44;1;37m                โหมดเชื่อมต่อต่างๆ                 \E[0m\n"
 			echo -e "\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
 			[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
 				echo -e "\033[1;32mระบบ: \033[1;33mCHISEL: \033[1;32mPORT: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)"
