@@ -2464,7 +2464,7 @@ refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
 #Portas" > $var_sqd
-for Pts in $(echo -e $portass); do
+for Pts in $(echo -e $PROXY); do
 echo -e "http_port $Pts" >> $var_sqd
 [[ -f "/usr/sbin/ufw" ]] && ufw allow $Pts/tcp
 done
