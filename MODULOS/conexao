@@ -2424,8 +2424,18 @@ END
 		fi
 #Install squid
 		apt-get -y install squid
+if [[ -d "/etc/squid/" ]]; then
+				var_sqd="/etc/squid/squid.conf"
+				var_pay="/etc/squid/payload.txt"
+			elif [[ -d "/etc/squid3/" ]]; then
+				var_sqd="/etc/squid3/squid.conf"
+				var_pay="/etc/squid3/payload.txt"
+			else
+				echo -e "\n\033[1;33m[\033[1;31mERRO\033[1;33m]\033[1;37m: \033[1;33mO SQUID PROXY CORROMPEU\033[0m"
+				sleep 2
+				fun_conexao
+			fi
 		cat > /etc/squid/squid.conf <<END
-http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -2453,6 +2463,17 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
+#Portas" > $var_sqd
+for Pts in $(echo -e $portass); do
+echo -e "http_port $Pts" >> $var_sqd
+[[ -f "/usr/sbin/ufw" ]] && ufw allow $Pts/tcp
+done
+echo -e "
+#Nome squid
+visible_hostname LiLGunX 
+via off
+forwarded_for off
+pipeline_prefetch off" >> $var_sqd
 		IP2="s/xxxxxxxxx/$IP/g";
 		sed -i $IP2 /etc/squid/squid.conf;
 		/etc/init.d/squid restart
