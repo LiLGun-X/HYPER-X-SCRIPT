@@ -137,7 +137,7 @@ inst_sqd() {
 			done
 			[[ $(grep -wc '14' /etc/issue.net) != '0' ]] || [[ $(grep -wc '8' /etc/issue.net) != '0' ]] && {
 				echo -e "\n\033[1;32mINSTALANDO SQUID PROXY\033[0m\n"
-				fun_bar 'apt update -y' "apt install squid3 -y"
+				fun_bar 'apt update -y' "apt-get -y install squid -y"
 			} || {
 				echo -e "\n\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.3.X\n\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.5.X\033[0m\n"
 				read -p "$(echo -e "\033[1;32mINFORME UMA OPÇÃO \033[1;37m: ")" -e -i 1 opc
