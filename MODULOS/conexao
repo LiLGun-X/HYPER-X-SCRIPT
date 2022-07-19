@@ -340,7 +340,7 @@ for Pts in $(echo -e $portass); do
 			echo -e "\n\033[1;32mSQUID INSTALADO COM SUCESSO!\033[0m"
 			sleep 2.5s
 			fun_conexao
-		fi
+		
 	}
 
 addpt_sqd () {
