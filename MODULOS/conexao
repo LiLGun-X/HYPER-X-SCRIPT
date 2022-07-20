@@ -137,11 +137,9 @@ inst_sqd() {
 			done
 			echo ""
 				echo -e "\033[1;32mINSTALANDO DEPENDENCIAS"
-				echo ""
-				fun_instdep() {
-	                                apt-get -y install squid
-				}
-				fun_bar 'fun_instdep'
+				echo -e " \033[1;35m➤ INSTLL PROXY \033[0m"
+                        apt-get -y install squid -q > /dev/null 2>&1
+
 			if [[ -d "/etc/squid/" ]]; then
 				var_sqd="/etc/squid/squid.conf"
 				var_pay="/etc/squid/payload.txt"
