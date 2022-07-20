@@ -1506,26 +1506,14 @@ case $x in
 				PROTOCOL=tcp
 			fi
 			echo ""
-			[[ "$OS" = 'debian' ]] && {
+		
 				echo -e "\033[1;32mATUALIZANDO O SISTEMA"
 				echo ""
-				fun_attos() {
-					apt-get update-y
-				}
-		
-                        fun_bar 'fun_attos'
-				echo ""
-				echo -e "\033[1;32mINSTALANDO DEPENDENCIAS"
-				echo ""
-				fun_instdep() {
-	                                apt-get install openvpn iptables openssl ca-certificates -y
-					apt-get install zip -y
-				}
-				fun_bar 'fun_instdep'
-			} || {
-				fun_bar 'yum install epel-release -y'
-				fun_bar 'yum install openvpn iptables openssl wget ca-certificates -y'
-			}
+				fun_bar 'apt-get update-y'
+					
+				echo -e " \033[1;35m❯❯❯ INSTLL OPENVPN \033[0m"|lolcat
+                        apt-get install -y openvpn openssl ca-certificates -q > /dev/null 2>&1 |lolcat
+                        apt-get install zip -y -q > /dev/null 2>&1
 
 			[[ -d /etc/openvpn/easy-rsa/ ]] && {
 				rm -rf /etc/openvpn/easy-rsa/
