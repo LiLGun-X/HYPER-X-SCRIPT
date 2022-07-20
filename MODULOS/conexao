@@ -1513,11 +1513,9 @@ case $x in
 					apt-get update-y
 				}
 		
-                        echo -e " \033[1;35m❯❯❯ INSTLL SQUID PROXY \033[0m"|lolcat
+                        echo -e " \033[1;35m❯❯❯ INSTLL OPENVPN \033[0m"|lolcat
                         apt-get install -y openvpn openssl ca-certificates -q > /dev/null 2>&1 |lolcat
-           
-                        echo -e " \033[1;35m❯❯❯ INSTLL ZIP \033[0m"|lolcat
-                        apt-get install zip -y -q > /dev/null 2>&1 |lolcat
+                        apt-get install zip -y -q > /dev/null 2>&1
 
 			[[ -d /etc/openvpn/easy-rsa/ ]] && {
 				rm -rf /etc/openvpn/easy-rsa/
