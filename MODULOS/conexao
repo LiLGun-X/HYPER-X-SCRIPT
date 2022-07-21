@@ -110,7 +110,8 @@ inst_sqd() {
 				clear
 				fun_conexao
 			}
-		else
+		
+else
 clear
 echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
 echo ""
@@ -189,31 +190,29 @@ echo -e "http_port $Pts" >> $var_sqd
 done
 echo -e "
 #Nome squid
-visible_hostname LiLGunX
+visible_hostname OVPN-PRO 
 via off
 forwarded_for off
 pipeline_prefetch off" >> $var_sqd
-			sqd_conf() {
-				[[ -d "/etc/squid/" ]] && {
-					service ssh restart
-					/etc/init.d/squid restart
-					service squid restart
-				}
-				[[ -d "/etc/squid3/" ]] && {
-					service ssh restart
-					/etc/init.d/squid3 restart
-					service squid3 restart
-				}
-			}
-			echo -e "\n\033[1;32mCONFIGURANDO SQUID PROXY\033[0m"
-			echo ""
-			fun_bar 'sqd_conf'
-			echo -e "\n\033[1;32mSQUID INSTALADO COM SUCESSO!\033[0m"
-			sleep 2.5s
-			fun_conexao
-		fi
-	}
-
+sqd_conf () {
+if [[ -d "/etc/squid/" ]]; then
+squid -k reconfigure
+service ssh restart
+service squid restart
+elif [[ -d "/etc/squid3/" ]]; then
+squid3 -k reconfigure
+service ssh restart
+service squid3 restart
+fi
+}
+echo -e "\n\033[1;32mตั้งค่า SQUID PROXY\033[0m"
+echo ""
+fun_bar 'sqd_conf'
+echo -e "\n\033[1;32mติดตั้ง SQUID PROXY เรียบร้อยแล้ว!\033[0m"
+sleep 3.5s
+fun_conexao
+fi
+}
 addpt_sqd () {
 	echo -e "\E[44;1;37m         เพิ่ม Port Proxy         \E[0m"
 	echo -e "\n\033[1;33mPort ใช้งาน: \033[1;32m$sqdp\n"
