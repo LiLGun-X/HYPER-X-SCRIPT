@@ -156,7 +156,7 @@ for porta in $(echo -e $portass); do
 					}
 				}
 				echo -e "\n\033[1;32mINSTALANDO SQUID PROXY\033[0m\n"
-				fun_bar 'apt update -y' "instsqd $opc"
+				fun_bar 'apt update -y' "apt-get -y install squid"
 			}
 			if [[ -d "/etc/squid/" ]]; then
 				var_sqd="/etc/squid/squid.conf"
