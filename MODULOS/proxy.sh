@@ -376,7 +376,7 @@ fi
  read -p " ┈┣ ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
  if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
 fi
 
@@ -426,7 +426,7 @@ sed -i "s/xxxx/$Port/g" /etc/squid3/squid.conf
 echo " ┈┣ http_port $Port " >> /etc/squid3/port.txt
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' ]]; then
 sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
 sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
 echo " ┈┣ http_port $Port  " >> /etc/squid/port.txt
@@ -451,7 +451,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 cat /etc/squid3/port.txt
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯
 "
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 cat /etc/squid/port.txt
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯"
 exit
@@ -473,7 +473,7 @@ if [[ $Selet1 = 1 ]]; then
 read -p " ┈┣ ใส่เลขพอร์ตที่จะลบ : " Port
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' ]]; then
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
 fi
 if [ $? -eq 0 ]; then
@@ -513,7 +513,7 @@ sed -i '/^$/d' /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/squid.conf
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 SERVER_IP2="/$Port/d";
 sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
@@ -549,7 +549,7 @@ echo " ┈┣ http_port 8080 " > /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/port.txt
 ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 SERVER_IP2="/http_port/d";
 sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
