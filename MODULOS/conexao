@@ -2213,7 +2213,7 @@ echo -e "\033[01;31m║\033[0m"
 			trojan-go
 			;;
 			12 | 12)
-			websocket.sh
+			proxy.sh
 			;;
 			13 | 13)
 			echo -e "\E[44;1;37m             LIMPAR V2RAY              \E[0m"
