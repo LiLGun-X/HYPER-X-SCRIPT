@@ -127,11 +127,11 @@ for porta in $(echo -e $portass); do
 done
 echo -e "\n\033[1;32mติดตั้ง SQUID PROXY\033[0m"
 echo ""
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="2.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 echo "squid3"
 fun_bar 'apt-get update -y' 'apt install squid3 -y'
 fi
-if [[ "$VERSION_ID" = 'VERSION_ID="20.4"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04.2"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 echo "squid"
 fun_bar 'apt-get update -y' 'apt install squid -y'
 fi
