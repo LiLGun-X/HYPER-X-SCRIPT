@@ -130,7 +130,7 @@ echo ""
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 fun_bar 'apt-get update -y' 'apt install squid3 -y'
 fi
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 fun_bar 'apt-get update -y' 'apt install squid -y'
 fi
 			if [[ -d "/etc/squid/" ]]; then
