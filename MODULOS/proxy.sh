@@ -61,6 +61,9 @@ echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ 
  exit
 fi
 if [[ "1" = "$kguza" ]]; then
+
+
+if [[ "t" = "$kguza" ]]; then
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
 elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="10"' ]]; then
