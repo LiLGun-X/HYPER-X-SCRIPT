@@ -289,7 +289,7 @@ echo ""
 	echo ""
 	echo ""
 	echo ""
-	exit
+	proxy.sh
 
 	;;
 
@@ -309,13 +309,13 @@ echo ""
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
 			echo ""
-			exit
+			proxy.sh
 		else
 			service squid start
 			echo ""
 			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
 			echo ""
-			exit
+			proxy.sh
 		fi
 	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
@@ -328,11 +328,11 @@ echo ""
 			echo ""
 			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
 			echo ""
-			exit
+			proxy.sh
 		fi
 	fi
 	;;
-fi
+
 if [[ "t" = "$kguza" ]]; then
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
