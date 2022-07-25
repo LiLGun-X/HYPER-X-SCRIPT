@@ -2076,6 +2076,17 @@ if [[ ! -e /dev/net/tun ]]; then
 	echo "TUN ไม่สามารถใช้งานได้"
 	exit
 fi
+ok() {
+    echo -e '\e[32m'$1'\e[m';
+}
+
+die() {
+    echo -e '\e[1;35m'$1'\e[m';
+}
+
+des() {
+    echo -e '\e[1;31m'$1'\e[m'; exit 1;
+}
 
 
 # Set Localtime GMT +7
@@ -2231,6 +2242,60 @@ if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo ""
 			exit
 		fi
+;;
+t)
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  เลือกใช้คำสั่ง โดยการพิมพ์ตัวเลข"
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+echo " ┈┣  1. เพิ่มไอพี "
+echo " ┈┣  2. เช็คไอพี     "
+echo " ┈┣  3. ลบไอพี          "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+echo " "
+ read -p " ┈┣ พิมพ์ตัวเลข : " Selet
+ if [[ "$Selet" = "" ]]; then
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  โปรดพิมพ์คำสั่งโดยใส่ตัวเลข "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+ exit
+fi
+ if [[ $Selet = 1 ]]; then
+ read -p " ┈┣ ใส่เลขไอพีที่จะใช้งานพร็อกซี่นี้ : " SERVER_IP
+ read -p " ┈┣ บันทึกการตั้งค่านี้ Y/N : " YN
+ if [[ n = $YN || N = $YN ]]; then
+ clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  $SERVER_IP ไม่ได้ยืนยันการใช้งาน "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit 
+ fi
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
+if [ $? -eq 0 ]; then
+ clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  $SERVER_IP มีอยู่ในระบบแล้ว "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit
+fi
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
+sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
+echo " ┈┣ $SERVER_IP " >> /etc/squid/squid.txt
+ok "❯❯❯ service squid restart"
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  เปิดใช้งาน $SERVER_IP เรียบร้อย "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit 
 ;;
 esac
 fun_conexao
