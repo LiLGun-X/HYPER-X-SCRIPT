@@ -2238,7 +2238,11 @@ END
 			apt-get -y remove --purge squid
 		fi
 #Install squid
-		apt-get -y install squid
+		
+ins() {
+apt-get -y install squid
+				}
+fun_bar 'ins'
 if [[ -d "/etc/squid/" ]]; then
 				var_sqd="/etc/squid/squid.conf"
 				var_pay="/etc/squid/payload.txt"
@@ -2310,7 +2314,7 @@ echo ""
 	echo ""
 	echo ""
 	echo ""
-	exit
+	fun_conexao
 
 	;;
 
