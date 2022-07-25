@@ -2238,7 +2238,9 @@ _oss=("18.04" "18.04.5" "20.04")
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' || "$VERSION_ID" = 'VERSION_ID="11"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
+clear
 		fi
+
 #Install squid
 		
 ins() {
