@@ -2238,7 +2238,6 @@ _oss=("18.04" "18.04.5" "20.04")
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' || "$VERSION_ID" = 'VERSION_ID="11"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
-clear
 		fi
 
 #Install squid
@@ -2311,9 +2310,24 @@ sre() {
 echo -e "\n\033[1;32mRESTART SQUID PROXY\033[0m"
 echo ""
 fun_bar 'sre'
-echo -e "\n\033[1;32mSQUID INSTALADO COM SUCESSO!\033[0m"
-			sleep 2.5s
-			fun_conexao
+
+
+	clear
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+	echo "Squid Proxy,Install finish."
+	echo "Port Proxy : $PROXY"
+	echo ""
+	echo ""
+	echo ""
+        sleep 2.5
+	fun_conexao
 	;;
 
 	2) # ==================================================================================================================
