@@ -32,7 +32,7 @@ echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
 
-	echo "FUNCTION SCRIPT MyGatherBK-VPN"
+	echo "FUNCTION SCRIPT MyGatherBK-VPN v.1"
 	echo ""
 	echo "|1| Install-ProxyServer"
 	echo "|2| Restart/ProxyServer"
