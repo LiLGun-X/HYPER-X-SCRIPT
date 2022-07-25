@@ -2172,7 +2172,7 @@ echo -e "\033[01;31m║\033[0m"
                         ;;
                         sq | sq)
 			clear
-			xxx
+			sq
 			;;
 			3 | 03)
 			fun_drop
