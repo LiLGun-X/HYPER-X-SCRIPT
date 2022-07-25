@@ -1,4 +1,5 @@
 #!/bin/bash
+		
 if [[ "$EUID" -ne 0 ]]; then
 	echo ""
 	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
@@ -32,27 +33,25 @@ echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
 
-	echo "FUNCTION SCRIPT MyGatherBK-VPN v.1"
+	echo "FUNCTION SCRIPT MyGatherBK-VPN v4"
 	echo ""
 	echo "|1| Install-ProxyServer"
 	echo "|2| Restart/ProxyServer"
 	echo ""
 	echo ""
-	read -p "Select a Function Script : " x
+	read -p "Select a Function Script : " FUNCTIONSCRIPT
 
 case $FUNCTIONSCRIPT in
-if [[ "1" = "$x" ]]; then # ==================================================================================================================
+1) # ==================================================================================================================
+if [[ -e /etc/squid/squid.conf ]]; then
+			apt-get -y remove --purge squid
+		fi
 clear
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
+cr
 echo ""
 cd
 echo ""
+echo " IP SERVRR: $IP "
 read -p "Port Proxy : " -e -i 8080 PROXY
 echo ""
 echo "{ Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }"|lolcat
@@ -122,6 +121,8 @@ sre() {
 /etc/init.d/openvpn restart
 /etc/init.d/nginx restart
 				}
+		
+	
 echo -e "\n\033[1;32mRESTART SQUID PROXY\033[0m"
 echo ""
 fun_bar 'sre'
@@ -142,7 +143,8 @@ echo ""
 	echo ""
 	echo ""
         sleep 2.5
-exit
+	fun_conexao
+	;;
 	2) # ==================================================================================================================
 	
 clear
@@ -166,3 +168,4 @@ if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo ""
 			exit
 		fi
+;;
