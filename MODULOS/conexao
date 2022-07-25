@@ -2219,6 +2219,7 @@ END
 		/etc/init.d/openvpn restart
 		/etc/init.d/nginx restart
 	fi
+;;
 }
 
 
