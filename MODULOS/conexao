@@ -2233,8 +2233,9 @@ END
 			/etc/init.d/openvpn restart
 			/etc/init.d/nginx restart
 		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' ]]; then
+#OSที่รองรับ
+_os=("18.04" "18.04.5" "20.04")
+	elif [[ "$VERSION_ID" = 'VERSION_ID="$_oss"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
 		fi
