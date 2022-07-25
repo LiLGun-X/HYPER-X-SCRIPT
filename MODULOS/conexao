@@ -2261,6 +2261,7 @@ acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
 acl localnet src 172.16.0.0/12
 acl localnet src 192.168.0.0/16
+acl url1 dstdomain -i 127.0.0.1
 acl SSL_ports port 443
 acl Safe_ports port 80
 acl Safe_ports port 21
@@ -2275,6 +2276,7 @@ acl Safe_ports port 777
 acl CONNECT method CONNECT
 acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
 http_access allow SSH
+http_access allow url1
 http_access allow localnet
 http_access allow localhost
 http_access allow all
