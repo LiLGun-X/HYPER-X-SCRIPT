@@ -2235,7 +2235,7 @@ END
 		fi
 #OSที่รองรับ
 _oss=("18.04" "18.04.5" "20.04")
-	elif [[ "$VERSION_ID" = 'VERSION_ID="$_oss"' ]]; then
+	
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
 		fi
