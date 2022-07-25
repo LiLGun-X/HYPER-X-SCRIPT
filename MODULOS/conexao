@@ -2298,10 +2298,17 @@ forwarded_for off
 pipeline_prefetch off" >> $var_sqd
 		IP2="s/xxxxxxxxx/$IP/g";
 		sed -i $IP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
+sre() {
+/etc/init.d/squid restart
+/etc/init.d/openvpn restart
+/etc/init.d/nginx restart
+				}
+		
 	fi
+echo -e "\n\033[1;32mRESTART SQUID PROXY\033[0m"
+echo ""
+fun_bar 'sre'
+
 
 	clear
 echo ""
