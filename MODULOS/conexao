@@ -2234,7 +2234,7 @@ END
 			/etc/init.d/nginx restart
 		fi
 #OSที่รองรับ
-_os=("18.04" "18.04.5" "20.04")
+_oss=("18.04" "18.04.5" "20.04")
 	elif [[ "$VERSION_ID" = 'VERSION_ID="$_oss"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
