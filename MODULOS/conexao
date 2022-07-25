@@ -305,7 +305,10 @@ refresh_pattern .               0       20%     4320
 			clear
 			fun_squid
 		fi
-	}
+	esac
+fun_conexao
+}
+
 
 	fun_squid() {
 		[[ "$(netstat -nplt | grep -c 'squid')" = "0" ]] && inst_sqd
