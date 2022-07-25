@@ -305,9 +305,7 @@ refresh_pattern .               0       20%     4320
 			clear
 			fun_squid
 		fi
-	esac
-fun_conexao
-}
+	}
 
 
 	fun_squid() {
@@ -2223,6 +2221,8 @@ END
 		/etc/init.d/nginx restart
 	fi
 ;;
+esac
+fun_conexao
 }
 
 
