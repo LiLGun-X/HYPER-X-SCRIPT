@@ -42,9 +42,6 @@ echo ""
 
 case $FUNCTIONSCRIPT in
 1) # ==================================================================================================================
-if [[ -e /etc/squid/squid.conf ]]; then
-			apt-get -y remove --purge squid
-		fi
 clear
 echo ""
 echo "=============== OS-32 & 64-bit =================    "
@@ -125,8 +122,6 @@ sre() {
 /etc/init.d/openvpn restart
 /etc/init.d/nginx restart
 				}
-		
-	fi
 echo -e "\n\033[1;32mRESTART SQUID PROXY\033[0m"
 echo ""
 fun_bar 'sre'
