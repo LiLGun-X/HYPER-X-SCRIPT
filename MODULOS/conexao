@@ -2245,7 +2245,6 @@ END
 		sed -i $IP2 /etc/squid/squid.conf;
 		sre() { /etc/init.d/squid restart }
 
-fi
 echo -e "\n\033[1;32mRESTART SQUID PROXY\033[0m"
 echo ""
 fun_bar 'sre'
