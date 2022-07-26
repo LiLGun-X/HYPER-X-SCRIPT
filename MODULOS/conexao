@@ -2371,13 +2371,13 @@ echo -e "\033[1;34m[\033[1;37m•\033[1;34m]\033[1;37m ➩ \033[1;33mREMOVIDO CO
  return 10
  }
 echo -e "\033[1;34m[\033[1;37m•\033[1;34m]\033[1;37m ➩ \033[1;33mINSTALAR WEBMIN \033[0;32m"
-echo -e "\033[1;34mDeseja Prosseguir? [S/N]: \033[0;32m"; read x
+echo -e "\033[1;34mDeseja Prosseguir? [Y/N]:\033[0;32m"; read x
 [[ $x = @(n|N) ]] && msg -bar && return
 fun_bar "service ssh restart"
 fun_ip
 echo -ne "\033[1;34mConfirme seu ip \033[0;32m"; read -p ": " -e -i $IP ip
 echo -ne "\033[1;34mEstamos prontos para configurar seu servidor Webmin \033[0;32m"
-echo -ne "\033[1;34mDesea Seguir? [S/N]: \033[0;32m"; read x
+echo -ne "\033[1;34mDesea Seguir? [Y/N]:\033[0;32m"; read x
 [[ $x = @(n|N) ]] && msg -bar && return
 # echo -e ""
 # Actualiza Sistema
@@ -2393,11 +2393,11 @@ wget -q http://www.webmin.com/jcameron-key.asc -O- | apt-key add -  > /dev/null 
 add-apt-repository "deb [arch=amd64] http://download.webmin.com/download/repository sarge contrib"  > /dev/null 2>&1
 echo -ne " \033[1;31m[ ! ] apt-get install webmin"
 apt-get install webmin -y > /dev/null 2>&1 && echo -e "\033[1;32m [OK]" || echo -e "\033[1;31m [FAIL]"
-ufw allow 10000/tcp
+ufw allow 146203/tcp
 sleep 1s
 service webmin restart > /dev/null 2>&1
 fun_ip
-echo -e "\033[1;34mAcesso via web usando o link \033[0;32mhttps://$IP:10000"
+echo -e "\033[1;34mAcesso via web usando o link \033[0;32mhttps://$IP:146203"
 echo -e ""
 echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
 }
