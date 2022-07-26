@@ -2208,7 +2208,7 @@ END
 			apt-get -y remove --purge squid
 		fi
 #Install squid
-ins() {apt-get -y install squid}
+ins() { apt-get -y install squid }
 fun_bar 'ins'
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
