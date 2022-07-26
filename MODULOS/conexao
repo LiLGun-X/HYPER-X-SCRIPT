@@ -2148,6 +2148,7 @@ echo " ไอพีเซิฟ: $IP "
 echo ""
 cd
 echo ""
+echo "   Server IP  : $IP "
 read -p "Port Proxy : " -e -i 8080 PROXY
 echo ""
 echo "{ Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }"|lolcat
@@ -2207,7 +2208,8 @@ END
 			apt-get -y remove --purge squid
 		fi
 #Install squid
-		apt-get -y install squid
+ins() {apt-get -y install squid}
+fun_bar 'ins'
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
@@ -2241,9 +2243,12 @@ refresh_pattern .               0       20%     4320
 END
 		IP2="s/xxxxxxxxx/$IP/g";
 		sed -i $IP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
+		sre() { /etc/init.d/squid restart }
+
+fi
+echo -e "\n\033[1;32mRESTART SQUID PROXY\033[0m"
+echo ""
+fun_bar 'sre'
 	fi
 
 	clear
