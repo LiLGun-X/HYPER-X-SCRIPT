@@ -2079,7 +2079,7 @@ if [[ -e /etc/debian_version ]]; then
 	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
-
+fi
 
 # Menu
 echo ""
