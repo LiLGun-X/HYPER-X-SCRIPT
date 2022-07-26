@@ -2208,7 +2208,11 @@ END
 			apt-get -y remove --purge squid
 		fi
 #Install squid
-		apt-get -y install squid
+echo  "❯❯❯ INSTALL SQUID"
+ins() {
+apt-get -y install squid
+				}
+fun_bar 'ins'
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
@@ -2242,9 +2246,11 @@ refresh_pattern .               0       20%     4320
 END
 		IP2="s/xxxxxxxxx/$IP/g";
 		sed -i $IP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
+sre() {
+/etc/init.d/squid restart
+}		
+echo  "❯❯❯ REBOOT SQUID"
+fun_bar 'sre'		
 	fi
 
 	clear
