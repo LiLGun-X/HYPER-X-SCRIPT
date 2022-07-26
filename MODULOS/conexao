@@ -2337,20 +2337,14 @@ echo -e "\033[1;34m[\033[1;37m•\033[1;34m]\033[1;37m ➩ \033[1;33mREMOVIDO CO
  return 10
  }
 echo -e "\033[1;34m[\033[1;37m•\033[1;34m]\033[1;37m ➩ \033[1;33mINSTALAR WEBMIN \033[0;32m"
-echo -e "\033[1;34mDeseja Prosseguir? [Y/N]:\033[0;32m"; read x
+echo -e "\033[1;34mDeseja Prosseguir? [Y/N]:\033[0;32m";read x
 [[ $x = @(n|N) ]] && msg -bar && return
 fun_bar "service ssh restart"
 fun_ip
 echo -ne "\033[1;34mConfirme seu ip \033[0;32m"; read -p ": " -e -i $IP ip
 echo -ne "\033[1;34mEstamos prontos para configurar seu servidor Webmin \033[0;32m"
-echo -ne "\033[1;34mDesea Seguir? [Y/N]:\033[0;32m"; read x
+echo -ne "\033[1;34mDesea Seguir? [Y/N]:\033[0;32m";read x
 [[ $x = @(n|N) ]] && msg -bar && return
-# echo -e ""
-# Actualiza Sistema
-echo -ne " \033[1;31m[ ! ] apt-get update"
-apt-get update -y > /dev/null 2>&1 && echo -e "\033[1;32m [OK]" || echo -e "\033[1;31m [FAIL]"
-echo -ne " \033[1;31m[ ! ] apt-get upgrade"
-apt-get upgrade -y > /dev/null 2>&1 && echo -e "\033[1;32m [OK]" || echo -e "\033[1;31m [FAIL]"
 # Install webmin
 echo -ne " \033[1;31m[ ! ] add-apt-repository"
 sleep 3s > /dev/null 2>&1 && echo -e "\033[1;32m [OK]" || echo -e "\033[1;31m [FAIL]"
