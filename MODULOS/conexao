@@ -127,7 +127,7 @@ for porta in $(echo -e $portass); do
 done
 [[ $(grep -wc '14' /etc/issue.net) != '0' ]] || [[ $(grep -wc '8' /etc/issue.net) != '0' ]] && {
 				echo -e "\n\033[1;32mติดตั้ง SQUID PROXY\033[0m\n"
-				fun_bar 'apt update -y' "apt install squid3 -y"
+				fun_bar 'apt update -y' "apt install squid -y"
 			} || {
 				echo -e "\n\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.3.X\n\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.5.X\033[0m\n"
 				read -p "$(echo -e "\033[1;32mINFORME UMA OPÇÃO \033[1;37m: ")" -e -i 1 opc
@@ -165,14 +165,13 @@ done
 				.speedtest.net/
 			EOF
 			cat <<-EOF >$var_sqd
-acl localhost src 127.0.0.1/32 ::1
+acl localhost src 127.0.0.1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
 acl localnet src 172.16.0.0/12
 acl localnet src 192.168.0.0/16
 acl payload url_regex -i "$var_pay"
 acl SSL_ports port 443
-acl url1 dstdomain -i 127.0.0.1
 acl Safe_ports port 80
 acl Safe_ports port 21
 acl Safe_ports port 443
@@ -2114,7 +2113,7 @@ echo " ไอพีเซิฟ: $IP "
 echo ""
 cd
 echo ""
-echo "   Server IP  : $IP "
+echo "Server IP  : $IP "
 read -p "Port Proxy : " -e -i 8080 PROXY
 echo ""
 echo "{ Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }"|lolcat
@@ -2484,7 +2483,7 @@ echo -e "\033[01;31m║\033[0m"
                         s | S)
                         fun_proxyx2
                         ;;
-                        sq | sq)
+                        s | S)
 			clear
 			xxx
 			;;
