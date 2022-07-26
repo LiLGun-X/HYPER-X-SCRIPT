@@ -165,7 +165,7 @@ done
 				.speedtest.net/
 			EOF
 			cat <<-EOF >$var_sqd
-acl localhost src 127.0.0.1
+acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
 acl localnet src 172.16.0.0/12
@@ -183,6 +183,7 @@ acl Safe_ports port 488
 acl Safe_ports port 591
 acl Safe_ports port 777
 acl CONNECT method CONNECT
+acl SSH dst 127.0.0.1-127.0.0.1/255.255.255.255
 acl SSH dst $ipdovps-$ipdovps/255.255.255.255
 http_access allow SSH
 http_access allow url1
@@ -2480,9 +2481,6 @@ echo -e "\033[01;31m║\033[0m"
 			2 | 02)
 			fun_squid
 			;;
-                        s | S)
-                        fun_proxyx2
-                        ;;
                         s | S)
 			clear
 			xxx
