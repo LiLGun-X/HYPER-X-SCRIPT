@@ -2080,40 +2080,6 @@ if [[ -e /etc/debian_version ]]; then
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
 
-	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="20.04"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' ]]; then
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
-		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
-		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 18.04 - 20.04"
-		echo "Debian 8 - 9 -10"
-		echo ""
-		exit
-	fi
-else
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
-	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
-	echo ""
-	echo "Ubuntu 14.04 - 16.04 - 18.04 -20.04"
-	echo "Debian 8 - 9 -10"
-	echo ""
-	exit
-fi
 
 # Menu
 echo ""
