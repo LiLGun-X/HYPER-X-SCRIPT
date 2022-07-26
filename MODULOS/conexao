@@ -2104,20 +2104,13 @@ case $FUNCTIONSCRIPT in
 	1) # ==================================================================================================================
 
 clear
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
+cr
 cd
 echo ""
 echo "Server IP  : $IP "
 read -p "Port Proxy : " -e -i 8080 PROXY
 echo ""
-echo "{ Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }"|lolcat
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
 echo ""
 #Install squid3
 	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -2321,7 +2314,7 @@ apt-get install software-properties-common apt-transport-https wget -y
 wget -q http://www.webmin.com/jcameron-key.asc -O- | apt-key add -
 add-apt-repository "deb [arch=amd64] http://download.webmin.com/download/repository sarge contrib"
 apt-get install webmin
-ufw allow 10000/tcp
+ufw allow 146203/tcp
 sleep 1s
 service webmin restart > /dev/null 2>&1
 }
@@ -2436,17 +2429,12 @@ echo -e "\033[0;31m║\033[0m"
 			} || {
 				xv2ray="\033[1;31m○ "
 			}
-                        [[ "$(netstat -tlpn | grep 'squid' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mSQUID \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
-				ss="\033[1;32m◉ "
-			} || {
-				ss="\033[1;31m○ "
-			}
+                        
 			echo -e "\033[0;31m╠━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━\033[0m"
 			echo -e "\033[01;31m║\033[0m"
 			echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 01 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENSSH \033[01;31m $sts6\033[0m"
 echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 02 •\033[1;34m]\033[1;37m ➩  \033[1;33mSQUID3 PROXY \033[01;31m $sts1\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m  S •\033[1;34m]\033[1;37m ➩  \033[1;33mSQUID PROXY \033[01;31m $ss\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m  S •\033[1;34m]\033[1;37m ➩  \033[1;33mSQUID PROXY \033[01;31m $sts1\033[0m"
 echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 03 •\033[1;34m]\033[1;37m ➩  \033[1;33mDROPBEAR \033[01;31m $sts2\033[0m"
 echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 04 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENVPN \033[01;31m $sts5\033[0m"
 echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 05 •\033[1;34m]\033[1;37m ➩  \033[1;33mPROXY SOCKS \033[01;31m $sts4\033[0m"
