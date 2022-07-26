@@ -2247,9 +2247,6 @@ END
 		/etc/init.d/nginx restart
 	fi
 
-fi
-	
-
 	clear
 echo ""
 echo "=============== OS-32 & 64-bit =================    "
