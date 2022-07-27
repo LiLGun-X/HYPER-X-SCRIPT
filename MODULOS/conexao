@@ -2082,15 +2082,7 @@ if [[ -e /etc/debian_version ]]; then
 fi
 
 # Menu
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
 	echo "FUNCTION SCRIPT MyGatherBK-VPN"
 	echo ""
 	echo "|1| Install-ProxyServer"
@@ -2102,15 +2094,11 @@ echo ""
 case $FUNCTIONSCRIPT in
 
 	1) # ==================================================================================================================
-
 clear
-cr
-cd
+
 echo ""
 echo "Server IP  : $IP "
 read -p "Port Proxy : " -e -i 8080 PROXY
-echo ""
-echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
 echo ""
 #Install squid3
 	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
