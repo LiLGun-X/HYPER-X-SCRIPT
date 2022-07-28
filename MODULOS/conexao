@@ -2088,7 +2088,6 @@ echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY             
 	echo "|1| Install-ProxyServer"
 	echo "|2| Restart/ProxyServer"
         echo "|3| Restart/ProxyServer"
-        echo "|4| Restart/ProxyServer"
 	echo ""
 	echo ""
 	read -p "Select a Function Script : " FUNCTIONSCRIPT
@@ -2221,44 +2220,7 @@ echo ""
 
 	2) # ==================================================================================================================
 
-clear
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' || "$VERSION_ID" = 'VERSION_ID="18.04.5"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid start
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
-			echo ""
-			exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid3 start
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
-			echo ""
-			exit
-		fi
-	fi
-	;;
-2#################################################################
+2)#################################################################
 # IP Address
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 if [ -e '/etc/squid3/squid.txt' ]; then
@@ -2475,7 +2437,7 @@ exit
 fi
 fi
 ;;
-4)################################################################
+3)################################################################
 clear
 cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
