@@ -1043,7 +1043,7 @@ refresh_pattern .               0       20%     4320
 						clear
 						fun_apchon() {
 							apt-get install apache2 zip -y
-							sed -i "s/Listen 80/Listen 88/g" /etc/apache2/ports.conf
+							sed -i "s/Listen 80/Listen 85/g" /etc/apache2/ports.conf
 							service apache2 restart
 							[[ ! -d /var/www/html ]] && {
 								mkdir /var/www/html
@@ -2296,8 +2296,11 @@ elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="11"' || 
 sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
 sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
 echo " ┈┣ http_port $Port  " >> /etc/squid/port.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
-service squid restart -q > /dev/null 2>&1
+echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+apx() {
+service squid restart
+}
+fun_bar 'apx'
 fi
 clear
 cr
@@ -2385,8 +2388,11 @@ sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
 sed -i '/^$/d' /etc/squid/port.txt
 sed -i '/^$/d' /etc/squid/squid.conf
-ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
-service squid restart -q > /dev/null 2>&1
+echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+ap() {
+service squid restart
+}
+fun_bar 'ap'
 fi
 clear
 cr
@@ -2423,8 +2429,11 @@ sed -i '/^$/d' /etc/squid/squid.conf
 sed -i "/http_access allow SSH/a http_port 8080" /etc/squid/squid.conf
 echo " ┈┣ http_port 8080 " > /etc/squid/port.txt
 sed -i '/^$/d' /etc/squid/port.txt
-ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
-service squid restart -q > /dev/null 2>&1
+echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+rs() {
+service squid restart
+}
+fun_bar 'rs'
 fi
 clear
 cr
@@ -2482,8 +2491,11 @@ fi
 sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
 sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
 echo " ┈┣ $SERVER_IP " >> /etc/squid/squid.txt
-ok "❯❯❯ service squid restart"
-service squid restart -q > /dev/null 2>&1
+echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+aip() {
+service squid restart
+}
+fun_bar 'aip'
 fi
 clear
 cr
