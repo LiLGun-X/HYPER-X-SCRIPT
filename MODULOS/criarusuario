@@ -349,7 +349,7 @@ User&Pass
 User : $username 
 Pass : $password 
 Limt : $sshlimiter
-Link : $IP:88/openvpn/$username.zip  "'' https://notify-api.line.me/api/notify > /dev/null 2>&1
+Link : $IP:85/openvpn/$username.zip  "'' https://notify-api.line.me/api/notify > /dev/null 2>&1
 		clear
 		echo -e "\E[44;1;37m       สร้างบัญชี SSH แล้ว !      \E[0m"
 		echo -e "\n\033[1;32mIP: \033[1;37m$IP"
@@ -381,9 +381,9 @@ Link : $IP:88/openvpn/$username.zip  "'' https://notify-api.line.me/api/notify >
 		[[ -d /var/www/html/openvpn ]] && {
 			mv $HOME/$username.zip /var/www/html/openvpn/$username.zip >/dev/null 2>&1
 			[[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]] && {
-				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:88/html/openvpn/$username.zip"
+				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:85/html/openvpn/$username.zip"
 			} || {
-				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:88/openvpn/$username.zip"
+				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:85/openvpn/$username.zip"
 			}
 		} || {
 			echo -e "\033[1;32mDownload \033[1;31m" ~/"$username.zip\033[0m"
