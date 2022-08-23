@@ -25,8 +25,6 @@ newclient() {
 	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
-RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
-	mkdir /home/vps/public_html/$RANDOMFOLDER
 fun_geraovpn() {
     [[ "$respost" = @(y|Y) ]] && {
         cd /etc/openvpn/easy-rsa/
@@ -385,7 +383,7 @@ Link : $IP:85/openvpn/$username.zip  "'' https://notify-api.line.me/api/notify >
 			[[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]] && {
 				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:85/html/openvpn/$username.zip"
 			} || {
-				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:85/openvpn/$RANDOMFOLDER/$username.zip"
+				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:85/openvpn/$username.zip"
 			}
 		} || {
 			echo -e "\033[1;32mDownload \033[1;31m" ~/"$username.zip\033[0m"
