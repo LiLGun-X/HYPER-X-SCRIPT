@@ -3,6 +3,9 @@ fun_swap() {
 _diskText=$(df -h | awk '$NF=="/"{printf "%d/%dGB + (%s)\n", $3,$2,$5}')
 _swap1=$(free -h | grep -i swap | awk {'print $2'})
 swap4=$(free | awk '/Swap/{printf("%.1f%"), $3/($2+.000000001)*100}';)
+swap1=$(printf '%-5s' "$(free -h | grep -i swap | awk {'print $2'})")
+swap2=$(printf '%-5s' "$(free -h | grep -i swap | awk {'print $4'})")
+swap3=$(printf '%-5s' "$(free -h | grep -i swap | awk {'print $3'})")
     clear
 		echo -e "\E[44;1;37m            GERENCIAR MEMORIA VIRTUAL             \E[0m"
 echo -e "\033[01;34m===================================================================="
