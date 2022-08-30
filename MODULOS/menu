@@ -239,7 +239,7 @@ echo -e "\033[0;34m════════════════════�
 fun_atts () {
   [[ -e /home/versao ]] && rm /home/versao
   [[ -e /tmp/att ]] && rm /tmp/att
-	wget -c -P /home https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/versao
+	wget -c -P /home https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/SYSTEM/versao
 	[[ -f "/home/versao" ]] && mv /home/versao /tmp/att
 } > /dev/null 2>&1
 echo -e "══════════════[\033[1;33m ◉ \033[1;32mBY LiL Gun-X V.1\033[1;33m ◉\033[1;31m ]══════════════"
