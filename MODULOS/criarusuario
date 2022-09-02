@@ -254,7 +254,7 @@ fun_edithost() {
     fi
 }
 [[ ! -e /usr/lib/sshplus ]] && exit 0
-echo -e "\E[5;34;47m           สร้างชื่อผู้ใช้ SSH              \E[0m"
+echo -e "\E[5;34;47m           สร้างชื่อผู้ใช้ SSH       \E[0m"
 echo ""
 echo -ne "\033[1;32mUsername:\033[1;37m ";read username
 [[ -z $username ]] && {
