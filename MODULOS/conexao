@@ -1474,9 +1474,7 @@ exit 0' >$RCLOCAL
 				rcvbuf 0
 				remote 127.0.0.1 $porta
 				http-proxy $IP 8080
-				http-proxy-option CUSTOM-HEADER Host www.opensignal.com
-                                dhcp-option DNS 8.8.8.8
-                                dhcp-option DNS 8.8.4.4
+				http-proxy-option CUSTOM-HEADER Host #ใส่host
 				resolv-retry 5
 				nobind
 				persist-key
