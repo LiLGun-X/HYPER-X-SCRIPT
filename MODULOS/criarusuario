@@ -269,7 +269,7 @@ echo -ne "\033[1;32mUsername:\033[1;37m ";read username
 	exit 1
 }
 sizemin=$(echo ${#username})
-[[ $sizemin -lt 2 ]] && {
+[[ $sizemin -lt 1 ]] && {
 	echo -e "\n${cor1}คุณป้อนชื่อผู้ใช้ที่สั้นมาก${scor}"
 	echo -e "${cor1}ใช้อักขระอย่างน้อยสองตัว!${scor}\n"
 	exit 1
@@ -286,7 +286,7 @@ echo -ne "\033[1;32mPassword:\033[1;37m ";read password
 	exit 1
 }
 sizepass=$(echo ${#password})
-[[ $sizepass -lt 4 ]] && {
+[[ $sizepass -lt 1 ]] && {
 	echo -e "\n${cor1}รหัสผ่านสั้น ! ใช้อักขระอย่างน้อย 4 ตัว${scor}\n"
 	exit 1
 }
