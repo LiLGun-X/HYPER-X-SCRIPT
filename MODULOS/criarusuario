@@ -328,7 +328,7 @@ echo "$username $sshlimiter" >>/root/userlist.gzn
 		rm $username.zip $username.ovpn >/dev/null 2>&1
 		echo -ne "\033[1;32mต้องการใส่ชื่อ&รหัสผ่านลงในไฟล์เลยไหม📌 \033[1;31m? \033[1;33m[Y/N]:\033[1;37m "
 		read respost
-		echo -ne "\033[1;32mเลือก\033[1;31m?\033[1;33m[Y/N]:\033[1;37m "; read oprc
+		echo -ne "\033[1;31m?\033[1;33m[Y/N]:\033[1;37m "; read oprc
 		[[ "$oprc" = @(y|Y) ]] && {
 			fun_edithost
 		} || {
