@@ -328,7 +328,7 @@ echo "$username $sshlimiter" >>/root/userlist.gzn
 		rm $username.zip $username.ovpn >/dev/null 2>&1
 		echo -ne "\033[1;32mGenerate with username and password \033[1;31m? \033[1;33m[Y/N]:\033[1;37m "
 		read respost
-		echo -ne "\033[1;32mCurrent Host\033[1;37m: \033[1;31m(\033[1;37m$Host\033[1;31m) \033[1;37m- \033[1;32mChange \033[1;31m? \033[1;33m[Y/N]:\033[1;37m "; read oprc
+		echo -ne "\033[1;32mเลือกโปร&ซิมสำหรับใช้งาน📂\033[1;37m: \033[1;31m(\033[1;37m$Host\033[1;31m) \033[1;37m- \033[1;32mChange \033[1;31m? \033[1;33m[Y/N]:\033[1;37m "; read oprc
 		[[ "$oprc" = @(y|Y) ]] && {
 			fun_edithost
 		} || {
