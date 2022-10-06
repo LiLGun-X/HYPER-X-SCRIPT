@@ -354,7 +354,7 @@ _onlin=$(printf '%-5s' "$_onli")
 _userexp=$(printf '%-5s' "$_expuser")
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 C=$(curl -s https://ipapi.co/$IP/country)
-ISP(curl -s https://ipapi.co/$IP/org | cut -d " " -f 2-10 )
+ISP=$(curl -s https://ipapi.co/$IP/org | cut -d " " -f 2-10 )
 clear
 echo -e "\033[1;31m╔════════════════════════════════════════════════════════════╗\033[0m"
 echo -e "\033[1;31m║ \E[5;34;47m                     Hyper-X-SCRIPT                       \E[0m \033[1;31m║"
