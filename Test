@@ -82,15 +82,19 @@ rm /usr/bin/pass
 exit
 fi
 echo ""
-echo -e "\033[1;31m       ══════════════════════════════════════════════════\033[0m"
-echo "         ||||||||| PLEASE SELECT MUNU NUMBER  ||||||||" |lolcat 
-echo -e "\033[1;31m       ══════════════════════════════════════════════════\033[0m"
-echo -e "\033[1;33m        # หมายเหตุ ถ้าจะติดตั้ง L2TP ให้ติดตั้ง OpenVPN ก่อน   |\033[0m"
-echo ""
-echo -e " \033[1;33m      | [ 1 ] OpenVPN Debian8-9-10 & Ubuntu18.4-20.4+ |\033[0m"
-echo -e " \033[1;33m      | [ 2 ] L2TP ได้ทุก OS      |\033[0m"
-echo -e "\033[1;31m       ══════════════════════════════════════════════════\033[0m"
-read -p "        ➤ Namber : " opcao
+echo "        ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮ 
+        ┣ แน่ใจคุณต้องการรันระบบ OpenVPN    
+        ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯   "
+    read -p "        ╰━━ ( Y/n ) : " -e -i y Confirn
+    if [[ "$Confirn" = "y" || "$Confirn" = "Y" ]]; then
+wget -q -O install "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/install"
+bash install
+exit
+elif [[ "$Confirn" = "n" || "$Confirn" = "N" ]]; then
+clear
+clear
+wget -O install "https://raw.githubusercontent.com/tokssa/SAVAT/master/install"
+bash install
 else
 opcao=$zenon
 fi
