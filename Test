@@ -95,3 +95,4 @@ clear
 clear
 wget -O install "https://raw.githubusercontent.com/tokssa/SAVAT/master/install"
 bash install
+esac
