@@ -64,11 +64,11 @@ echo "                                            𝙎𝘾𝙍𝙄𝙋𝙏"
 echo -e "\033[1;31m╔════════════════════════════════════════════════════════════╗\033[0m"
 echo -e "\033[1;31m║ \E[5;34;47m                     Hyper-X-SCRIPT                       \E[0m \033[1;31m║"
 echo -e "\033[1;31m╠════════════════════════════════════════════════════════════╣\033[0m"
-echo -e "\033[1;31m║\033[1;32mSCRIPT ใช้ติดตั้งOPENVPN & SSH & V2RAY\033[1;31m      ║"
-echo -e "\033[1;31m║\033[1;32mระบบและเวอร์ชั่นที่รองรับ Ubuntu18+ Debian 8+ \033[1;31m ║"
-echo -e "\033[1;31m║\033[1;32mติดต่อ-@Line gzn007\033[1;31m                      ║"
+echo -e "\033[1;31m║          \033[1;32mSCRIPT ใช้ติดตั้งOPENVPN & SSH & V2RAY\033[1;31m      ║"
+echo -e "\033[1;31m║          \033[1;32mระบบและเวอร์ชั่นที่รองรับ Ubuntu18+ Debian 8+ \033[1;31m ║"
+echo -e "\033[1;31m║          \033[1;32mติดต่อ-@Line gzn007\033[1;31m                      ║"
 echo -e "\033[1;31m╠════════════════════════════════════════════════════════════╝\033[0m"
-echo -ne "\033[1;31m╚═══{ \033[1;32mPASS\033[1;31m}══  "; read P
+echo -ne "\033[1;31m╚═══{ \033[1;32mใส่รหัสผ่าน\033[1;31m }══┫"; read P
 wget -q -O /usr/bin/pass https://raw.githubusercontent.com/Lil-Gun-X/HYPER-X-SCRIPT/main/Modulos/pass.txt
 if ! grep -w -q $P /usr/bin/pass; then
 clear
