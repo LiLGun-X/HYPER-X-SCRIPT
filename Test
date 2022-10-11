@@ -81,10 +81,10 @@ echo " เสียใจด้วย รหัสผิด ถ้าไม่�
 rm /usr/bin/pass
 exit
 fi
-echo -e "\033[1;31m          ╔═════┻═════════════════════════════════╗"
-echo -e "\033[1;31m          ┣ แน่ใจคุณต้องการรันระบบ OpenVPN             ┃" 
-echo -e "\033[1;31m          ╠══════════════════════════════════════╝"
-read -p "$(echo -e "\033[1;31m        ╰━━ \033[1;33m[Y/N]:\033[1;37m ")" -e -i Y Y
+echo -e "\033[1;31m             ╔═════┻═════════════════════════════════╗"
+echo -e "\033[1;31m             ┣ แน่ใจคุณต้องการรันระบบ OpenVPN             ║" 
+echo -e "\033[1;31m             ╠═══════════════════════════════════════╝"
+read -p "$(echo -e "\033[1;31m          ╰━━ \033[1;33m[Y/N]:\033[1;37m ")" -e -i Y Y
     if [[ "$Y" = "y" || "$Y" = "Y" ]]; then
 wget -q -O install "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/install"
 bash install
