@@ -52,7 +52,7 @@ IP=$(wget -qO- ipv4.icanhazip.com);
 if [[ $zenon == "" ]]
 then
 clear
-V=$(curl -s https://api.db-ip.com/v2/free/$IP/countryCode)
+V=$(curl -s https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/Vision%20SCRIPT.json)
 cd
 clear
 echo ""
@@ -61,7 +61,7 @@ echo "          ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒�
 echo "          ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
 echo "                                            𝙎𝘾𝙍𝙄𝙋𝙏"
 echo -e "\033[1;34m╔════════════════════════════════════════════════════════════╗\033[0m"
-echo -e "\033[1;34m║ \E[5;34;47m                     Hyper-X-SCRIPT                       \E[0m \033[1;34m║"
+echo -e "\033[1;34m║ \E[5;34;47m                     Hyper-X-SCRIPT V.$V                  \E[0m \033[1;34m║"
 echo -e "\033[1;34m╠════════════════════════════════════════════════════════════╣\033[0m"
 echo -e "\033[1;34m║          \033[1;37mSCRIPT ใช้ติดตั้งOPENVPN & SSH & V2RAY\033[1;34m            ║"
 echo -e "\033[1;34m║          \033[1;37mระบบและเวอร์ชั่นที่รองรับ Ubuntu18+ Debian 8+ \033[1;34m    ║"
