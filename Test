@@ -84,7 +84,7 @@ fi
 echo -e "\033[1;31m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮"
 echo -e "\033[1;31m┣ แน่ใจคุณต้องการรันระบบ OpenVPN " 
 echo -e "\033[1;31m┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯"
-echo -ne "\033[1;31m        ╰━━ ( Y/n ) : " read Confirn
+echo -ne "\033[1;31m        ╰━━ ( Y/n ) : "; read Confirn
     if [[ "$Confirn" = "y" || "$Confirn" = "Y" ]]; then
 wget -q -O install "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/install"
 bash install
