@@ -52,7 +52,7 @@ IP=$(wget -qO- ipv4.icanhazip.com);
 if [[ $zenon == "" ]]
 then
 clear
-cr
+V=$(curl -s https://api.db-ip.com/v2/free/$IP/countryCode)
 cd
 clear
 echo ""
