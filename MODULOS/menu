@@ -352,13 +352,13 @@ _system=$(printf '%-14s' "$system")
 _hora=$(printf '%(%H:%M:%S)T')
 _onlin=$(printf '%-5s' "$_onli")
 _userexp=$(printf '%-5s' "$_expuser")
-
+v1=$(curl -sSL "https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/Vision%20SCRIPT")
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 C=$(curl -s https://api.db-ip.com/v2/free/$IP/countryCode)
 ISP=$(curl -s https://ipapi.co/$IP/org | cut -d " " -f 2-10 )
 clear
 echo -e "\033[1;31m╔════════════════════════════════════════════════════════════╗\033[0m"
-echo -e "\033[1;31m║ \E[5;34;47m                     Hyper-X-SCRIPT                       \E[0m \033[1;31m║"
+echo -e "\033[1;31m║ \E[5;34;47m                     Hyper-X-SCRIPT V.$v1                 \E[0m \033[1;31m║"
 echo -e "\033[1;31m╠════════════════════╦═══════════════════╦═══════════════════╣\033[0m"
 echo -e "\033[1;31m║  \033[1;32mระบบ           \033[1;31m   ║  \033[1;32mหน่วยความจำ      \033[1;31m║ \033[1;32m โปรเซสเซอร์      \033[1;31m║"
 echo -e "\033[1;31m║  \033[1;36mOS: \033[1;37m$_system\033[1;31m║  \033[1;36mRAM:\033[1;37m$_ram \033[1;31m  ║  \033[1;36mCORE: \033[1;37m$_core\033[0m   \033[1;31m       ║"
