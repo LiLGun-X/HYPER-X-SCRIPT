@@ -7,7 +7,8 @@ gem install lolcat
 apt -y install lolcat
 apt -y install figlet 
 apt -y install dos2unix 
-rm -f setup.sh
+apt install curl -yy
+rm -f Test
 rm -f screenfetch
 
 cd /bin/bash /etc/openvpn
@@ -52,16 +53,18 @@ IP=$(wget -qO- ipv4.icanhazip.com);
 if [[ $zenon == "" ]]
 then
 clear
-V=$(curl -s https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/Vision%20SCRIPT.json)
+
 cd
 clear
+v1=$(curl -sSL "https://raw.githubusercontent.com/khaledagn/VPS-AGN_English_Official/master/SCRIPT-v8.5x/Version")
+
 echo ""
 echo "          ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
 echo "          ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
 echo "          ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
 echo "                                            𝙎𝘾𝙍𝙄𝙋𝙏"
 echo -e "\033[1;34m╔════════════════════════════════════════════════════════════╗\033[0m"
-echo -e "\033[1;34m║ \E[5;34;47m                     Hyper-X-SCRIPT                       \E[0m \033[1;34m║"
+echo -e "\033[1;34m║ \E[5;34;47m                     Hyper-X-SCRIPT $v1                      \E[0m \033[1;34m║"
 echo -e "\033[1;34m╠════════════════════════════════════════════════════════════╣\033[0m"
 echo -e "\033[1;34m║          \033[1;37mSCRIPT ใช้ติดตั้งOPENVPN & SSH & V2RAY\033[1;34m            ║"
 echo -e "\033[1;34m║          \033[1;37mระบบOSที่รองรับ Ubuntu & Debian \033[1;34m    ║"
