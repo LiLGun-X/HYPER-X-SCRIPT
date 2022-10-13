@@ -352,6 +352,7 @@ _system=$(printf '%-14s' "$system")
 _hora=$(printf '%(%H:%M:%S)T')
 _onlin=$(printf '%-5s' "$_onli")
 _userexp=$(printf '%-5s' "$_expuser")
+
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 C=$(curl -s https://api.db-ip.com/v2/free/$IP/countryCode)
 ISP=$(curl -s https://ipapi.co/$IP/org | cut -d " " -f 2-10 )
