@@ -1,0 +1,91 @@
+#!/bin/bash
+#########################################
+#PROJETO PAINEL WEB V2RAY Samuraiexecutor
+#########################################
+echo -e "\033[01;31m▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣\033[0m"
+        tput setaf 7 ; tput setab 4 ; tput bold ; printf '%55s%s%-12s\n' "PAINEL WEB V2RAY Samuraiexecutor" ; tput sgr0
+echo -e "\033[01;31m▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣\033[0m"
+echo -e "\033[1;32mCERTIFICADO SSL : \033[1;33m/etc/letsencrypt/live/TEUDOMINIO/fullchain.pem"
+echo -e "\033[1;32mCHAVE KEY PRIVADA : \033[1;33m/etc/letsencrypt/live/TEUDOMINIO/privkey.pem"
+echo -e "\033[01;34m▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣"
+echo -e "\033[1;34m[\033[1;37m1 •\033[1;34m]\033[1;37m ➩ \033[1;33mINSTALAR PAINEL WEB V2RAY\033[0;32m"
+echo -e "\033[1;34m[\033[1;37m2 •\033[1;34m]\033[1;37m ➩ \033[1;33mINSTALAR CERTIFICADO TLS \033[0;32m"
+echo -e "\033[1;34m[\033[1;37m3 •\033[1;34m]\033[1;37m ➩ \033[1;33mRENOVAR CERTIFICADO TLS \033[0;32m"
+echo -e "\033[1;34m[\033[1;37m0 •\033[1;34m]\033[1;37m ➩ \033[1;33mSAIR \033[0;32m"
+echo -e "\033[01;34m▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣"
+echo -ne "\033[1;32mESCOLHA A OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m : "; read x
+case "$x" in
+   1)
+   clear
+   echo -ne "\033[1;32mINSTALANDO PAINEL WEB \033[1;33mV2RAY\033[1;37m "
+sleep 4
+sudo apt-get update -y 
+sudo apt-get upgrade -y
+sudo apt install curl -y
+bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
+echo -ne "\033[1;32mINSTALANDO CERTIFICADO \033[1;33mSSL\033[1;37m "
+sleep 4
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get install certbot
+echo -ne "\033[1;32mQUAL EMAIL DESEJA ULTILIZAR \033[1;33m?\033[1;37m "
+            read email
+echo -ne "\033[1;32mQUAL DOMÍNIO DESEJA ULTILIZAR \033[1;33m?\033[1;37m "
+            read dominio
+sudo certbot certonly --standalone --preferred-challenges http --agree-tos --email $email -d $dominio
+echo -ne "\033[1;32mINSTALANDO COM SUCESSO \033[1;33mV2RAY\033[1;37m "
+echo -e ""
+echo -e ""
+echo -e "\033[1;33mACESSO DO PAINEL WEB V2RAY \033[0;32m: $dominio:54321"
+echo -e ""
+echo -e "\033[1;33mCERTIFICADO TLS : \033[0;32m/etc/letsencrypt/live/$dominio/fullchain.pem"
+echo -e ""
+echo -e "\033[1;33mCHAVE KEY PRIVADA : \033[0;32m/etc/letsencrypt/live/$dominio/privkey.pem"
+echo -e ""
+echo -e "Copie-os Dados, pois você precisará deles no PAINEL WEB V2RAY"
+echo -e ""
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   ;;
+   2)
+   clear
+   echo -ne "\033[1;32mINSTALANDO CERTIFICADO \033[1;33mTLS\033[1;37m "
+sleep 4
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get install certbot
+echo -ne "\033[1;32mQUAL EMAIL DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "
+            read email
+echo -ne "\033[1;32mQUAL DOMÍNIO DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "
+            read dominio
+sudo certbot certonly --standalone --preferred-challenges http --agree-tos --email $email -d $dominio
+echo -ne "\033[1;32mINSTALADO COM SUCESSO \033[1;33m PAINEL WEB V2RAY\033[1;37m "
+echo -e ""
+echo -e ""
+echo -e "\033[1;33mACESSO DO PAINEL WEB V2RAY : \033[0;32m$IP:54321"
+echo -e ""
+echo -e "\033[1;33M A CERTIFICADO TLS : /etc/letsencrypt/live/$dominio/fullchain.pem"
+echo -e ""
+echo -e "\033[1;33mCHAVE KEY PRIVADA : /etc/letsencrypt/live/$dominio/privkey.pem"
+echo -e ""
+echo -e "Copie-os, pois você precisará deles no painel da web"
+echo -e ""
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   ;;
+   3)
+   clear
+   echo -ne "\033[1;32mRENOVANDO CERTIFICADO \033[1;33mTLS\033[1;37m "
+sleep 3
+certbot renew --force-renewal
+echo -e "\033[0;32mCERTIFICADO VÁLIDO POR 90 DIAS"
+echo -e ""
+echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   ;;
+   0)
+   clear
+   menu
+   ;;
+esac
+done
+}
+painelv2ray
+#fim
