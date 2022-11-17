@@ -22,7 +22,7 @@ sleep 4
 sudo apt-get update -y 
 sudo apt-get upgrade -y
 sudo apt install curl -y
-bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/LiLGun-X/x-ui/main/install.sh)
 echo -ne "\033[1;32mINSTALANDO CERTIFICADO \033[1;33mSSL\033[1;37m "
 sleep 4
 sudo apt install software-properties-common
