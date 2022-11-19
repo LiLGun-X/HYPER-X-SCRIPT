@@ -55,6 +55,7 @@ then
 clear
 
 cd
+rm -f Version
 clear
 v1=$(curl -sSL "https://raw.githubusercontent.com/khaledagn/VPS-AGN_English_Official/master/SCRIPT-v8.5x/Version")
 
