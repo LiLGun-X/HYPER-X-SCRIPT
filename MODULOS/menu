@@ -477,8 +477,8 @@ case "$x" in
    s | s)
    swap
    ;;
-   v | V)
-   v2m
+   r | R)
+   menu
    ;;
    18)
    clear
