@@ -2768,6 +2768,10 @@ echo -e ""
 			clear
 			test
 			;;
+                        tx | tx)
+			clear
+			REB
+			;;
 			0 | 00)
 			clear
 			menu
