@@ -94,7 +94,7 @@ sleep 2.5s
 service cron restart
 echo -e "";;
  05 | 5 )
-echo " " > /etc/cron.d/reboot
+rm -f /etc/cron.d/reboot
 clear
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣  🕰 ปิด Restart vps เรียบร้อยแล้ว 🕰 "
