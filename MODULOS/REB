@@ -3,6 +3,7 @@
 if [[ $1 == "" ]]
 then
 [[ -e /etc/cron.d/reboot ]] && ar=$(echo -e "\033[1;32m◉ ") || ar=$(echo -e "\033[1;31m○ ")
+[[ -e /etc/cron.d/reboot ]] && _onop=$(grep -c "10.8.0" /etc/cron.d/reboot) || _onop="0"
 cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣     สถานะAuto Reboot $ar     "
