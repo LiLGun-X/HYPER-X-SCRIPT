@@ -2,10 +2,12 @@
 
 if [[ $1 == "" ]]
 then
-clear
+[[ -e /etc/cron.d/reboot ]] && ar=$(echo -e "\033[1;32m◉ ") || ar=$(echo -e "\033[1;31m○ ")
 cr
-[[ -e /etc/cron.d/reboot ]] && stsf=$(echo -e "\033[1;32m◉ ") || stsf=$(echo -e "\033[1;31m○ ")
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣     สถานะAuto Reboot $ar     "
+echo " ┈╰━┳━━━━━┳━━━━━━━━━━━━━━╯ "
+echo " ┈╭━┻━━━━━┻━━━━━━━━━━━━━━╮ "
 echo " ┈┣  🕰🕰 ตั้งเวลา Restart vps 🕰🕰 "
 echo " ┈╰━┳━━━━━┳━━━━━━━━━━━━━━╯ "
 echo " ┈╭━┻━━━━━┻━━━━━━━━━━━━━━╮ "
