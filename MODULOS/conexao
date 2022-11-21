@@ -2775,6 +2775,9 @@ echo -e ""
                         tx | tx)
 			REB
 			;;
+                        ti | ti)
+			reboot
+			;;
 			0 | 00)
 			clear
 			menu
