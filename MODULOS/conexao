@@ -4,7 +4,7 @@
 #====================================================
 OS=debian
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
-txx=$(cat /etc/cron.d/v1)
+
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
 scor='\033[0m'
