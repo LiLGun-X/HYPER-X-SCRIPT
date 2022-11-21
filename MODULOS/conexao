@@ -4,6 +4,7 @@
 #====================================================
 OS=debian
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+txx=$(cat /etc/cron.d/v1)
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
 scor='\033[0m'
@@ -2590,7 +2591,7 @@ echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; 
 web_min
 fun_conexao
 }
-txx=$(cat /etc/timeboot/v1)
+
 
 	x="ok"
 	fun_conexao() {
