@@ -3,7 +3,7 @@
 if [[ $1 == "" ]]
 then
 [[ -e /etc/cron.d/reboot ]] && ar=$(echo -e "\033[1;32m◉ ") || ar=$(echo -e "\033[1;31m○ ")
-tx=$(cat cut -d' ' -f3 /etc/cron.d/reboot)
+tx=$(cat /etc/time/v2)
 cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣     สถานะAuto Reboot $ar Test $tx   "
@@ -30,6 +30,7 @@ fi
 case $opcao in
   01 | 1 )
   echo " 00 1 * * * root /sbin/reboot" > /etc/cron.d/reboot
+echo " 00 1 * * *" > /etc/timeboot/v2
 clear
 
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
@@ -42,6 +43,7 @@ sleep 2.5s
 service cron restart;;
   02 | 2 )
   echo " 0 0 * * 0 root /sbin/reboot" > /etc/cron.d/reboot
+echo " 0 0 * * 0 " > /etc/timeboot/v2
 clear
 
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
@@ -54,6 +56,7 @@ sleep 2.5s
 service cron restart;;
   03 | 3 )
   echo " 0 0 1 * * root /sbin/reboot" > /etc/cron.d/reboot
+echo " 0 0 1 * * " > /etc/timeboot/v2
 clear
 
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
@@ -84,6 +87,7 @@ echo " ┈╰━━━━━━━━━━━━━━━━━━━━━━�
   
 read -p " Time ( 0 0 * * 0 ) : " Set
 echo "$Set root /sbin/reboot" > /etc/cron.d/reboot
+echo "$Set " > /etc/timeboot/v2
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣  🕰 ตั้งเวลา Restart vps 🕰 "
 echo " ┈╰━━━━━━━┳━━━━━┳━━━━━━━━╯ "
@@ -95,6 +99,7 @@ service cron restart
 echo -e "";;
  05 | 5 )
 rm -f /etc/cron.d/reboot
+rm -f /etc/timeboot/v2
 clear
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣  🕰 ปิด Restart vps เรียบร้อยแล้ว 🕰 "
