@@ -1,1 +1,3 @@
 #!/bin/bash
+
+echo -e "\E[44;1;37m             AUTO REBOOT              \E[0m"
