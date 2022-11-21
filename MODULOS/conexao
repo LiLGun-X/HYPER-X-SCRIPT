@@ -2599,7 +2599,7 @@ fun_conexao
 			clear
 system=$(cat /etc/issue.net)
 date=$(date '+%Y-%m-%d <> %H:%M:%S')
-txx=$(cat /etc/cron.d/rebootx)
+
 echo -e "\033[1;37m $system                $date"
 echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                      CONEXAO                      \033[1;33m \033[0m\033[01;31m║"
 echo -e "\033[0;31m║\033[0m"
@@ -2663,7 +2663,7 @@ echo -e "\033[0;31m║\033[0m"
 			} || {
 				xv2ray="\033[1;31m○ "
 			}
-                        
+txx=$(cat /etc/cron.d/rebootx)                        
 			echo -e "\033[0;31m╠━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━\033[0m"
 			echo -e "\033[01;31m║\033[0m"
 			echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 01 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENSSH \033[01;31m $sts6\033[0m"
