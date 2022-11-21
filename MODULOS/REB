@@ -3,7 +3,7 @@
 if [[ $1 == "" ]]
 then
 [[ -e /etc/cron.d/reboot ]] && ar=$(echo -e "\033[1;32m◉ ") || ar=$(echo -e "\033[1;31m○ ")
-tx=$(cat /etc/cron.d/reboot)
+tx=$(cat cut -d' ' -f3 /etc/cron.d/reboot)
 cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣     สถานะAuto Reboot $ar Test $tx   "
