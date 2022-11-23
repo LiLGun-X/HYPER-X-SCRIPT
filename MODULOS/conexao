@@ -2769,7 +2769,7 @@ echo -e ""
 			pv2
 			;;
 			15 | 15)
-			reboot
+			rebootx
 			;;
                         tx | tx)
 			REB
