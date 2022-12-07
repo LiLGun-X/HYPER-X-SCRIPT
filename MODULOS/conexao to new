@@ -2692,96 +2692,71 @@ echo -e "\033[01;31m║\033[0m"
 			read x
 			tput cnorm
 			clear
-			case $x in
+
 			1 | 01)
-			fun_openssh
-			;;
+				fun_openssh
+				;;
 			2 | 02)
-			fun_squid
-			;;
+				fun_squid
+				;;
                         s | S)
-			clear
-			xxx
-			;;
+				fun_ipv2
+				;;
 			3 | 03)
-			fun_drop
-			;;
+				fun_drop
+				;;
 			4 | 04)
-			fun_openvpn
-			;;
+				fun_openvpn
+				;;
 			5 | 05)
-			fun_socks
-			;;
-			6 | 06) 
-			inst_ssl
-			;;
+				fun_socks
+				;;
+			6 | 06)
+				inst_ssl
+				;;
 			7 | 07)
-			fun_sslh
-			;;
+				fun_sslh
+				;;
 			8 | 08)
-			fun_chisel
-			;;
+				fun_chisel
+				;;
 			9 | 09)
-			slow_setup
-			;;
+				slowdns
+				;;
 			10 | 10)
-			v2m
-			exit
-			;;
+				v2raymanager
+				exit
+				;;
 			11 | 11)
-			trojan-go
-			;;
+				trojan-go
+				;;
 			12 | 12)
-			proxy.sh
-			;;
+				websocket.sh
+				;;
 			13 | 13)
-   clear
-   echo -e "\E[44;1;37m             AUTO REBOOT              \E[0m"
-                                echo -e "\033[1;31mESSA FUNÇÃO ATIVA REINICIALIZAÇÃO AUTOMÁTICA DA TUA VPS \033[1;33m \033[1;32\033[0m"
-   echo -e "\033[1;31M ESCOLHA UM HORÁRIO PARA O DESLIGAMENTO EX: \033[1;33m00:00 \033[1;32\033[0m"
-echo -ne "\033[1;32mDIGITE A HORA \033[1;33m\033[1;37m: "
-            read escolha
-                echo ""
-                echo -e "\033[1;31m HORÁRIO VÁLIDO!"
-                sleep 4
+                                echo -e "\E[44;1;37m             LIMPAR V2RAY              \E[0m"
+                                echo -e "\033[1;31mESSA FUNÇÃO É PARA LIBERAR MEMÓRIA EM DISCO COMO MEMÓRIA RAM \033[1;33m \033[1;32\033[0m"
+echo -e "\033[1;31mTenha em mente que ao executá-lo, se você tivesse estatísticas de consumo, \033[1;33m \033[1;32\033[0m"
+echo -e "\033[1;31meles serão zerados, não há perda de configurações ou do usuário \033[1;33m \033[1;32\033[0m"
+				v2ray clean
+                                echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
+				;;
+                14 | 14)
                 clear
-   shutdown -r +$escolha
-   echo " $escolha" > /etc/timeboot/v1
-   echo -e ""
-   echo -e "\033[1;33mAUTO REBOOT AS $escolha ATIVADO COM SUCESSO \033[0m"
-   echo -e ""
-   echo -e "\033[1;34m[\033[1;37m01 •\033[1;34m]\033[1;37m > \033[1;33mDESATIVAR REBOOT \033[1;37m\033[0;32m"
-   echo -e ""
-   echo -ne "\n\033[1;33mENTER \033[1;33mPARA VOLTAR AO \033[1;33mMENU!\033[0m"; read
-   ;;
-   1)
-   clear
-   echo -e "\E[44;1;37m             AUTO REBOOT              \E[0m"
-   echo -e "\033[1;31mESSA FUNÇÃO DESATIVA A REINICIALIZAÇÃO AUTOMÁTICA DA TUA VPS \033[1;33m \033[1;32\033[0m"
-   echo -e "\033[1;31mO HORÁRIO PRÉ DEFINIDO $escolha SERÁ DESATIVADO \033[1;33m \033[1;32\033[0m"
-   shutdown -c
-echo -e "\033[1;33mAUTO REBOOT DESATIVADO COM SUCESSO \033[0m"
-echo -e ""
-   echo -ne "\n\033[1;33mENTER \033[1;33mPARA VOLTAR AO \033[1;33mMENU!\033[0m"; read
-   ;;
-			14 | 14)
-			clear
-			pv2
-			;;
-			15 | 15)
-			rebootx
-			;;
-                        tx | tx)
-			REB
-			;;
+				painelv2ray
+				;;
+                15 | 15)
+                clear
+				rebootx
+				;;
 			0 | 00)
-			clear
-			menu
-			;;
+				clear
+				menu
+				;;
 			*)
-			echo -e "\033[1;31mOpcao invalida !\033[0m"
-			sleep 2
-			;;
+				echo -e "\033[1;31mOpcao invalida !\033[0m"
+				sleep 2
+				;;
 			esac
 		done
 	}
