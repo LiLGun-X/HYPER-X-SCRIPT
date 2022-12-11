@@ -2319,9 +2319,9 @@ echo -e "\033[1;31meles serão zerados, não há perda de configurações ou do 
                 clear
 				painelv2ray
 				;;
-                15 | 15)
-                clear
-				rebootx
+                                15 | 15)
+                                clear
+			        REB
 				;;
 			0 | 00)
 				clear
