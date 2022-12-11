@@ -88,7 +88,7 @@ SCOLOR='\033[0m'
 				clear
 				fun_conexao
 			}
-		else
+	        install_v1() {
 			clear
 			echo -e "\E[44;1;37m              INSTALADOR SQUID                \E[0m"
 			echo ""
@@ -305,6 +305,9 @@ SCOLOR='\033[0m'
 			;;
 		3 | 03)
 			rempt_sqd
+			;;
+                x | x)
+			install_v1
 			;;
 		0 | 00)
 			echo -e "\033[1;31mRetornando...\033[0m"
