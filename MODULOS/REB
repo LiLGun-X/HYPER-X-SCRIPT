@@ -3,7 +3,7 @@
 if [[ $1 == "" ]]
 then
 [[ -e /etc/cron.d/reboot ]] && ar=$(echo -e "\033[1;32m◉ ") || ar=$(echo -e "\033[1;31m○ ")
-# tx=$(cat /etc/cron.d/v2)
+tx=$(cat /etc/cron.d/v2)
 cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣     สถานะAuto Reboot $ar Test $tx   "
@@ -40,8 +40,8 @@ echo -ne "\033[1;32mDIGITE A HORA \033[1;33m\033[1;37m: "
                 echo -e "\033[1;31m HORÁRIO VÁLIDO!"
                 sleep 4
                 clear
-   shutdown -r +$escolha
 echo " $escolha " > /etc/cron.d/v2
+   shutdown -r +$escolha
    echo -e ""
    echo -e "\033[1;33mAUTO REBOOT AS $escolha ATIVADO COM SUCESSO \033[0m"
    echo -e ""
