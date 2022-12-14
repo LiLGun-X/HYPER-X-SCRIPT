@@ -4,8 +4,9 @@
 
 if [[ $1 == "" ]]
 then
-[[ -e /etc/cron.d/reboot ]] && ar=$(echo -e "\033[1;32m◉ ") || ar=$(echo -e "\033[1;31m○ ")
 tx=$(cat /etc/cron.d/v2)
+[[ -e /etc/cron.d/reboot ]] && ar=$(echo -e "\033[1;32m◉ ") || ar=$(echo -e "\033[1;31m○ ")
+
 cr
 echo -e "\E[44;1;37m             AUTO REBOOT              \E[0m"
 echo -e "TEST"
