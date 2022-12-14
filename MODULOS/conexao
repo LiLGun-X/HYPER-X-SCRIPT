@@ -1014,7 +1014,7 @@ SCOLOR='\033[0m'
 						clear
 						fun_apchon() {
 							apt-get install apache2 zip -y
-							sed -i "s/Listen 80/Listen 88/g" /etc/apache2/ports.conf
+							sed -i "s/Listen 80/Listen 85/g" /etc/apache2/ports.conf
 							service apache2 restart
 							[[ ! -d /var/www/html ]] && {
 								mkdir /var/www/html
