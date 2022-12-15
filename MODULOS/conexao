@@ -2312,7 +2312,7 @@ case "$x" in
 				;;
                 14 | 14)
                 clear
-				painelv2ray
+				pv2
 				;;
                                 15 | 15)
                                 clear
