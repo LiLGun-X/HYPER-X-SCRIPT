@@ -13,7 +13,7 @@ rm -f screenfetch
 
 cd /bin/bash /etc/openvpn
 rm -f .profile
-# Running screenfetch
+# Running screenfetch xxxxx
 
 sudo apt install neofetch -yy
 
