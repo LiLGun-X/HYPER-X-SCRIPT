@@ -2176,7 +2176,7 @@ exit 0' >$RCLOCAL
 ########################################################################
 
 ########################################################################
-xxx() {
+proxy_v2() {
 # Set Localtime GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
@@ -2755,7 +2755,7 @@ case "$x" in
 				fun_squid
 				;;
                         s | S)
-				fun_ipv2
+				proxy_v2
 				;;
 			3 | 03)
 				fun_drop
