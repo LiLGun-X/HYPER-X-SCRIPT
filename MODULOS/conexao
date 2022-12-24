@@ -2366,6 +2366,7 @@ echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ 
 cat /etc/squid/port.txt
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯"
 exit
+fi
 ################
 elif [[ $Selet = 3 ]]; then
 clear
