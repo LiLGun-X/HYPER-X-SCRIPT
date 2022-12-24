@@ -2399,9 +2399,109 @@ echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ 
 read -p " ┈┣ พิมพ์ตัวเลข : " Selet1
 if [[ $Selet1 = 1 ]]; then
 read -p " ┈┣ ใส่เลขพอร์ตที่จะลบ : " Port
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="11"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+2) # ==================================================================================================================
+
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  เลือกใช้คำสั่ง โดยการพิมพ์ตัวเลข"
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+echo " ┈┣  1. เพิ่มพอร์ต Proxy "
+echo " ┈┣  2. เช็ดพอร์ต Proxy "
+echo " ┈┣  3. ลบพอร์ต Proxy "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+echo " "
+ read -p " ┈┣ พิมพ์ตัวเลข : " Selet
+ if [[ "$Selet" = "" ]]; then
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  โปรดพิมพ์คำสั่ง"
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+ exit
+fi
+###############
+ if [[ $Selet = 1 ]]; then
+ read -p " ┈┣ ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
+grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
+fi
+##############
+if [ $? -eq 0 ]; then
+ clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  Port $Port มีอยู่ในระบบแล้ว"
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit
+else
+if [[ $Port = 80 || $Port = 443 || $Port = 22 || $Port = 143 || $Port = 444 || $Port = 10000 ]]; then
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  Port $Port ไม่สามารถเปิดใช้งานได้"
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  PORT ที่ห้ามใช้มีดังนี้"
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+echo " ┈┣  80•443•22•143•444•10000•1194 "
+echo " ┈┣  9000•21•70•210•1025•65535•280 "
+echo " ┈┣  488•591•777•255•10•172•127•3128 "
+echo " ┈┣  32•12•16•1440•20•10080•4320•192 "
+echo " ┈┣  5555•และ0ถึง9"
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+echo " "
+exit
+fi
+read -p " ┈┣ ยืนยันการตั้งค่า Y/N : " YN
+ if [[ n = $YN || N = $YN ]]; then
+ clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  $Port ไม่ได้ยืนยันการใช้งาน"
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit 
+ fi
+sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
+sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
+echo " ┈┣ http_port $Port  " >> /etc/squid/port.txt
+echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
+apx() {
+service squid restart
+}
+fun_bar 'apx'
+
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  Port $Port พร้อมใช้งาน"
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+exit 
+###############
+elif [[ $Selet = 2 ]]; then
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  พอร์ตที่เปิดใช้งานอยู่ปัจจุบัน "
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+cat /etc/squid/port.txt
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯"
+exit
+################
+elif [[ $Selet = 3 ]]; then
+clear
+cr
+echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo " ┈┣  เลือกใช้คำสั่ง โดยการพิมพ์ตัวเลข"
+echo " ┈┣  ลบพอร์ตพร็อกซี่"
+echo " ┈╰━━┳━━━━━━━━━━━━┳━━━━━╯ "
+echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ "
+echo " ┈┣  1. ลบบางพอร์ต  "
+echo " ┈┣  2. รีเซ็ตค่าเริ่มต้น  "
+echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
+read -p " ┈┣ พิมพ์ตัวเลข : " Selet1
+if [[ $Selet1 = 1 ]]; then
+read -p " ┈┣ ใส่เลขพอร์ตที่จะลบ : " Port
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
 fi
 if [ $? -eq 0 ]; then
@@ -2422,8 +2522,6 @@ echo " ┈┣  ไม่พบ Port $Port ในระบบ"
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
 exit
 fi
-
-
 if [[ $YN = N || $YN = n ]]; then
 clear
 cr
@@ -2432,16 +2530,6 @@ echo " ┈┣  ยกเลิกการเปลี่ยนแปลง "
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
  exit
 fi
-
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-SERVER_IP2="/$Port/d";
-sed -i $SERVER_IP2 /etc/squid3/port.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/squid.conf
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="11"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 SERVER_IP2="/$Port/d";
 sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
@@ -2452,7 +2540,6 @@ ap() {
 service squid restart
 }
 fun_bar 'ap'
-fi
 clear
 cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
@@ -2469,18 +2556,6 @@ echo " ┈┣  ยกเลิกการรีเซ็ต "
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
  exit
 fi
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-SERVER_IP2="/http_port/d";
-sed -i $SERVER_IP2 /etc/squid3/port.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/squid.conf
-sed -i "/http_access allow SSH/a http_port 8080" /etc/squid3/squid.conf
-echo " ┈┣ http_port 8080 " > /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/port.txt
-ok "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="11"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 SERVER_IP2="/http_port/d";
 sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
@@ -2493,7 +2568,6 @@ rs() {
 service squid restart
 }
 fun_bar 'rs'
-fi
 clear
 cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
@@ -2501,9 +2575,7 @@ echo " ┈┣  รีเซ็ตพอร์ค่าเดิมเรีย�
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
 exit
 fi
-fi
 ;;
-
 3) # ==================================================================================================================
 
 clear
