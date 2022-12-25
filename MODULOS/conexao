@@ -2291,16 +2291,6 @@ echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ 
 echo " "
  read -p " ┈┣ พิมพ์ตัวเลข : " read xx
 case "$xx" in
-
-* )
-clear
-cr
-echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
-echo " ┈┣  โปรดพิมพ์คำสั่ง"
-echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
- exit
-;;
-###############
 1)
  read -p " ┈┣ ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
@@ -2541,7 +2531,7 @@ fun_conexao
 system=$(cat /etc/issue.net)
 date=$(date '+%Y-%m-%d <> %H:%M:%S')
 echo -e "\033[1;37m $system                $date"
-echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                      CONEXAO                      \033[1;33m \033[0m\033[01;31m║"
+echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                      CONEXAO debug                     \033[1;33m \033[0m\033[01;31m║"
 echo -e "\033[0;31m║\033[0m"
 			echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
 			[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
