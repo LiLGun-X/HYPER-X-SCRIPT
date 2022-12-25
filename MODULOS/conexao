@@ -2303,8 +2303,6 @@ echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ 
 1 )
  read -p " ┈┣ ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
-
-##############
 if [ $? -eq 0 ]; then
  clear
 cr
@@ -2355,8 +2353,9 @@ cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣  Port $Port พร้อมใช้งาน"
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
-exit 
 ;;
+exit 
+
 ###############
 2 )
 clear
