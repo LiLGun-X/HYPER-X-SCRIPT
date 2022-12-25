@@ -2383,11 +2383,11 @@ echo " ┈╭━━┻━━━━━━━━━━━━┻━━━━━╮ 
 echo " ┈┣  1. ลบบางพอร์ต  "
 echo " ┈┣  2. รีเซ็ตค่าเริ่มต้น  "
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
-read -p " ┈┣ พิมพ์ตัวเลข : " Selet1
-if [[ $Selet1 = 1 ]]; then
+read -p " ┈┣ พิมพ์ตัวเลข : " read xa
+case "$xa" in
+1)
 read -p " ┈┣ ใส่เลขพอร์ตที่จะลบ : " Port
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
-fi
 if [ $? -eq 0 ]; then
 if [[ $Port = 8080 ]]; then
 clear
@@ -2430,7 +2430,9 @@ echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ 
 echo " ┈┣  ลบพอร์ต $Port เรียบร้อย "
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
  exit
-elif [[ $Selet1 = 2 ]]; then
+;;
+
+2)##########
 read -p " ┈┣ ยืนยันรีเซ็ตค่าเดิม Y/N : " YN
 if [[ $YN = N || $YN = n ]]; then
 clear
@@ -2457,10 +2459,11 @@ cr
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
 echo " ┈┣  รีเซ็ตพอร์ค่าเดิมเรียบร้อย "
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
-fi
 exit
 fun_conexao
-	;;
+;;
+esac
+;;
 esac
 ;;
 
