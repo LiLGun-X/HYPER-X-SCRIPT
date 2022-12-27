@@ -378,6 +378,7 @@ Link : $IP:85/openvpn/$username.zip  "'' https://notify-api.line.me/api/notify >
 		echo ""
 		[[ -d /var/www/html/openvpn ]] && {
 			mv $HOME/$username.zip /var/www/html/openvpn/$username.zip >/dev/null 2>&1
+                        mv $HOME/gunx/$username.zip /var/www/html/openvpn/gunx/$username.zip >/dev/null 2>&1
 			[[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]] && {
 				echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:85/html/openvpn/$username.zip"
 			} || {
