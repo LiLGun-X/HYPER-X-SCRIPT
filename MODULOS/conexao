@@ -2629,7 +2629,7 @@ case "$x" in
 				proxy_v2
 				;;
                         o | O)
-				openvpn_v2
+				OV2
 				;;
 			3 | 03)
 				fun_drop
