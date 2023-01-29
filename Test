@@ -15,14 +15,27 @@ fi
 
 
 # install python
- apt install python3 -yy
+echo -e " \033[1;31m➤ python3 \033[0m"
+apt install python3 -yy -q > /dev/null 2>&1
 apt update 
-apt install ruby-full -yy 
-apt install lolcat -yy
-apt install figlet -yy
-apt install dos2unix -yy
-apt install curl -yy
-apt install netstat -yy
+echo -e " \033[1;31m➤ ruby-full \033[0m"
+apt install ruby-full -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ lolcat \033[0m"
+apt install lolcat -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ figlet \033[0m"
+apt install figlet -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ dos2unix \033[0m"
+apt install dos2unix -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ curl \033[0m"
+apt install curl -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ netstat \033[0m"
+apt install netstat -yy  -q > /dev/null 2>&1
+
 rm -f Test
 rm -f screenfetch
 
