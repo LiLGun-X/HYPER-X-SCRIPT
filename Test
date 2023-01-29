@@ -19,9 +19,9 @@ fi
 apt update 
 apt install ruby-full -yy 
 gem install lolcat
-apt -y install lolcat
-apt -y install figlet 
-apt -y install dos2unix 
+apt install lolcat -yy
+apt install figlet -yy
+apt install dos2unix -yy
 apt install curl -yy
 rm -f Test
 rm -f screenfetch
