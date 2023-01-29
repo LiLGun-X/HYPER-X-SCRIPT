@@ -18,7 +18,6 @@ fi
  apt install python3 -yy
 apt update 
 apt install ruby-full -yy 
-gem install lolcat
 apt install lolcat -yy
 apt install figlet -yy
 apt install dos2unix -yy
