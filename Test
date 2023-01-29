@@ -23,6 +23,7 @@ apt install lolcat -yy
 apt install figlet -yy
 apt install dos2unix -yy
 apt install curl -yy
+apt install netstat-yy
 rm -f Test
 rm -f screenfetch
 
