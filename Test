@@ -20,8 +20,18 @@ apt update
 apt install ruby-full -yy 
 gem install lolcat
 apt install lolcat -yy
-apt install figlet -yy
-apt install dos2unix -yy
+echo -e " \033[1;31m➤ figlet \033[0m"
+apt install figlet -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ dos2unix \033[0m"
+apt install dos2unix -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ curl \033[0m"
+apt install curl -yy  -q > /dev/null 2>&1
+
+echo -e " \033[1;31m➤ netstat \033[0m"
+apt install netstat -yy  -q > /dev/null 2>&1
+
 rm -f Test
 rm -f screenfetch
 
