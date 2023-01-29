@@ -2223,6 +2223,7 @@ echo ""
 echo  "❯❯❯ INSTALL SQUID"
 ins() {
 apt-get -y install squid
+sudo apt install squid
 				}
 fun_bar 'ins'
 		cat > /etc/squid/squid.conf <<END
