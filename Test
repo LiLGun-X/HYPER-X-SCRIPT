@@ -1,4 +1,19 @@
 #!/bin/bash
+#test os22
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+	GROUPNAME=nogroup
+	RCLOCAL='/etc/rc.local'
+fi
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="22.04"' ]]; then
+apt install lolcat -yy
+apt install figlet -yy
+apt install dos2unix -yy
+
+fi
+
+
 # install python
  apt install python3 -yy
 apt update 
