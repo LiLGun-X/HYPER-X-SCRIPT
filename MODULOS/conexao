@@ -1277,9 +1277,9 @@ SCOLOR='\033[0m'
 				echo -e "\033[1;32mINSTALANDO DEPENDENCIAS"
 				echo ""
 				fun_instdep() {
-                                        sudo apt update
-                                        sudo apt install openvpn easy-rsa
-					apt-get install openvpn iptables openssl ca-certificates -y
+                           
+                                        apt install openvpn easy-rsa -yy
+					apt-get install openvpn iptables openssl ca-certificates -yy
 					apt-get install zip -y
 				}
 				fun_bar 'fun_instdep'
