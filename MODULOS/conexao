@@ -2210,7 +2210,7 @@ echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
 # Install openvpn
-cd
+
 echo -e "\033[35;1m
 ----------------------------------------------
 [√] ระบบสคริป  : Pirakit Khawpleum 
@@ -2302,7 +2302,7 @@ echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
 # Install openvpn
-cd
+
 echo -e "\033[35;1m
 ----------------------------------------------
 [√] ระบบสคริป  : Pirakit Khawpleum 
@@ -2527,7 +2527,6 @@ verb 3" > /etc/openvpn/client-common.txt
 
 }
 }
-fun_conexao
 }
 
 
