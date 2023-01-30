@@ -2525,6 +2525,9 @@ verb 3" > /etc/openvpn/client-common.txt
 		;;
 	esac
 
+}
+fun_conexao
+}
 
 
 
