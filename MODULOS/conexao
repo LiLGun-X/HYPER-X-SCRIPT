@@ -2236,7 +2236,6 @@ acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
 acl localnet src 172.16.0.0/12
 acl localnet src 192.168.0.0/16
-acl localnet src www.speedtest.net
 acl JLX dst 127.0.0.1-127.0.0.1/255.255.255.255
 acl SSL_ports port 443
 acl Safe_ports port 80
