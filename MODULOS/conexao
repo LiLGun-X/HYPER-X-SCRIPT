@@ -155,6 +155,7 @@ SCOLOR='\033[0m'
 				acl url1 dstdomain -i 127.0.0.1
 				acl url2 dstdomain -i localhost
 				acl url3 dstdomain -i $ipdovps
+                                acl urlx dstdomain -i www.speedtest.net
 				acl url4 dstdomain -i /SSHPLUS?
 				acl payload url_regex -i "$var_pay"
 				acl all src 0.0.0.0/0
@@ -162,6 +163,7 @@ SCOLOR='\033[0m'
 				http_access allow url1
 				http_access allow url2
 				http_access allow url3
+                                http_access allow url3x
 				http_access allow url4
 				http_access allow payload
 				http_access deny all
@@ -2223,11 +2225,11 @@ echo ""
 #Install squid
 echo  "❯❯❯ INSTALL SQUID"
 ins() {
-apt-get -y install squid3
-sudo apt install squid3
+apt-get -y install squid
+sudo apt install squid
 				}
 fun_bar 'ins'
-		cat > /etc/squid3/squid.conf <<END
+		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
@@ -2259,7 +2261,7 @@ refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
 		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid3/squid.conf;
+		sed -i $IP2 /etc/squid/squid.conf;
 sre() {
 /etc/init.d/squid3 restart
 }		
