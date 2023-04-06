@@ -2223,11 +2223,11 @@ echo ""
 #Install squid
 echo  "❯❯❯ INSTALL SQUID"
 ins() {
-apt-get -y install squid
-sudo apt install squid
+apt-get -y install squid3
+sudo apt install squid3
 				}
 fun_bar 'ins'
-		cat > /etc/squid/squid.conf <<END
+		cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
@@ -2259,9 +2259,9 @@ refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
 		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid/squid.conf;
+		sed -i $IP2 /etc/squid3/squid.conf;
 sre() {
-/etc/init.d/squid restart
+/etc/init.d/squid3 restart
 }		
 echo  "❯❯❯ REBOOT SQUID"
 fun_bar 'sre'		
