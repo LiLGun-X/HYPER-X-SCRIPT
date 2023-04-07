@@ -342,3 +342,4 @@ verb 3" > /etc/openvpn/client-common.txt
 		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
 		;;
 	esac
+fi
