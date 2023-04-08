@@ -1,3 +1,19 @@
+#!/bin/bash
+
+if [[ "$EUID" -ne 0 ]]; then
+	echo ""
+	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
+	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
+	echo ""
+	exit
+fi
+
+if [[ ! -e /dev/net/tun ]]; then
+	echo ""
+	echo "TUN ไม่สามารถใช้งานได้"
+	exit
+fi
+
 
 # Set Localtime GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
@@ -18,7 +34,104 @@ BLUE='\033[34;1m'
 MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
 
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+	GROUPNAME=nogroup
+	RCLOCAL='/etc/rc.local'
 
+	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="20.04"' ]]; then
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
+		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
+		echo ""
+		echo "Ubuntu 14.04 - 16.04 - 18.04 - 20.04"
+		echo "Debian 8 - 9 -10"
+		echo ""
+		exit
+	fi
+else
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
+	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
+	echo ""
+	echo "Ubuntu 14.04 - 16.04 - 18.04 -20.04"
+	echo "Debian 8 - 9 -10"
+	echo ""
+	exit
+fi
+
+# Menu
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล    ${NC}"
+	else
+		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล    ${NC}"
+	fi
+	echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root    ${NC}"
+	echo -e "|${GRAY} 3${NC}| ${GREEN}รีสตาร์ท/เปิด Openvpn ${NC}"
+	echo -e "|${GRAY} 4${NC}| ${GREEN}รีสตาร์ท/เปิด พร็อกซี่ ${NC}"
+	echo ""
+	echo ""
+	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
+	echo -e "|${GRAY}00${NC}| CHANGE TO ENGLISH"
+	echo ""
+	echo ""
+	read -p "เลือกหัวข้อฟังก์ชั่นที่ต้องการใช้งาน : " FUNCTIONSCRIPT
+
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL   ${NC}"
+	else
+		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL   ${NC}"
+	fi
+	echo -e "|${GRAY} 2${NC}| Change Password Root   ${NC}"
+	echo -e "|${GRAY} 3${NC}| ${GREEN}Restart/Open Openvpn ${NC}"
+	echo -e "|${GRAY} 4${NC}| ${GREEN}Restart/Open Proxy ${NC}"
+        echo ""
+	echo ""
+	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
+	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
+	echo ""
+	echo ""
+	read -p "Select a Function Script : " FUNCTIONSCRIPT
+	
+	
+
+fi
+
+case $FUNCTIONSCRIPT in
+
+	1) # ==================================================================================================================
+
+# ads
 echo ""
 echo "=============== OS-32 & 64-bit =================    "
 echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
@@ -44,11 +157,11 @@ newclient () {
 	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
 	echo "</ca>" >> ~/$1.ovpn
 	echo "<cert>" >> ~/$1.ovpn
-	sed -ne '/BEGIN CERTIFICATE/,$ p' 
-	echo "</cert>  
-	echo "  
-	cat /etc/openvpn/easy-rsa/pki/private/ 
-	echo "</key>  
+	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
+	echo "</cert>" >> ~/$1.ovpn
+	echo "<key>" >> ~/$1.ovpn
+	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
+	echo "</key>" >> ~/$1.ovpn
 	echo "<tls-auth>" >> ~/$1.ovpn
 	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
 	echo "</tls-auth>" >> ~/$1.ovpn
@@ -326,7 +439,6 @@ rcvbuf 0
 port $PORT
 remote $IP
 http-proxy $IP $PROXY
-auth-user-pass
 resolv-retry infinite
 nobind
 persist-key
@@ -338,4 +450,400 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
+	case $OPENVPNSYSTEM in
+		2)
+		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
+		;;
+	esac
 	
+echo ""
+echo -e "\033[35;1m { install nginx }${NC} "
+echo ""
+	cd
+	apt-get -y install nginx
+	cat > /etc/nginx/nginx.conf <<END
+user www-data;
+worker_processes 2;
+pid /var/run/nginx.pid;
+events {
+	multi_accept on;
+        worker_connections 1024;
+}
+http {
+	autoindex on;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        server_tokens off;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        client_max_body_size 32M;
+	client_header_buffer_size 8m;
+	large_client_header_buffers 8 8m;
+	fastcgi_buffer_size 8m;
+	fastcgi_buffers 8 8m;
+	fastcgi_read_timeout 600;
+        include /etc/nginx/conf.d/*.conf;
+}
+END
+	mkdir -p /home/vps/public_html
+	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
+	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+	args='$args'
+	uri='$uri'
+	document_root='$document_root'
+	fastcgi_script_name='$fastcgi_script_name'
+	cat > /etc/nginx/conf.d/vps.conf <<END
+server {
+    listen       85;
+    server_name  127.0.0.1 localhost;
+    access_log /var/log/nginx/vps-access.log;
+    error_log /var/log/nginx/vps-error.log error;
+    root   /home/vps/public_html;
+    location / {
+        index  index.html index.htm index.php;
+	try_files $uri $uri/ /index.php?$args;
+    }
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+END
+
+echo ""
+echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18 }${NC} "
+echo ""
+#Install squid3
+	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ -e /etc/squid3/squid.conf ]]; then
+			apt-get -y remove --purge squid3
+		fi
+
+		apt-get -y install squid3
+		cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+		IP2="s/xxxxxxxxx/$IP/g";
+		sed -i $IP2 /etc/squid3/squid.conf;
+		if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+			service squid3 restart
+			/etc/init.d/openvpn restart
+			/etc/init.d/nginx restart
+		else
+			/etc/init.d/squid3 restart
+			/etc/init.d/openvpn restart
+			/etc/init.d/nginx restart
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+		if [[ -e /etc/squid/squid.conf ]]; then
+			apt-get -y remove --purge squid
+		fi
+#Install squid
+		apt-get -y install squid
+		cat > /etc/squid/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+		IP2="s/xxxxxxxxx/$IP/g";
+		sed -i $IP2 /etc/squid/squid.conf;
+		/etc/init.d/squid restart
+		/etc/init.d/openvpn restart
+		/etc/init.d/nginx restart
+	fi
+
+fi
+echo ""
+echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
+echo ""
+	cd /usr/local/bin
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+chmod +x /usr/local/bin/m
+	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
+	chmod +x /usr/local/bin/Auto-Delete-Client 
+	apt-get -y install vnstat
+	cd /etc/openvpn/easy-rsa/
+	./easyrsa build-client-full $CLIENT nopass
+	newclient "$CLIENT"
+	cp /root/$CLIENT.ovpn /home/vps/public_html/
+	rm -f /root/$CLIENT.ovpn
+	case $OPENVPNSYSTEM in
+		2)
+		useradd $Usernames
+		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
+		;;
+	esac
+
+	
+	
+	
+	clear
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
+	echo "IP Server        : $IP"
+	echo "Port Server      : $PORT"
+	if [[ "$PROTOCOL" = 'udp' ]]; then
+		echo "Protocal : UDP"
+	elif [[ "$PROTOCOL" = 'tcp' ]]; then
+		echo "Protocal : TCP"
+	fi
+	echo "Port Nginx : 85"
+	echo "IP Proxy   : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	case $OPENVPNSYSTEM in
+		1)
+		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+		2)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		echo ""
+		echo "Your Username : $Usernames"
+		echo "Your Password : $Passwords"
+		echo "Expire : Never"
+		;;
+		3)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+	esac
+	echo ""
+	echo "===================================================================="
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo "===================================================================="
+	echo ""
+	exit
+
+	;;
+
+    2) # ==================================================================================================================
+	   #!/bin/bash
+clear
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+echo " ======================================"
+echo "    กำหนดรหัสผ่านสำหรับล็อกอินด้วยชื่อ root  "
+echo " ====================================="
+passwd
+cat > /etc/ssh/sshd_config <<-END
+# Package generated configuration file
+# See the sshd_config(5) manpage for details
+# What ports, IPs and protocols we listen for
+Port 22
+# Use these options to restrict which interfaces/protocols sshd will bind to
+#ListenAddress ::
+#ListenAddress 0.0.0.0
+Protocol 2
+# HostKeys for protocol version 2
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+#Privilege Separation is turned on for security
+UsePrivilegeSeparation yes
+# Lifetime and size of ephemeral version 1 server key
+KeyRegenerationInterval 3600
+ServerKeyBits 1024
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
+# Authentication:
+LoginGraceTime 120
+PermitRootLogin yes
+StrictModes yes
+RSAAuthentication yes
+PubkeyAuthentication yes
+#AuthorizedKeysFile	%h/.ssh/authorized_keys
+# Don't read the user's ~/.rhosts and ~/.shosts files
+IgnoreRhosts yes
+# For this to work you will also need host keys in /etc/ssh_known_hosts
+RhostsRSAAuthentication no
+# similar for protocol version 2
+HostbasedAuthentication no
+# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
+#IgnoreUserKnownHosts yes
+# To enable empty passwords, change to yes (NOT RECOMMENDED)
+PermitEmptyPasswords no
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication no
+# Change to no to disable tunnelled clear text passwords
+PasswordAuthentication yes
+# Kerberos options
+#KerberosAuthentication no
+#KerberosGetAFSToken no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+# GSSAPI options
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+#UseLogin no
+#MaxStartups 10:30:60
+#Banner /etc/issue.net
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+Subsystem sftp /usr/lib/openssh/sftp-server
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+UsePAM yes
+END
+service ssh restart
+exit
+;;
+	3) # ==================================================================================================================
+clear
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+	service openvpn restart
+	echo ""
+	echo -e "	OpenVPN ${GRAY}RESTARTED${NC}"
+	echo ""
+	exit
+	;;
+	4) # ==================================================================================================================
+	
+clear
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+	if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid start
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
+			echo ""
+			exit
+		fi
+	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid3 start
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
+			echo ""
+			exit
+		fi
+	fi
+	;;
+
+	5) # ==================================================================================================================
+	;;
+	0) # ==================================================================================================================
+
+rm -rf Install
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1 && chmod +x Install1 && bash Install1
+	;;
+
+	00) # ==================================================================================================================
+
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	rm -f /usr/local/bin/Check-Thai
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo "Check Thai" >> /usr/local/bin/Check-Thai
+fi
+bash Install1
+	;;
+
+esac
