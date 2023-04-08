@@ -460,7 +460,7 @@ echo ""
 echo -e "\033[35;1m { install nginx }${NC} "
 echo ""
 	cd
-	apt-get -y install nginxx
+	apt-get -y install nginx
 	cat > /etc/nginx/nginx.conf <<END
 user www-data;
 worker_processes 2;
@@ -568,7 +568,7 @@ END
 			/etc/init.d/nginx restart
 		fi
 
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
 		fi
@@ -615,9 +615,9 @@ echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
 echo ""
 	cd /usr/local/bin
-wget -q -O m ""
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 chmod +x /usr/local/bin/m
-	wget -O /usr/local/bin/Auto-Delete-Client ""
+	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
 	apt-get -y install vnstat
 	cd /etc/openvpn/easy-rsa/
