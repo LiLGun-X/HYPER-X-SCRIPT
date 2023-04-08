@@ -455,12 +455,12 @@ verb 3" > /etc/openvpn/client-common.txt
 		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
 		;;
 	esac
-	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	
 echo ""
 echo -e "\033[35;1m { install nginx }${NC} "
 echo ""
 	cd
-	apt-get -y install nginx
+	apt-get -y install nginxx
 	cat > /etc/nginx/nginx.conf <<END
 user www-data;
 worker_processes 2;
