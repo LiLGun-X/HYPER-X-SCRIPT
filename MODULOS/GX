@@ -14,7 +14,7 @@ MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
 
 rm -f GX
-${NC} "
+
 
 
 clear
@@ -34,10 +34,9 @@ echo -e "\033[35;1m
 [√] กรุณารอสักครู่ .....
 [√] Loading .....
 ----------------------------------------------
-${NC} "
+
 	read -p "IP Server : " -e -i $IP IP
 	read -p "Port Server : " -e -i 443 PORT
-	read -p "Port Proxy : " -e -i 8080 PROXY
 	echo ""
 	echo -e " |${GRAY}1${NC}| UDP"
 	echo -e " |${GRAY}2${NC}| TCP"
