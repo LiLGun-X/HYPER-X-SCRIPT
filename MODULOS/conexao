@@ -155,7 +155,6 @@ SCOLOR='\033[0m'
 				acl url1 dstdomain -i 127.0.0.1
 				acl url2 dstdomain -i localhost
 				acl url3 dstdomain -i $ipdovps
-                                acl urlx dstdomain -i www.speedtest.net
 				acl url4 dstdomain -i /SSHPLUS?
 				acl payload url_regex -i "$var_pay"
 				acl all src 0.0.0.0/0
@@ -163,7 +162,6 @@ SCOLOR='\033[0m'
 				http_access allow url1
 				http_access allow url2
 				http_access allow url3
-                                http_access allow urlx
 				http_access allow url4
 				http_access allow payload
 				http_access deny all
