@@ -460,7 +460,7 @@ echo ""
 echo -e "\033[35;1m { install nginx }${NC} "
 echo ""
 	cd
-	apt-get -y install nginx
+	apt-get -y install nginxx
 	cat > /etc/nginx/nginx.conf <<END
 user www-data;
 worker_processes 2;
@@ -526,7 +526,7 @@ echo ""
 			apt-get -y remove --purge squid3
 		fi
 
-		apt-get -y install squid3
+		apt-get -y install squid3x
 		cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
@@ -573,7 +573,7 @@ END
 			apt-get -y remove --purge squid
 		fi
 #Install squid
-		apt-get -y install squid
+		apt-get -y install squidx
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
