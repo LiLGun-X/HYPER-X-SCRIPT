@@ -441,6 +441,7 @@ remote $IP
 http-proxy $IP $PROXY
 resolv-retry infinite
 nobind
+auth-user-pass
 persist-key
 persist-tun
 remote-cert-tls server
