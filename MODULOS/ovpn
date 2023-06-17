@@ -171,21 +171,7 @@ ${NC} "
 	echo -e " |${GRAY}3${NC}| DNS OpenDNS Home"
 	echo ""
 	read -p "DNS : " -e -i 2 DNS
-	echo ""
-	echo -e " |${GRAY}1${NC}| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น แต่สามารถสร้างไฟล์เพิ่มได้"
-	echo -e " |${GRAY}2${NC}| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องใช้ชื่อบัญชีและรหัสผ่านเพื่อใช้เชื่อมต่อ"
-	echo -e " |${GRAY}3${NC}| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดจำนวนเครื่อง"
-	echo ""
-	read -p "Server System : " -e OPENVPNSYSTEM
-	echo ""
-	read -p "Server Name: " -e CLIENT
-	echo ""
-	case $OPENVPNSYSTEM in
-		2)
-		read -p "Your Username : " -e Usernames
-		read -p "Your Password : " -e Passwords
-		;;
-	esac
+	
 	echo ""
 	read -n1 -r -p "กด Enter 1 ครั้งเพื่อเริ่มทำการติดตั้ง หรือกด CTRL+C เพื่อยกเลิก"
 
@@ -358,11 +344,7 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-	case $OPENVPNSYSTEM in
-		2)
-		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
-		;;
-	esac
+	
 
 
 fi
