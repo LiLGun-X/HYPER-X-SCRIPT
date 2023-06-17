@@ -87,15 +87,15 @@ new_client () {
 	cat /etc/openvpn/server/easy-rsa/pki/ca.crt
 	echo "</ca>"
 	echo "<cert>"
-	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/server/easy-rsa/pki/issued/"$1".crt
+	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt
 	echo "</cert>"
 	echo "<key>"
-	cat /etc/openvpn/server/easy-rsa/pki/private/"$1".key
+	cat /etc/openvpn/server/easy-rsa/pki/private/"$client".key
 	echo "</key>"
 	echo "<tls-crypt>"
 	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/server/tc.key
 	echo "</tls-crypt>"
-	} > ~/"$1".ovpn
+	} > ~/"$client".ovpn
 }
 
 if [[ ! -e /etc/openvpn/server/server.conf ]]; then
