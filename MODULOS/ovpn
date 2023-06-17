@@ -151,7 +151,7 @@ echo -e "\033[35;1m
 ${NC} "
 	read -p "IP Server : " -e -i $IP IP
 	read -p "Port Server : " -e -i 443 PORT
-	read -p "Port Proxy : " -e -i 8080 PROXY
+	
 	echo ""
 	echo -e " |${GRAY}1${NC}| UDP"
 	echo -e " |${GRAY}2${NC}| TCP"
@@ -190,8 +190,7 @@ ${NC} "
 	read -n1 -r -p "กด Enter 1 ครั้งเพื่อเริ่มทำการติดตั้ง หรือกด CTRL+C เพื่อยกเลิก"
 
 	apt-get update
-	apt-get install openvpn iptables openssl ca-certificates -y
-
+        apt-get install -y --no-install-recommends openvpn openssl ca-certificates
 	# Get easy-rsa
 	EASYRSAURL='https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.5/EasyRSA-nix-3.0.5.tgz'
 	wget -O ~/easyrsa.tgz "$EASYRSAURL" 2>/dev/null || curl -Lo ~/easyrsa.tgz "$EASYRSAURL"
@@ -349,6 +348,7 @@ remote $IP
 http-proxy $IP $PROXY
 resolv-retry infinite
 nobind
+auth-user-pass
 persist-key
 persist-tun
 remote-cert-tls server
