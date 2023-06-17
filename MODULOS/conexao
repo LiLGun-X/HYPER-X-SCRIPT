@@ -2635,7 +2635,7 @@ case "$x" in
 				proxy_v2
 				;;
                         o | O)
-				OV2x
+				ovpn
 				;;
 			3 | 03)
 				fun_drop
@@ -2677,7 +2677,7 @@ case "$x" in
 				;;
                         15 | 15)
                                 clear
-			        REB
+			        timereboot
 				;;
 			0 | 00)
 				clear
