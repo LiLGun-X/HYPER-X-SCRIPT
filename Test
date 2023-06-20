@@ -7,7 +7,7 @@ if [[ -e /etc/debian_version ]]; then
 	RCLOCAL='/etc/rc.local'
 fi
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="22.04"' ]]; then
-apt install lolcat -yy
+apt install lolcat
 apt install figlet -yy
 apt install dos2unix -yy
 fi
@@ -15,7 +15,7 @@ fi
 if [[ "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 echo -e "      \033[1;33m Ubuntu 18.04 \033[0m"
 apt update
-gem install lolcat -yy
+gem install lolcat
 apt install python3 -yy
 apt install figlet -yy
 apt install dos2unix -yy
