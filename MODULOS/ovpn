@@ -344,7 +344,19 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-	
+
+apt-get install apache2 zip -y
+sed -i "s/Listen 80/Listen 85/g" /etc/apache2/ports.conf
+							service apache2 restart
+							[[ ! -d /var/www/html ]] && {
+								mkdir /var/www/html
+							}
+							[[ ! -d /var/www/html/openvpn ]] && {
+								mkdir /var/www/html/openvpn
+							}
+							touch /var/www/html/openvpn/index.html
+							chmod -R 755 /var/www
+							/etc/init.d/apache2 restart
 
 
 fi
