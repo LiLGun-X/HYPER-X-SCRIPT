@@ -413,7 +413,7 @@ fi
 
 
 if [[ -e /etc/openvpn/server/server.conf ]]; then
-newclient() {
+new_client() {
     cp /etc/openvpn/server/client-common.txt ~/$1.ovpn
 	echo "<ca>" >> ~/$1.ovpn
 	cat /etc/openvpn/server/easy-rsa/pki/ca.crt >> ~/$1.ovpn
@@ -655,7 +655,7 @@ fun_edithost() {
     fi
 }
 [[ ! -e /usr/lib/sshplus ]] && exit 0
-echo -e "\E[5;31;47m           สร้างชื่อผู้ใช้ SSH       \E[0m"
+echo -e "\E[5;31;47m           สร้างชื่อผู้ใช้ SSH   X    \E[0m"
 echo ""
 echo -ne "\033[1;32mUsername:\033[1;37m ";read username
 [[ -z $username ]] && {
