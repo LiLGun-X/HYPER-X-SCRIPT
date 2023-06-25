@@ -838,20 +838,20 @@ SCOLOR='\033[0m'
 			echo -e "SISTEMA NAO SUPORTADO"
 			exit 5
 		fi
-		newclient() {
+		new_client() {
 			# gerar client.ovpn
-			cp /etc/openvpn/client-common.txt ~/$1.ovpn
+			cp /etc/openvpn/server/client-common.txt ~/$1.ovpn
 			echo "<ca>" >>~/$1.ovpn
-			cat /etc/openvpn/easy-rsa/pki/ca.crt >>~/$1.ovpn
+			cat /etc/openvpn/server/easy-rsa/pki/ca.crt >>~/$1.ovpn
 			echo "</ca>" >>~/$1.ovpn
 			echo "<cert>" >>~/$1.ovpn
-			cat /etc/openvpn/easy-rsa/pki/issued/$1.crt >>~/$1.ovpn
+			cat /etc/openvpn/server/easy-rsa/pki/issued/$1.crt >>~/$1.ovpn
 			echo "</cert>" >>~/$1.ovpn
 			echo "<key>" >>~/$1.ovpn
-			cat /etc/openvpn/easy-rsa/pki/private/$1.key >>~/$1.ovpn
+			cat /etc/openvpn/server/easy-rsa/pki/private/$1.key >>~/$1.ovpn
 			echo "</key>" >>~/$1.ovpn
 			echo "<tls-auth>" >>~/$1.ovpn
-			cat /etc/openvpn/ta.key >>~/$1.ovpn
+			cat /etc/openvpn/server/tc.key >>~/$1.ovpn
 			echo "</tls-auth>" >>~/$1.ovpn
 		}
 		IP1=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
@@ -868,13 +868,13 @@ SCOLOR='\033[0m'
 			while :; do
 				clear
 
-				opnp=$(cat /etc/openvpn/server.conf | grep "port" | awk {'print $2'})
+				opnp=$(cat /etc/openvpn/server/server.conf | grep "port" | awk {'print $2'})
 				[[ -d /var/www/html/openvpn ]] && {
 					ovpnweb=$(echo -e "\033[1;32m◉ ")
 				} || {
 					ovpnweb=$(echo -e "\033[1;31m○ ")
 				}
-				if grep "duplicate-cn" /etc/openvpn/server.conf >/dev/null; then
+				if grep "duplicate-cn" /etc/openvpn/server/server.conf >/dev/null; then
 					mult=$(echo -e "\033[1;32m◉ ")
 				else
 					mult=$(echo -e "\033[1;31m○ ")
@@ -912,11 +912,11 @@ SCOLOR='\033[0m'
 					echo -e "\033[1;32mALTERANDO A PORTA OPENVPN!\033[1;33m"
 					echo ""
 					fun_opn() {
-						var_ptovpn=$(sed -n '1 p' /etc/openvpn/server.conf)
-						sed -i "s/\b$var_ptovpn\b/port $porta/g" /etc/openvpn/server.conf
+						var_ptovpn=$(sed -n '1 p' /etc/openvpn/server/server.conf)
+						sed -i "s/\b$var_ptovpn\b/port $porta/g" /etc/openvpn/server/server.conf
 						sleep 1
-						var_ptovpn2=$(sed -n '7 p' /etc/openvpn/client-common.txt | awk {'print $NF'})
-						sed -i "s/\b$var_ptovpn2/\b$porta/g" /etc/openvpn/client-common.txt
+						var_ptovpn2=$(sed -n '7 p' /etc/openvpn/server/client-common.txt | awk {'print $NF'})
+						sed -i "s/\b$var_ptovpn2/\b$porta/g" /etc/openvpn/server/client-common.txt
 						sleep 1
 						service openvpn restart
 					}
@@ -932,8 +932,8 @@ SCOLOR='\033[0m'
 					read REMOVE
 					[[ "$REMOVE" = 's' ]] && {
 						rmv_open() {
-							PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
-							PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
+							PORT=$(grep '^port ' /etc/openvpn/server/server.conf | cut -d " " -f 2)
+							PROTOCOL=$(grep '^proto ' /etc/openvpn/server/server.conf | cut -d " " -f 2)
 							IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 11)
 							if pgrep firewalld; then
 								firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
@@ -1051,10 +1051,10 @@ SCOLOR='\033[0m'
 
 
 				4)
-					if grep "duplicate-cn" /etc/openvpn/server.conf >/dev/null; then
+					if grep "duplicate-cn" /etc/openvpn/server/server.conf >/dev/null; then
 						clear
 						fun_multon() {
-							sed -i '/duplicate-cn/d' /etc/openvpn/server.conf
+							sed -i '/duplicate-cn/d' /etc/openvpn/server/server.conf
 							sleep 1.5s
 							service openvpn restart >/dev/null
 							sleep 2
@@ -1082,8 +1082,8 @@ SCOLOR='\033[0m'
 					else
 						clear
 						fun_multoff() {
-							grep -v "^duplicate-cn" /etc/openvpn/server.conf >/tmp/tmpass && mv /tmp/tmpass /etc/openvpn/server.conf
-							echo "duplicate-cn" >>/etc/openvpn/server.conf
+							grep -v "^duplicate-cn" /etc/openvpn/server/server.conf >/tmp/tmpass && mv /tmp/tmpass /etc/openvpn/server/server.conf
+							echo "duplicate-cn" >>/etc/openvpn/server/server.conf
 							sleep 1.5s
 							service openvpn restart >/dev/null
 						}
@@ -1287,8 +1287,8 @@ SCOLOR='\033[0m'
 				fun_bar 'yum install epel-release -y'
 				fun_bar 'yum install openvpn iptables openssl wget ca-certificates -y'
 			}
-			[[ -d /etc/openvpn/easy-rsa/ ]] && {
-				rm -rf /etc/openvpn/easy-rsa/
+			[[ -d /etc/openvpn/server/easy-rsa/ ]] && {
+				rm -rf /etc/openvpn/server/easy-rsa/
 			}
 			# Adquirindo easy-rsa
 			echo ""
@@ -1298,20 +1298,20 @@ SCOLOR='\033[0m'
 					wget -O ~/EasyRSA-3.1.0.tgz "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/EasyRSA-3.1.0.tgz"
 				}
 				tar xzf ~/EasyRSA-3.1.0.tgz -C ~/
-				mv ~/EasyRSA-3.1.0/ /etc/openvpn/
-				mv /etc/openvpn/EasyRSA-3.1.0/ /etc/openvpn/easy-rsa/
-				chown -R root:root /etc/openvpn/easy-rsa/
+				mv ~/EasyRSA-3.1.0/ /etc/openvpn/server/
+				mv /etc/openvpn/server/EasyRSA-3.1.0/ /etc/openvpn/server/easy-rsa/
+				chown -R root:root /etc/openvpn/server/easy-rsa/
 				rm -rf ~/EasyRSA-3.1.0.tgz
-				cd /etc/openvpn/easy-rsa/
+				cd /etc/openvpn/server/easy-rsa/
 				./easyrsa init-pki
 				./easyrsa --batch build-ca nopass
 				./easyrsa gen-dh
 				./easyrsa build-server-full server nopass
 				./easyrsa build-client-full SSHPLUS nopass
 				./easyrsa gen-crl
-				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
-				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-				openvpn --genkey --secret /etc/openvpn/ta.key
+				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/server/easy-rsa/pki/crl.pem /etc/openvpn/server
+				chown nobody:$GROUPNAME /etc/openvpn/server/crl.pem
+				openvpn --genkey --secret /etc/openvpn/server/tc.key
 				# Generando server.conf
 				echo "port $porta
 proto $PROTOCOL
@@ -1325,38 +1325,38 @@ dh dh.pem
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt" >/etc/openvpn/server.conf
-				echo 'push "redirect-gateway def1 bypass-dhcp"' >>/etc/openvpn/server.conf
+ifconfig-pool-persist ipp.txt" >/etc/openvpn/server/server.conf
+				echo 'push "redirect-gateway def1 bypass-dhcp"' >>/etc/openvpn/server/server.conf
 				# DNS
 				case $DNS in
 				1)
 					# Obtain the resolvers from resolv.conf and use them for OpenVPN
 					grep -v '#' /etc/resolv.conf | grep 'nameserver' | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | while read line; do
-						echo "push \"dhcp-option DNS $line\"" >>/etc/openvpn/server.conf
+						echo "push \"dhcp-option DNS $line\"" >>/etc/openvpn/server/server.conf
 					done
 					;;
 				2)
-					echo 'push "dhcp-option DNS 8.8.8.8"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 8.8.4.4"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 8.8.8.8"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 8.8.4.4"' >>/etc/openvpn/server/server.conf
 					;;
 				3)
-					echo 'push "dhcp-option DNS 208.67.222.222"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 208.67.220.220"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 208.67.222.222"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 208.67.220.220"' >>/etc/openvpn/server/server.conf
 					;;
 				4)
-					echo 'push "dhcp-option DNS 1.1.1.1"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 1.0.0.1"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 1.1.1.1"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 1.0.0.1"' >>/etc/openvpn/server/server.conf
 					;;
 				5)
-					echo 'push "dhcp-option DNS 74.82.42.42"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 74.82.42.42"' >>/etc/openvpn/server/server.conf
 					;;
 				6)
-					echo 'push "dhcp-option DNS 64.6.64.6"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 64.6.65.6"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 64.6.64.6"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 64.6.65.6"' >>/etc/openvpn/server/server.conf
 					;;
 				7)
-					echo 'push "dhcp-option DNS 189.38.95.95"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 216.146.36.36"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 189.38.95.95"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 216.146.36.36"' >>/etc/openvpn/server/server.conf
 					;;
 				esac
 				echo "keepalive 10 120
@@ -1375,7 +1375,7 @@ client-to-client
 client-cert-not-required
 username-as-common-name
 plugin $(find /usr -type f -name 'openvpn-plugin-auth-pam.so') login
-duplicate-cn" >>/etc/openvpn/server.conf
+duplicate-cn" >>/etc/openvpn/server/server.conf
 				sed -i '/\<net.ipv4.ip_forward\>/c\net.ipv4.ip_forward=1' /etc/sysctl.conf
 				if ! grep -q "\<net.ipv4.ip_forward\>" /etc/sysctl.conf; then
 					echo 'net.ipv4.ip_forward=1' >>/etc/sysctl.conf
@@ -1440,20 +1440,20 @@ exit 0' >$RCLOCAL
 					wget -O ~/EasyRSA-3.1.0.tgz "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/EasyRSA-3.1.0.tgz"
 				}
 				tar xzf ~/EasyRSA-3.1.0.tgz -C ~/
-				mv ~/EasyRSA-3.1.0/ /etc/openvpn/
-				mv /etc/openvpn/EasyRSA-3.1.0/ /etc/openvpn/easy-rsa/
-				chown -R root:root /etc/openvpn/easy-rsa/
+				mv ~/EasyRSA-3.1.0/ /etc/openvpn/server/
+				mv /etc/openvpn/server/EasyRSA-3.1.0/ /etc/openvpn/server/easy-rsa/
+				chown -R root:root /etc/openvpn/server/easy-rsa/
 				rm -rf ~/EasyRSA-3.1.0.tgz
-				cd /etc/openvpn/easy-rsa/
+				cd /etc/openvpn/server/easy-rsa/
 				./easyrsa init-pki
 				./easyrsa --batch build-ca nopass
 				./easyrsa gen-dh
 				./easyrsa build-server-full server nopass
 				./easyrsa build-client-full SSHPLUS nopass
 				./easyrsa gen-crl
-				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
-				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-				openvpn --genkey --secret /etc/openvpn/ta.key
+				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/server/easy-rsa/pki/crl.pem /etc/openvpn/server
+				chown nobody:$GROUPNAME /etc/openvpn/server/crl.pem
+				openvpn --genkey --secret /etc/openvpn/server/tc.key
 				# Generando server.conf
 				echo "port $porta
 proto $PROTOCOL
@@ -1467,38 +1467,38 @@ dh dh.pem
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt" >/etc/openvpn/server.conf
-				echo 'push "redirect-gateway def1 bypass-dhcp"' >>/etc/openvpn/server.conf
+ifconfig-pool-persist ipp.txt" >/etc/openvpn/server/server.conf
+				echo 'push "redirect-gateway def1 bypass-dhcp"' >>/etc/openvpn/server/server.conf
 				# DNS
 				case $DNS in
 				1)
 					# Obtain the resolvers from resolv.conf and use them for OpenVPN
 					grep -v '#' /etc/resolv.conf | grep 'nameserver' | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | while read line; do
-						echo "push \"dhcp-option DNS $line\"" >>/etc/openvpn/server.conf
+						echo "push \"dhcp-option DNS $line\"" >>/etc/openvpn/server/server.conf
 					done
 					;;
 				2)
-					echo 'push "dhcp-option DNS 8.8.8.8"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 8.8.4.4"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 8.8.8.8"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 8.8.4.4"' >>/etc/openvpn/server/server.conf
 					;;
 				3)
-					echo 'push "dhcp-option DNS 208.67.222.222"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 208.67.220.220"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 208.67.222.222"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 208.67.220.220"' >>/etc/openvpn/server/server.conf
 					;;
 				4)
-					echo 'push "dhcp-option DNS 1.1.1.1"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 1.0.0.1"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 1.1.1.1"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 1.0.0.1"' >>/etc/openvpn/server/server.conf
 					;;
 				5)
-					echo 'push "dhcp-option DNS 74.82.42.42"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 74.82.42.42"' >>/etc/openvpn/server/server.conf
 					;;
 				6)
-					echo 'push "dhcp-option DNS 64.6.64.6"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 64.6.65.6"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 64.6.64.6"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 64.6.65.6"' >>/etc/openvpn/server/server.conf
 					;;
 				7)
-					echo 'push "dhcp-option DNS 189.38.95.95"' >>/etc/openvpn/server.conf
-					echo 'push "dhcp-option DNS 216.146.36.36"' >>/etc/openvpn/server.conf
+					echo 'push "dhcp-option DNS 189.38.95.95"' >>/etc/openvpn/server/server.conf
+					echo 'push "dhcp-option DNS 216.146.36.36"' >>/etc/openvpn/server/server.conf
 					;;
 				esac
 				echo "keepalive 10 120
@@ -1517,7 +1517,7 @@ client-to-client
 client-cert-not-required
 username-as-common-name
 plugin $(find /usr -type f -name 'openvpn-plugin-auth-pam.so') login
-duplicate-cn" >>/etc/openvpn/server.conf
+duplicate-cn" >>/etc/openvpn/server/server.conf
 				sed -i '/\<net.ipv4.ip_forward\>/c\net.ipv4.ip_forward=1' /etc/sysctl.conf
 				if ! grep -q "\<net.ipv4.ip_forward\>" /etc/sysctl.conf; then
 					echo 'net.ipv4.ip_forward=1' >>/etc/sysctl.conf
@@ -1585,7 +1585,7 @@ exit 0' >$RCLOCAL
 				IP="$IP2"
 			fi
 			[[ $(grep -wc 'open.py' /etc/autostart) != '0' ]] && pt_proxy=$(grep -w 'open.py' /etc/autostart| cut -d' ' -f6) || pt_proxy=80
-			cat <<-EOF >/etc/openvpn/client-common.txt
+			cat <<-EOF >/etc/openvpn/server/client-common.txt
 				client
 				dev tun
 				proto $PROTOCOL
