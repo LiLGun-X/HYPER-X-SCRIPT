@@ -413,20 +413,23 @@ fi
 
 
 if [[ -e /etc/openvpn/server/server.conf ]]; then
-new_client() {
-    cp /etc/openvpn/server/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/server/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/server/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/server/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/server/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
+new_client () {
+	# Generates the custom client.ovpn
+	{
+	cat /etc/openvpn/server/client-common.txt
+	echo "<ca>"
+	cat /etc/openvpn/server/easy-rsa/pki/ca.crt
+	echo "</ca>"
+	echo "<cert>"
+	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt
+	echo "</cert>"
+	echo "<key>"
+	cat /etc/openvpn/server/easy-rsa/pki/private/"$client".key
+	echo "</key>"
+	echo "<tls-crypt>"
+	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/server/tc.key
+	echo "</tls-crypt>"
+	} > ~/"$client".ovpn
 }
 fun_geraovpn() {
     [[ "$respost" = @(y|Y) ]] && {
@@ -655,7 +658,7 @@ fun_edithost() {
     fi
 }
 [[ ! -e /usr/lib/sshplus ]] && exit 0
-echo -e "\E[5;31;47m           สร้างชื่อผู้ใช้ SSH   X    \E[0m"
+echo -e "\E[5;31;47m           สร้างชื่อผู้ใช้ SSH   z    \E[0m"
 echo ""
 echo -ne "\033[1;32mUsername:\033[1;37m ";read username
 [[ -z $username ]] && {
