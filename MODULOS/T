@@ -150,7 +150,7 @@ echo -e "\033[35;1m
 ----------------------------------------------
 ${NC} "
 	read -p "IP Server : " -e -i $IP IP
-	read -p "Port Server : " -e -i 443 PORT
+	read -p "Port Server : " -e -i 443 porta
 	
 	echo ""
 	echo -e " |${GRAY}1${NC}| UDP"
@@ -330,7 +330,7 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-port $PORT
+port $porta
 remote $IP
 http-proxy $IP $PROXY
 resolv-retry infinite
