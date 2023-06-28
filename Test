@@ -34,7 +34,7 @@ apt install dos2unix -yy
 
 fi
 ########################################################################
-if [[ "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+
 echo -e "      \033[1;33mUbuntu 22.04\033[0m"
 apt update
 apt install ruby-full -yy 
@@ -43,7 +43,7 @@ gem install lolcat
 apt install figlet -yy
 apt install dos2unix -yy
 apt install ruby-full -yy 
-fi
+
 ########################################################################
 
 echo -e " \033[1;31m➤ figlet \033[0m"
@@ -65,7 +65,7 @@ cd /bin/bash /etc/openvpn
 rm -f .profile
 # Running screenfetch xxxxx
 
-sudo apt install neofetch -yy
+apt install neofetch -yy
 
 apt-get install vnstat -yy 
 systemctl start vnstat.service 
