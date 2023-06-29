@@ -345,7 +345,7 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-	apt-get update
+	
         apt-get install -y --no-install-recommends openvpn openssl ca-certificates
 	# Get easy-rsa
 	EASYRSAURL='https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/EasyRSA-3.1.0.tgz'
