@@ -114,8 +114,8 @@ fun_edithost() {
     echo ""
     
     echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;31mSIM TRUE \033[1;36m[\033[1;31mNOPRO\033[1;36m]"
-    echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;33mOPEN SQUID \033[1;31m[\033[1;32mAPP MOD\033[1;31m]"
-    echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;33mVIVO MMS \033[1;31m[\033[1;37mAPN: \033[1;32mmms.vivo.com.br\033[1;31m]"
+    echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;32mSIM AIS \033[1;31m[\033[1;32mกันรั่ว + AIS PLAY\033[1;31m]"
+    echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;34mSIM DTAC \033[1;31m[\033[1;34mNOPRO\033[1;31m]"
     echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;33mMODO BYPASS \033[1;31m[\033[1;32mOPEN + INJECTOR\033[1;31m]"
     echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;33mTODOS HOSTS \033[1;31m[\033[1;32m1 OVPN DE CADA\033[1;31m]"
     echo -e "\033[1;31m[\033[1;36mx\033[1;31m] \033[1;33mแก้ไขด้วยตนเอง"
@@ -141,9 +141,8 @@ fun_edithost() {
     elif [[ "$respo" = '2' ]]; then
         echo -e "\n\033[1;32mเปลี่ยน HOST!\033[0m\n"
         fun_althost2() {
-            sed -i "s;$rmt;remote $rmt2 $_Port;" $cert01
-            sed -i "s;$hedr;http-proxy-option CUSTOM-HEADER Host $vivo3;" $cert01
-            sed -i "s;$prxy;http-proxy $IP 80;" $cert01
+            sed -i "s;$rmt;remote 127.0.0.1:443@https://speedtest-3bb.co.th@speedtest.adslthailand.com;" $cert01
+            sed -i "s;$prxy;http-proxy $IP 8080;" $cert01
         }
         fun_bar 'fun_althost2'
         echo -e "\n\033[1;32mเปลี่ยนโฮสต์สำเร็จแล้ว!\033[0m"
@@ -152,8 +151,8 @@ fun_edithost() {
     elif [[ "$respo" = '3' ]]; then
         echo -e "\n\033[1;32mเปลี่ยน HOST!\033[0m\n"
         fun_althostpay1() {
-            sed -i "s;$rmt;remote $rmt2 $_Port;" $cert01
-            sed -i "s;$hedr;$payload1;" $cert01
+            sed -i "s;$rmt;remote 127.0.0.1:443@app.dtac.co.th;" $cert01
+            
             sed -i "s;$prxy;http-proxy $IP 8080;" $cert01
         }
         fun_bar 'fun_althostpay1'
