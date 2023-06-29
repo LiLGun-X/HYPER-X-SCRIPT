@@ -499,7 +499,7 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-port $PORT
+port $porta
 remote $IP
 http-proxy $IP $PROXY
 resolv-retry infinite
