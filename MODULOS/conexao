@@ -2223,11 +2223,11 @@ echo ""
 #Install squid
 echo  "❯❯❯ INSTALL SQUID"
 ins() {
-apt-get -y install squid3
-sudo apt install squid3
+apt-get -y install squid
+sudo apt install squid
 				}
 fun_bar 'ins'
-		cat > /etc/squid3/squid.conf <<END
+		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
@@ -2259,9 +2259,10 @@ refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
 		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid3/squid.conf;
+		sed -i $IP2 /etc/squid/squid.conf;
 sre() {
-/etc/init.d/squid3 restart
+
+/etc/init.d/squid restart
 }		
 echo  "❯❯❯ REBOOT SQUID"
 fun_bar 'sre'		
@@ -2284,96 +2285,6 @@ echo ""
 	fun_conexao
 	;;
 
-x) # ==================================================================================================================
-clear
-
-echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
-echo ""
-echo "Server IP  : $IP "
-read -p "Port Proxy : " -e -i 8080 PROXY
-echo ""
-#Install squid
-echo  "❯❯❯ INSTALL SQUID Test"
-ins() {
-apt-get -y install squid
-apt install squid
-				}
-fun_bar 'ins'
-		cat > /etc/squid/squid.conf <<END
-http_port $PROXY
-# Example rule allowing access from your local networks.
-# Adapt to list your (internal) IP networks from where browsing
-# should be allowed
-acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
-acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
-acl localnet src 100.64.0.0/10          # RFC 6598 shared address space (CGN)
-acl localnet src 169.254.0.0/16         # RFC 3927 link-local (directly plugged) machines
-acl localnet src 172.16.0.0/12          # RFC 1918 local private network (LAN)
-acl localnet src 192.168.0.0/16         # RFC 1918 local private network (LAN)
-acl localnet src fc00::/7               # RFC 4193 local private network range
-acl localnet src fe80::/10              # RFC 4291 link-local (directly plugged) machines
-
-acl SSL_ports port 443
-acl Safe_ports port 80          # http
-acl Safe_ports port 21          # ftp
-acl Safe_ports port 443         # https
-acl Safe_ports port 70          # gopher
-acl Safe_ports port 210         # wais
-acl Safe_ports port 1025-65535  # unregistered ports
-acl Safe_ports port 280         # http-mgmt
-acl Safe_ports port 488         # gss-http
-acl Safe_ports port 591         # filemaker
-acl Safe_ports port 777         # multiling http
-
-http_access deny !Safe_ports
-http_access deny CONNECT !SSL_ports
-http_access allow localhost manager
-http_access deny manager
-
-#
-# INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS
-#
-
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-
-coredump_dir /squid/var/cache/squid
-
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid/squid.conf;
-sre() {
-/etc/init.d/squid restart
-}		
-echo  "❯❯❯ REBOOT SQUID"
-fun_bar 'sre'		
-
-	clear
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-	echo "Squid Proxy,Install finish Test."
-	echo "Port Proxy : $PROXY"
-	echo ""
-	echo ""
-	echo ""
-        sleep 2.5
-	fun_conexao
-	;;
-
-
-
-
 
 2) #==================================================================================================================
 
@@ -2390,7 +2301,7 @@ echo " "
 case "$xx" in
 1)
  read -p " ┈┣ ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
-grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
+grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
 if [ $? -eq 0 ]; then
  clear
 cr
@@ -2427,9 +2338,9 @@ echo " ┈┣  $Port ไม่ได้ยืนยันการใช้ง�
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
 exit 
  fi
-sed -i "/http_port 8080/a http_port xxxx" /etc/squid3/squid.conf
-sed -i "s/xxxx/$Port/g" /etc/squid3/squid.conf
-echo " ┈┣ http_port $Port  " >> /etc/squid3/port.txt
+sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
+sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
+echo " ┈┣ http_port $Port  " >> /etc/squid/port.txt
 echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
 apx() {
 service squid3 restart
@@ -2479,7 +2390,7 @@ read -p " ┈┣ พิมพ์ตัวเลข : " xa
 case "$xa" in
 1)
 read -p " ┈┣ ใส่เลขพอร์ตที่จะลบ : " Port
-grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
+grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
 if [ $? -eq 0 ]; then
 if [[ $Port = 8080 ]]; then
 clear
@@ -2507,10 +2418,10 @@ echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ 
  exit
 fi
 SERVER_IP2="/$Port/d";
-sed -i $SERVER_IP2 /etc/squid3/port.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/squid.conf
+sed -i $SERVER_IP2 /etc/squid/port.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/port.txt
+sed -i '/^$/d' /etc/squid/squid.conf
 echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
 ap() {
 service squid restart
@@ -2535,12 +2446,12 @@ echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ 
  exit
 fi
 SERVER_IP2="/http_port/d";
-sed -i $SERVER_IP2 /etc/squid3/port.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/squid.conf
-sed -i "/http_access allow SSH/a http_port 8080" /etc/squid3/squid.conf
-echo " ┈┣ http_port 8080 " > /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/port.txt
+sed -i $SERVER_IP2 /etc/squid/port.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/squid.conf
+sed -i "/http_access allow SSH/a http_port 8080" /etc/squid/squid.conf
+echo " ┈┣ http_port 8080 " > /etc/squid/port.txt
+sed -i '/^$/d' /etc/squid/port.txt
 echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
 rs() {
 service squid3 restart
@@ -2592,7 +2503,7 @@ echo " ┈┣  $SERVER_IP ไม่ได้ยืนยันการใช้
 echo " ┈╰━━━━━━━━━━━━━━━━━━━━━╯ "
 exit 
  fi
-grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
 if [ $? -eq 0 ]; then
  clear
 cr
@@ -2603,8 +2514,8 @@ exit
 fi
 
 sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
-sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid3/squid.conf
-echo " ┈┣ $SERVER_IP " >> /etc/squid3/squid.txt
+sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
+echo " ┈┣ $SERVER_IP " >> /etc/squid/squid.txt
 echo  "❯❯❯ กำลังเปิดใช้งานตั้งค่าใหม่ รอสักครู่..."
 aip() {
 service squid restart
