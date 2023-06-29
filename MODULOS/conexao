@@ -2284,6 +2284,82 @@ echo ""
 	fun_conexao
 	;;
 
+x) # ==================================================================================================================
+clear
+
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
+echo ""
+echo "Server IP  : $IP "
+read -p "Port Proxy : " -e -i 8080 PROXY
+echo ""
+#Install squid
+echo  "❯❯❯ INSTALL SQUID"
+ins() {
+apt-get -y install squid3
+sudo apt install squid3
+				}
+fun_bar 'ins'
+		cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl JLX dst 127.0.0.1-127.0.0.1/255.255.255.255
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow JLX
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+		IP2="s/xxxxxxxxx/$IP/g";
+		sed -i $IP2 /etc/squid/squid.conf;
+sre() {
+/etc/init.d/squid3 restart
+}		
+echo  "❯❯❯ REBOOT SQUID"
+fun_bar 'sre'		
+
+	clear
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
+	echo "Squid Proxy,Install finish."
+	echo "Port Proxy : $PROXY"
+	echo ""
+	echo ""
+	echo ""
+        sleep 2.5
+	fun_conexao
+	;;
+
+
+
+
+
 2) #==================================================================================================================
 
 echo " ┈╭━━━━━━━━━━━━━━━━━━━━━╮ "
