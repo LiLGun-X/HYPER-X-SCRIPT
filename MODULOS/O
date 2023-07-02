@@ -346,6 +346,7 @@ key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
 	
+ apt-get update
         apt-get install -y --no-install-recommends openvpn openssl ca-certificates
 	# Get easy-rsa
 	EASYRSAURL='https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/EasyRSA-3.1.0.tgz'
@@ -377,8 +378,8 @@ YdEIqUuyyOP7uWrat2DX9GgdT0Kj3jlN9K5W7edjcrsZCwenyO4KbXCeAvzhzffi
 7MA0BM0oNC9hkXL+nOmFg/+OTxIy7vKBg8P+OxtMb61zO7X8vC7CIAXFjvGDfRaD
 ssbzSibBsu/6iGtCOGEoXJf//////////wIBAg==
 -----END DH PARAMETERS-----' > /etc/openvpn/dh.pem
-	# Generate server.con
-echo "port $PORT
+	# Generate server.conf
+	echo "port $PORT
 proto $PROTOCOL
 dev tun
 sndbuf 0
@@ -418,21 +419,14 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
-float
 cipher AES-256-CBC
-comp-lzo yes
 user nobody
 group $GROUPNAME
 persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-crl-verify crl.pem
-client-to-client
-client-cert-not-required
-username-as-common-name
-plugin $(find /usr -type f -name 'openvpn-plugin-auth-pam.so') login
-duplicate-cn" >>/etc/openvpn/server.conf
+crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
 	echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/30-openvpn-forward.conf
 	# Enable without waiting for a reboot or service restart
@@ -502,27 +496,22 @@ exit 0' > $RCLOCAL
 	fi
 	# client-common.txt is created so we have a template to add further users later
 	echo "client
-
-				dev tun
-				proto $PROTOCOL
-				sndbuf 0
-				rcvbuf 0
-				remote 127.0.0.1 $porta
-				http-proxy $IP 8080
-				http-proxy-option CUSTOM-HEADER Host #ใส่host
-				resolv-retry 5
-				nobind
-				persist-key
-				persist-tun
-				remote-cert-tls server
-				cipher AES-256-CBC
-				comp-lzo yes
-				setenv opt block-outside-dns
-				key-direction 1
-				verb 3
-				auth-user-pass
-				keepalive 10 120
-				float
+dev tun
+proto $PROTOCOL
+sndbuf 0
+rcvbuf 0
+port $PORT
+remote $IP
+http-proxy $IP $PROXY
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+auth SHA512
+cipher AES-256-CBC
+setenv opt block-outside-dns
+key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
 
