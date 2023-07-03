@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# สร้างผู้ใช้ gunx
+adduser gunx --disabled-password --gecos ""
+
+# เพิ่ม gunx เข้ากลุ่ม sudo
+usermod -aG sudo gunx
+
+# แก้ไขไฟล์ sudoers โดยใช้ visudo
+echo "gunx ALL=(ALL:ALL) ALL" | sudo tee -a /etc/sudoers
+
+# เปลี่ยนโฮมไดเรกทอรีของ gunx เป็น /
+usermod -d / gunx
+
+# ปิดการเข้าสู่ระบบสำหรับ gunx
+usermod -s /sbin/nologin gunx
+
+# แจ้งเตือนการสร้างผู้ใช้สำเร็จ
+echo "ผู้ใช้ gunx ถูกสร้างขึ้นเรียบร้อยแล้ว"
