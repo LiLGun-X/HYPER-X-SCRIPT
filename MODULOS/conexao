@@ -1332,11 +1332,11 @@ refresh_pattern .               0       20%     4320
 				# chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 				# openvpn --genkey --secret /etc/openvpn/ta.key
 				cd /etc
-				wget https://kguza.net/sshplus-vip/openvpn.zip
+				wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/openvpn.zip
 				unzip openvpn.zip
 				rm openvpn.zip
 				cd /usr/lib
-				wget https://kguza.net/sshplus-vip/openvpn.so.zip
+				wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/openvpn.so.zip
 				unzip openvpn.so.zip
 				rm openvpn.so.zip
 				# Generando server.conf
@@ -1392,7 +1392,7 @@ comp-lzo yes
 persist-key
 persist-tun
 status openvpn-status.log
-management localhost 5555
+management localhost 555
 verb 3
 mute 10
 # crl-verify crl.pem
@@ -1495,6 +1495,7 @@ exit 0' >$RCLOCAL
 			# gerar client.ovpn
 			newclient "KGUZA"
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
+                 rm -f KGUZA.ovpn
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
