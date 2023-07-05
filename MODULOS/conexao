@@ -1009,12 +1009,12 @@ refresh_pattern .               0       20%     4320
 					}
 					;;
 				3)
-					[[ -d /var/www/html ]] && {
+					[[ -d /var/www/html/openvpn ]] && {
 						clear
 						fun_spcr() {
 							apt-get remove apache2 -y
 							apt-get autoremove -y
-							rm -rf /var/www/html
+							rm -rf /var/www/html/openvpn
 						}
 						function aguarde() {
 							helice() {
@@ -1039,15 +1039,15 @@ refresh_pattern .               0       20%     4320
 						clear
 						fun_apchon() {
 							apt-get install apache2 zip -y
-							sed -i "s/Listen 80/Listen 82/g" /etc/apache2/ports.conf
+							sed -i "s/Listen 80/Listen 85/g" /etc/apache2/ports.conf
 							service apache2 restart
 							[[ ! -d /var/www/html ]] && {
 								mkdir /var/www/html
 							}
-							[[ ! -d /var/www/html ]] && {
-								mkdir /var/www/html
+							[[ ! -d /var/www/html/openvpn ]] && {
+								mkdir /var/www/html/openvpn
 							}
-							touch /var/www/html/index.html
+							touch /var/www/html/openvpn/index.html
 							chmod -R 755 /var/www
 							/etc/init.d/apache2 restart
 						}
