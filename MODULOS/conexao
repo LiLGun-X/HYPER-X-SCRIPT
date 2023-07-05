@@ -2070,53 +2070,57 @@ exit 0' >$RCLOCAL
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-			echo -e "\E[44;1;37m                โหมดฟังชั่นเพิ่มเติม                 \E[0m\n"
-			echo -e "\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <> %H:%M:%S')
+echo -e "\033[1;37m $system                $date"
+echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                      CONEXAO debug                     \033[1;33m \033[0m\033[01;31m║"
+echo -e "\033[0;31m║\033[0m"
+			echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
 			[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mCHISEL: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mCHISEL: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts8="\033[1;32m◉ "
 			} || {
 				sts8="\033[1;31m○ "
 			}
-			[[ "$(ps x | grep 'slowdns' | grep -v 'grep' | wc -l)" != '0' ]] && {
+			[[ "$(ps x | grep 'slow_dns' | grep -v 'grep'|wc -l)" != '0' ]] && {
 				sts9="\033[1;32m◉ "
 			} || {
 				sts9="\033[1;31m○ "
-			}
+			}            
 			[[ "$(netstat -tlpn | grep 'sslh' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mSSLH: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'sslh' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mSSLH: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'sslh' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts7="\033[1;32m◉ "
 			} || {
 				sts7="\033[1;31m○ "
 			}
 
 			[[ "$(netstat -tlpn | grep 'openvpn' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mOPENVPN: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'openvpn' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mOPENVPN: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'openvpn' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts5="\033[1;32m◉ "
 			} || {
 				sts5="\033[1;31m○ "
 			}
 
 			[[ "$(netstat -tlpn | grep 'python' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mPROXY SOCKS \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mPROXY SOCKS \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts4="\033[1;32m◉ "
 			} || {
 				sts4="\033[1;31m○ "
 			}
 			[[ -e "/etc/stunnel/stunnel.conf" ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mSSL TUNNEL \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mSSL TUNNEL \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts3="\033[1;32m◉ "
 			} || {
 				sts3="\033[1;31m○ "
 			}
 			[[ "$(netstat -tlpn | grep 'dropbear' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mDROPBEAR \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs)"
+				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mDROPBEAR \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs)"
 				sts2="\033[1;32m◉ "
 			} || {
 				sts2="\033[1;31m○ "
 			}
 			[[ "$(netstat -tlpn | grep 'squid' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mSQUID \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
+				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mSQUID \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
 				sts1="\033[1;32m◉ "
 			} || {
 				sts1="\033[1;31m○ "
@@ -2131,35 +2135,40 @@ exit 0' >$RCLOCAL
 			} || {
 				xv2ray="\033[1;31m○ "
 			}
-			echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-			echo ""
-			echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mOPENSSH $sts6\033[1;31m
-[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mSQUID PROXY $sts1\033[1;31m
-[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mDROPBEAR $sts2\033[1;31m
-[\033[1;36m04\033[1;31m] \033[1;37m• \033[1;33mOPENVPN $sts5\033[1;31m
-[\033[1;36m05\033[1;31m] \033[1;37m• \033[1;33mPROXY SOCKS $sts4\033[1;31m
-[\033[1;36m06\033[1;31m] \033[1;37m• \033[1;33mSSL TUNNEL $sts3\033[1;31m
-[\033[1;36m07\033[1;31m] \033[1;37m• \033[1;33mSSLH MULTIPLEX $sts7\033[1;31m
-[\033[1;36m08\033[1;31m] \033[1;37m• \033[1;33mCHISEL $sts8\033[1;31m
-[\033[1;36m09\033[1;31m] \033[1;37m• \033[1;33mSLOWDNS $sts9\033[1;31m
-[\033[1;36m10\033[1;31m] \033[1;37m• \033[1;33mV2RAY $xv2ray\033[1;31m
-[\033[1;36m11\033[1;31m] \033[1;37m• \033[1;33mTROJAN-GO $trojansts\033[1;31m
-[\033[1;36m12\033[1;31m] \033[1;37m• \033[1;33mย้อนกลับ \033[1;32m<\033[1;33m<\033[1;31m< \033[1;31m
-[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mออก \033[1;32m<\033[1;33m<\033[1;31m< \033[0m"
-			echo ""
-			echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-			echo ""
+			echo -e "\033[0;31m╠━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━\033[0m"
+			echo -e "\033[01;31m║\033[0m"
+			echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 01 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENSSH \033[01;31m $sts6\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 02 •\033[1;34m]\033[1;37m ➩  \033[1;33mSQUID PROXY \033[01;31m $sts1\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 03 •\033[1;34m]\033[1;37m ➩  \033[1;33mDROPBEAR \033[01;31m $sts2\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 04 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENVPN \033[01;31m $sts5\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 05 •\033[1;34m]\033[1;37m ➩  \033[1;33mPROXY SOCKS \033[01;31m $sts4\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 06 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSL TUNNEL \033[01;31m $sts3\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 07 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSLH MULTIPLEX \033[01;31m $sts7\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 08 •\033[1;34m]\033[1;37m ➩  \033[1;33mCHISEL \033[01;31m $sts8\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 09 •\033[1;34m]\033[1;37m ➩  \033[1;33mSLOWDNS \033[01;31m $sts9\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 10 •\033[1;34m]\033[1;37m ➩  \033[1;33mV2RAY \033[01;31m $xv2ray\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 11 •\033[1;34m]\033[1;37m ➩  \033[1;33mTROJAN-GO \033[01;31m $trojansts\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 12 •\033[1;34m]\033[1;37m ➩  \033[1;33mWEBSOCKET - Corretor \033[01;31m $sts3\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 13 •\033[1;34m]\033[1;37m ➩  \033[1;33mLIMPAR V2RAY \033[01;31m\033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 14 •\033[1;34m]\033[1;37m ➩  \033[1;33mPAINEL WEB V2RAY  \033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 15 •\033[1;34m]\033[1;37m ➩  \033[1;33mตั้งเวลาreboot   \033[0m"
+echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 00 •\033[1;34m]\033[1;37m ➩  \033[1;33mVOLTAR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m"
+echo -e "\033[01;31m║\033[0m"
+			echo -e "\033[0;31m╠━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━\033[0m"
 			tput civis
-			echo -ne "\033[1;32mSELLECT OPTION \033[1;33m?\033[1;31m?\033[1;37m "
-			read x
-			tput cnorm
-			clear
-			case $x in
+			echo -ne "\033[1;31m╰━━━━━━━━❪\033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m : "; read x
+case "$x" in
 			1 | 01)
 				fun_openssh
 				;;
 			2 | 02)
 				fun_squid
+				;;
+                        s | S)
+				proxy_v2
+				;;
+                        o | O)
+				ovpn
 				;;
 			3 | 03)
 				fun_drop
@@ -2180,26 +2189,35 @@ exit 0' >$RCLOCAL
 				fun_chisel
 				;;
 			9 | 09)
-				slow_setup
+				slowdns
 				;;
 			10 | 10)
-				v2raymanager
+				v2m
 				exit
 				;;
 			11 | 11)
 				trojan-go
 				;;
 			12 | 12)
-				menu
+				websocket.sh
+				;;
+			13 | 13)
+                                rebootx
+				;;
+                        14 | 14)
+                                clear
+				pv2
+				;;
+                        15 | 15)
+                                clear
+			        timereboot
 				;;
 			0 | 00)
-				echo -e "\033[1;31mSaindo...\033[0m"
-				sleep 2
 				clear
-				exit
+				menu
 				;;
 			*)
-				echo -e "\033[1;31mกรุณาเลือกให้ถูกต้อง !\033[0m"
+				echo -e "\033[1;31mOpcao invalida !\033[0m"
 				sleep 2
 				;;
 			esac
