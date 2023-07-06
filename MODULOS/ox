@@ -1,0 +1,104 @@
+clear
+if [[ $1 == "" ]]
+then
+  echo ""
+echo -e "\033[1;32m================
+    Credit ssh ssl
+================
+   {1} SSH-22-143
+   {2} DROPBEAR&SSL-443-143-444\033[0m"
+read -p "Selet : " opcao
+else
+opcao=$1
+fi
+case $opcao in
+ 1)
+clear
+if [[ $1 == "" ]]
+then
+  echo ""
+echo -e "\033[1;32m================
+    Credit ssh ssl
+================
+   {1} Install Credit
+   {2} Edit Credit
+   {3} Delet Credit\033[0m"
+echo -e "\033[1;36m"
+read -p "Selet : " opcao
+else
+opcao=$1
+fi
+case $opcao in
+  1 | 01 )
+echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
+nano /etc/bannerssh
+service sshd restart;;
+  2 | 02 )
+nano /etc/bannerssh
+service sshd restart;;
+  3 | 03 )
+echo 'Successfully deleted.' > /etc/bannerssh
+service sshd restart;;
+esac
+  ;;
+ 2)
+#!/bin/bash
+clear
+if [[ $1 == "" ]]
+then
+  echo ""
+echo -e "\033[1;32m================
+    Credit HTTP
+================
+   {1} Install Credit
+   {2} Edit Credit
+   {3} Delet Credit\033[0m"
+echo -e "\033[1;36m"
+read -p "Selet : " opcao
+else
+opcao=$1
+fi
+case $opcao in
+  1 | 01 )
+echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
+nano /etc/bannerssh
+service sshd restart;;
+  2 | 02 )
+nano /etc/bannerssh
+service sshd restart;;
+  3 | 03 )
+echo 'Successfully deleted.' > /etc/bannerssh
+service sshd restart;;
+esac
+  ;;
+ 2)
+#!/bin/bash
+clear
+if [[ $1 == "" ]]
+then
+  echo ""
+echo -e "\033[1;32m================
+    Credit HTTP
+================
+   {1} Install Credit
+   {2} Edit Credit
+   {3} Delet Credit\033[0m"
+echo -e "\033[1;36m"
+read -p "Selet : " opcao
+else
+opcao=$1
+fi
+case $opcao in
+  1 | 01 )
+echo 'DROPBEAR_BANNER="/etc/issue.net"' >> /etc/default/dropbear
+nano /etc/issue.net
+/etc/init.d/dropbear restart;;
+  2 | 02 )
+nano /etc/issue.net
+/etc/init.d/dropbear restart;;
+  3 | 03 )
+echo 'Tankyou' > /etc/issue.net
+/etc/init.d/dropbear restart;;
+esac
+ ;;
+esac
