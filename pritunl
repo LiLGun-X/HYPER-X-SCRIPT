@@ -1,109 +1,60 @@
-####### install pritunl on ubuntu20.04 ############
-apt-get update
-cd
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+  echo "เกิดข้อผิดพลาด: กรุณาเข้าสู่ระบบด้วย root : sudo -i ก่อนลงสคริปต์" 2>&1
+  exit 1
+fi
+
+MYIP=$(wget -qO- http://whatismyip.akamai.com/)
+
+apt update
+apt-get -y install ufw
+apt-get -y install sudo
+
+apt -y install curl gnupg2 wget unzip
+apt -y install neofetch
+echo "clear" >> .bash_profile
+echo "neofetch" >> .bash_profile
+
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+echo "deb https://repo.pritunl.com/stable/apt bionic main" > /etc/apt/sources.list.d/pritunl.list
+apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 6A26B1AE64C3C388
+sudo apt --assume-yes install gnupg
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \--dearmor
+apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7AE645C0CF8E292A
+apt update
+apt --assume-yes install pritunl mongodb-server
+systemctl start pritunl mongodb
+systemctl enable pritunl mongodb
+
+clear
+sudo touch /etc/apt/sources.list.d/trusty_sources.list
+echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" > /etc/apt/sources.list.d/trusty_sources.list
+apt update
+
+
 cd /usr/bin
-cat >> scred <<END
-echo -e "\e[31;1m "
-END
-chmod +x scred
-cat >> scwh <<END
-echo -e "\e[37;1m "
-END
-chmod +x scwh
-cat >> scyel <<END
-echo -e "\e[33;1m "
-END
-chmod +x scyel
-cd
-apt-get install curl gnupg2 wget unzip
-apt-get-key adv --keyserver hkp://keyserver.ubuntu.com --recv E162F504A20CDF15827F718D4B7C549A058F8B6B
+wget -O /usr/local/bin/m "https://raw.githubusercontent.com/PiTOn-0/Alone/master/menu"
+wget -O /usr/local/bin/01 "https://raw.githubusercontent.com/PiTOn-0/Alone/master/edit1"
+wget -O /usr/local/bin/02 "https://raw.githubusercontent.com/PiTOn-0/Alone/master/Restart"
+wget -O /usr/local/bin/03 "https://raw.githubusercontent.com/PiTOn-0/Alone/master/ufw"
 
-apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
+chmod +x /usr/local/bin/m
+chmod +x /usr/local/bin/01
+chmod +x /usr/local/bin/02
+chmod +x /usr/local/bin/03
 
-echo "deb http://repo.pritunl.com/stable/apt focal main" | sudo tee /etc/apt/sources.list.d/pritunl.list
-
-apt-get update
-apt-get install pritunl
-
-systemctl stop pritunl
-
-systemctl start pritunl
-
-systemctl enable pritunl
-
-systemctl status pritunl
-# Enable Firewall
-ufw allow 22,80,81,222,443,8080,3128,9700,60000,1194/tcp
-
-sudo yes | ufw enable
-
-rm -f xip
-hostname -I | awk '{print $1}'>xip
-MIP=$(cat xip)
-IP=$MIP
-MYIP=$MIP
-SERVER_IP=$MIP
-
-
-apt-get install squid
-
-cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
-
-cat > /etc/squid/squid.conf <<END
-http_port 8080
-http_port 3128
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst $SERVER_IP-$SERVER_IP/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-
-service squid restart
-
-curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-
-apt-get update
-apt-get install mongodb-server
-cd
-scyel
-sleep 3
-echo " Install printunl "
-echo " Login  "
-echo " http://$MIP  "
-echo " Edit and modify by sangmander kasang  "
-echo " key for login  "
-scwh 
-echo" 
-"
+clear
+echo ""
+echo " ========= • ≧ SCRIPT INSTALL AUTO ≦ • ========="
+echo "        ------ • ≧ ติดตั้งสำเร็จ..! ≦ • ------"
+echo ""
+echo " ➢ สคริปต์ใช้งานฟรี ความคุมเซิร์ฟเวอร์ด้วยระบบ PRITUNL."
+echo ""
+echo " ➢ เมนูพิมพ์ : m"
+echo ""
+echo "• Squid Proxy : $MYIP"
+echo "• Proxy Port  : 8080"
+echo "• Pritunl Websites https://$MYIP"
+echo ""
 pritunl setup-key
-echo" 
-"
-scyel
-echo" and you must default-password wiht command "
-echo" pritunl default-password "
-echo" 
-"
