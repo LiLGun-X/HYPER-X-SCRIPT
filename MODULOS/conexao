@@ -2065,6 +2065,126 @@ exit 0' >$RCLOCAL
 		}
 	}
 
+proxy_v2() {
+# Set Localtime GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
+clear
+# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+#if [[ "$IP" = "" ]]; then
+IP=$(wget -4qO- "http://whatismyip.akamai.com/")
+#fi
+
+
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+	GROUPNAME=nogroup
+	RCLOCAL='/etc/rc.local'
+fi
+
+# Menu
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
+	echo ""
+	echo "|1| ติดตั้ง SQUID Proxy"
+	echo "|2| Restart/ProxyServer"
+        echo "|3| Restart/ProxyServer"
+	echo ""
+	echo ""
+	read -p "Select a Function Script : " FUN
+
+case $FUN in
+1) # ==================================================================
+clear
+
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
+echo ""
+echo "Server IP  : $IP "
+read -p "Port Proxy : " -e -i 8080 PROXY
+echo ""
+#Install squid
+echo  "❯❯❯ INSTALL SQUID"
+ins() {
+apt-get -y install squid
+sudo apt install squid
+      }
+fun_bar 'ins'
+cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
+echo "acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
+acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
+acl localnet src 100.64.0.0/10          # RFC 6598 shared address space (CGN)
+acl localnet src 169.254.0.0/16         # RFC 3927 link-local (directly plugged>
+acl localnet src 172.16.0.0/12          # RFC 1918 local private network (LAN)
+acl localnet src 192.168.0.0/16         # RFC 1918 local private network (LAN)
+acl localnet src fc00::/7               # RFC 4193 local private network range
+acl localnet src fe80::/10              # RFC 4291 link-local (directly plugged>
+
+acl SSL_ports port 443
+acl Safe_ports port 80          # http
+acl Safe_ports port 21          # ftp
+acl Safe_ports port 443         # https
+acl Safe_ports port 70          # gopher
+acl Safe_ports port 210         # wais
+acl Safe_ports port 1025-65535  # unregistered ports
+acl Safe_ports port 280         # http-mgmt
+acl Safe_ports port 488         # gss-http
+acl Safe_ports port 591         # filemaker
+acl Safe_ports port 777         # multiling http
+acl CONNECT method CONNECT
+
+acl ip_server dst $IP-$IP/255.255.255.255
+acl JLX dst 127.0.0.1-127.0.0.1/255.255.255.255
+
+http_access allow ip_server
+http_access allow JLX
+http_access allow localhost manager
+http_access deny manager
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+
+http_port $PROXY
+http_port 3128
+
+cache_store_log none
+cache_log /dev/null
+logfile_rotate 0
+
+via off
+forwarded_for off
+dns_v4_first on
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern \/(Packages|Sources)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
+refresh_pattern \/Release(|\.gpg)$ 0 0% 0 refresh-ims
+refresh_pattern \/InRelease$ 0 0% 0 refresh-ims
+refresh_pattern \/(Translation-.*)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
+refresh_pattern .               0       20%     4320
+visible_hostname By HYPER-X" > /etc/squid/squid.conf
+
+sre() {
+/etc/init.d/squid start
+/etc/init.d/squid restart
+}		
+echo  "❯❯❯ REBOOT SQUID"
+fun_bar 'sre'		
+
+	clear
+
+	echo "ติดตั้งSquid Proxy สำเร็จ."
+	echo "Port Proxy : $PROXY"
+	echo ""
+	echo ""
+	echo ""
+        sleep 2.5
+	fun_conexao
+	;;
+esac
+}
+
+
+
 	x="ok"
 	fun_conexao() {
 		while true $x != "ok"; do
