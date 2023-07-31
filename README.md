@@ -22,7 +22,7 @@ wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh
 <p align='center'><a href><img src="https://raw.githubusercontent.com/PiTOn-0/Alone/main/Alone.png?r=82s" width="450"/></a></p>
 
 <p align="center">
-<img height=21 src="https://komarev.com/ghpvc/?username=PiTOn-0">
+<img height=21 src="https://komarev.com/ghpvc/?username=LiLGun-X">
 </p>
 <div height='45' align="center">
 <h2> ❄โ❂௮თัՁ aণع ツ<br>
