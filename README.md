@@ -16,7 +16,7 @@ wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh
 - ***SCRIPT RUN ON TERMUX && JUICE SSH***
   
 <p align="center">
-<img src="https://readme-typing-svg.herokuapp.com?color=%0A360E&center=true&vCenter=true&lines=Script+Install+Pritunl+BY+Alone" />
+<img src="https://readme-typing-svg.herokuapp.com?color=%0A360E&center=true&vCenter=true&lines=Script+HYPER-X+BY+Gun-X" />
 </p>
 
 <p align='center'><a href><img src="https://raw.githubusercontent.com/PiTOn-0/Alone/main/Alone.png?r=82s" width="450"/></a></p>
