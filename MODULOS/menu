@@ -237,9 +237,6 @@ clear
 system=$(cat /etc/issue.net)
 date=$(date '+%Y-%m-%d <> %H:%M:%S')
 echo -e "\033[1;37m $system                $date"
-echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                      CONEXAO                      \033[1;33m \033[0m\033[01;31m║"
-echo -e "\033[0;31m║\033[0m"
-clear
 echo -e "\033[1;31m╔════════════════════════════════════════════════════════════╗\033[0m"
 echo -e "\033[1;31m║ \E[5;34;47m                     Hyper-X-SCRIPT                       \E[0m \033[1;31m║"
 echo -e "\033[1;31m╠════════════════════╦═══════════════════╦═══════════════════╣\033[0m"
@@ -367,6 +364,9 @@ C=$(curl -s https://api.db-ip.com/v2/free/$IP/countryCode)
 ISP=$(curl -s https://ipapi.co/$IP/org )
 
 clear
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <™> %H:%M:%S')
+echo -e "\033[1;37m $system                $date"
 echo -e "\033[1;31m╔════════════════════════════════════════════════════════════╗\033[0m"
 echo -e "\033[1;31m║ \E[5;34;47m                     Hyper-X-SCRIPT                       \E[0m \033[1;31m║"
 echo -e "\033[1;31m╠════════════════════╦═══════════════════╦═══════════════════╣\033[0m"
