@@ -128,7 +128,7 @@ pip3 install speedtest-cli
 #Create Admin
 
  # เพิ่มผู้ใช้งาน "gunx" โดยกำหนด GID เป็น 65534
-useradd -g 65534 gunx
+sudo useradd -u 14 gunx
 
 # ส่งรหัสผ่านให้กับผู้ใช้งาน "gunx" ผ่านคำสั่ง passwd
 echo "gunx:gunx" | chpasswd
