@@ -6,7 +6,7 @@ apt update -y && apt upgrade -y && wget https://github.com/LiLGun-X/HYPER-X-SCRI
 ʜxs
 #Acessa Root
 
-wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh && chmod 777 senharoot.sh && ./senharoot.sh
+
 
 
 
@@ -30,13 +30,20 @@ wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh
 </h2>
 </div>
 
-# INSTALL SCRIPT ON TERMUX
+# ติดตั้งสคริปต์
 
 <p align="left"> <img src="https://img.shields.io/static/v1?style=for-the-badge&logo=ubuntu&label=Ubuntu%2018&message=18.04 LTS&color=%173e16"> <img src="https://img.shields.io/static/v1?style=for-the-badge&logo=ubuntu&label=Ubuntu%2020&message=20.04 LTS&color=%173e16"></p>
 
 ```
 wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/Test && chmod +x Test && ./Test
 ```
+# user to root
+```
+wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh && chmod 777 senharoot.sh && ./senharoot.sh
+```
+
+
+
 # INSTALL SCRIPT ON JUICE SSH
 <img src="https://img.shields.io/static/v1?style=for-the-badge&logo=ubuntu&label=Ubuntu%2018&message=18.04 LTS&color=%173e16">
   
