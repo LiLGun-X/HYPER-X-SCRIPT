@@ -11,9 +11,9 @@ wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh
 
 
 
-# Alone
-- ***SCRIPT INSTALL PRITUNL***
-- ***SCRIPT RUN ON TERMUX && JUICE SSH***
+# HYPER-X 
+- ***SCRIPT INSTALL OPENVPN SSH V2RAY***
+
   
 <p align="center">
 <img src="https://readme-typing-svg.herokuapp.com?color=%0A360E&center=true&vCenter=true&lines=Script+HYPER-X+BY+Gun-X" />
@@ -35,15 +35,7 @@ wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh
 <p align="left"> <img src="https://img.shields.io/static/v1?style=for-the-badge&logo=ubuntu&label=Ubuntu%2018&message=18.04 LTS&color=%173e16"> <img src="https://img.shields.io/static/v1?style=for-the-badge&logo=ubuntu&label=Ubuntu%2020&message=20.04 LTS&color=%173e16"></p>
 
 ```
-pkg update -y && pkg upgrade -y
-pkg install openssh -y
-pkg install wget -y
-pkg install git
-ssh user@ip server
-git clone https://github.com/PiTOn-0/Alone.git
-ls
-cd Alone
-bash ubuntu20 หรือ ubuntu18
+wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/Test && chmod +x Test && ./Test
 ```
 # INSTALL SCRIPT ON JUICE SSH
 <img src="https://img.shields.io/static/v1?style=for-the-badge&logo=ubuntu&label=Ubuntu%2018&message=18.04 LTS&color=%173e16">
