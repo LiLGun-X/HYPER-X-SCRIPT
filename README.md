@@ -19,7 +19,7 @@ wget https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/senharoot.sh
 <img src="https://readme-typing-svg.herokuapp.com?color=%0A360E&center=true&vCenter=true&lines=Script+HYPER-X+BY+Gun-X" />
 </p>
 
-<p align='center'><a href><img src="[https://raw.githubusercontent.com/PiTOn-0/Alone/main/Alone.png?r=82s](https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/SYSTEM/IMG_20230804_011507.jpg)" width="450"/></a></p>
+<p align='center'><a href><img src="https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/SYSTEM/IMG_20230804_011507.jpg" width="450"/></a></p>
 
 <p align="center">
 <img height=21 src="https://komarev.com/ghpvc/?username=LiLGun-X">
