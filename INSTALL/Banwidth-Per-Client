@@ -10,7 +10,8 @@ headers = {
     'virt':  'CLIENT IP',
     'sent':  'DOWNLOAD', 
     'recv':  'UPLOAD',
-    'time':  'CONNECTION TIME'
+    'start': 'CONNECTION START',  # แก้ไขนี่เป็น 'CONNECTION START'
+    'end':   'CONNECTION END'
 }
 sizes = [  
     (1<<50, 'PB'),
