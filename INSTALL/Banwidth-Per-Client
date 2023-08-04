@@ -1,33 +1,49 @@
-#!/bin/bash
+#!/usr/bin/env python
 
-STATUS="/etc/openvpn/openvpn-status.log"
-while IFS= read -r line; do
-    cols=($(echo "$line" | tr ',' ' '))
-    
-    if [[ ${#cols[@]} -eq 5 && ! $line =~ ^'Common Name' ]]; then
-        cn=${cols[0]}
-        recv=$(echo "${cols[2]}" | awk '{ printf "%.2f", $1 / (2^50) }')
-        sent=$(echo "${cols[3]}" | awk '{ printf "%.2f", $1 / (2^50) }')
-        connected_since=$(date -d @${cols[4]} +'%Y-%m-%d %H:%M:%S')
-        hosts+=("$cn $recv $sent $connected_since")
-    fi
-    
-    if [[ ${#cols[@]} -eq 4 && ! $line =~ ^'Virtual Address' ]]; then
-        for h in "${hosts[@]}"; do
-            h_cols=($h)
-            if [[ ${h_cols[0]} == ${cols[1]} ]]; then
-                virt=${cols[0]}
-                h_cols+=("$virt")
-                h="${h_cols[*]}"
-            fi
-        done
-    fi
-done < "$STATUS"
+STATUS = "/etc/openvpn/openvpn-status.log"
+status_file = open(STATUS, 'r')
+stats = status_file.readlines()
+status_file.close()
+hosts = []
+headers = {  
+    'cn':    'CLIENT', 
+    'virt':  'CLIENT IP',
+    'sent':  'DOWNLOAD', 
+    'recv':  'UPLOAD',
+    'time':  'CONNECTION TIME'
+}
+sizes = [  
+    (1<<50, 'PB'),
+    (1<<40, 'TB'),
+    (1<<30, 'GB'),
+    (1<<20, 'MB'),
+    (1<<10, 'KB'),
+    (1,     'B')
+]
 
-headers=("CLIENT" "CLIENT IP" "DOWNLOAD" "UPLOAD" "CONNECTED SINCE")
-fmt="%-16s %-16s %14s %15s %19s\n"
-printf "$fmt" "${headers[@]}"
-for h in "${hosts[@]}"; do
-    h_cols=($h)
-    printf "$fmt" "${h_cols[@]}"
-done
+def byte2str(size):  
+    for f, suf in sizes:
+        if size >= f:
+            break
+    return "%.2f %s" % (size / float(f), suf)
+
+for line in stats:  
+    cols = line.split(',')
+    if len(cols) == 5 and not line.startswith('Common Name'):
+        host = {}
+        host['cn'] = cols[0]
+        host['recv'] = byte2str(int(cols[2]))
+        host['sent'] = byte2str(int(cols[3]))
+        host['start'] = cols[4].strip()  # Assuming start time is in the last column
+        host['end'] = ""  # Initialize end time as an empty string
+        hosts.append(host)
+    if len(cols) == 4 and not line.startswith('Virtual Address'):
+        for h in hosts:
+            if h['cn'] == cols[1]:
+                h['virt'] = cols[0]
+                h['end'] = cols[3].strip()  # Assuming end time is in the last column
+
+fmt = "   %(cn)-16s %(virt)-16s %(sent)14s %(recv)15s %(start)-18s %(end)-18s"
+print(fmt % headers)
+print("-" * 116)  # Add a separator line
+print("\n".join([fmt % h for h in hosts]))
