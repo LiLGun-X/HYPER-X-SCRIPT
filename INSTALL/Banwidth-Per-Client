@@ -1,49 +1,33 @@
-#!/usr/bin/env python
+#!/bin/bash
 
-import time
+STATUS="/etc/openvpn/openvpn-status.log"
+while IFS= read -r line; do
+    cols=($(echo "$line" | tr ',' ' '))
+    
+    if [[ ${#cols[@]} -eq 5 && ! $line =~ ^'Common Name' ]]; then
+        cn=${cols[0]}
+        recv=$(echo "${cols[2]}" | awk '{ printf "%.2f", $1 / (2^50) }')
+        sent=$(echo "${cols[3]}" | awk '{ printf "%.2f", $1 / (2^50) }')
+        connected_since=$(date -d @${cols[4]} +'%Y-%m-%d %H:%M:%S')
+        hosts+=("$cn $recv $sent $connected_since")
+    fi
+    
+    if [[ ${#cols[@]} -eq 4 && ! $line =~ ^'Virtual Address' ]]; then
+        for h in "${hosts[@]}"; do
+            h_cols=($h)
+            if [[ ${h_cols[0]} == ${cols[1]} ]]; then
+                virt=${cols[0]}
+                h_cols+=("$virt")
+                h="${h_cols[*]}"
+            fi
+        done
+    fi
+done < "$STATUS"
 
-STATUS = "/etc/openvpn/openvpn-status.log"
-status_file = open(STATUS, 'r')
-stats = status_file.readlines()
-status_file.close()
-hosts = []
-headers = {
-    'cn':    'CLIENT',
-    'virt':  'CLIENT IP',
-    'sent':  'DOWNLOAD',
-    'recv':  'UPLOAD',
-    'time':  'CONNECT TIME'
-}
-sizes = [
-    (1 << 50, 'PB'),
-    (1 << 40, 'TB'),
-    (1 << 30, 'GB'),
-    (1 << 20, 'MB'),
-    (1 << 10, 'KB'),
-    (1,       'B')
-]
-def byte2str(size):
-    for f, suf in sizes:
-        if size >= f:
-            break
-    return "%.2f %s" % (size / float(f), suf)
-def seconds2str(seconds):
-    m, s = divmod(seconds, 60)
-    h, m = divmod(m, 60)
-    return "%d:%02d:%02d" % (h, m, s)
-for line in stats:
-    cols = line.split(',')
-    if len(cols) == 5 and not line.startswith('Common Name'):
-        host = {}
-        host['cn'] = cols[0]
-        host['recv'] = byte2str(int(cols[2]))
-        host['sent'] = byte2str(int(cols[3]))
-        host['time'] = seconds2str(int(time.time()) - int(cols[4]))
-        hosts.append(host)
-    if len(cols) == 4 and not line.startswith('Virtual Address'):
-        for h in hosts:
-            if h['cn'] == cols[1]:
-                h['virt'] = cols[0]
-fmt = "   %(cn)-16s %(virt)-16s %(sent)14s %(recv)15s %(time)15s"
-print fmt % headers
-print "\n".join([fmt % h for h in hosts])
+headers=("CLIENT" "CLIENT IP" "DOWNLOAD" "UPLOAD" "CONNECTED SINCE")
+fmt="%-16s %-16s %14s %15s %19s\n"
+printf "$fmt" "${headers[@]}"
+for h in "${hosts[@]}"; do
+    h_cols=($h)
+    printf "$fmt" "${h_cols[@]}"
+done
