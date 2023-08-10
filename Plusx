@@ -185,6 +185,24 @@ wget -qO- -O /etc/php/7.2/fpm/pool.d/www.conf https://raw.githubusercontent.com/
 service php7.2-fpm restart
 service nginx restart
 
+apt -y install vnstat
+wget -qO- -O /etc/vnstat.conf https://raw.githubusercontent.com/PiTOn-0/phanudet/master/vnstat.conf
+sudo chown -R vnstat:vnstat /var/lib/vnstat
+service vnstat restart
+
+cd /home/vps/public_html/
+wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+tar xf vnstat_php_frontend-1.5.1.tar.gz
+rm vnstat_php_frontend-1.5.1.tar.gz
+mv vnstat_php_frontend-1.5.1 vnstat
+cd vnstat
+wget -qO- -O config.php https://raw.githubusercontent.com/PiTOn-0/phanudet/master/config.php
+cd
+
+
+sudo ufw allow 85
+
+
 }
 fun_bar 'fun_attlist'
 clear
