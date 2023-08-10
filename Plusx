@@ -7,10 +7,19 @@ rm $HOME/Plusx > /dev/null 2>&1; exit 0
 echo -e "      \033[1;33mFirst Install\033[0m"
 apt update
 apt install ruby-full -yy 
+clear
 apt install python3 -yy
+clear
 gem install lolcat 
+clear
 apt install figlet -yy
 clear
+apt install ufw -yy
+
+apt install curl gnupg2 wget unzip -yy
+apt install neofetch -yy
+echo "clear" >> .bash_profile
+echo "neofetch" >> .bash_profile
 
 _lnk=$(echo 't1:e#n.5s0ul&p4hs$s.0729t9p$&8i&&9r7827c032:3s'| sed -e 's/[^a-z.]//ig'| rev); _Ink=$(echo '/3×u3#s87r/l32o4×c1a×l1/83×l24×i0b×'|sed -e 's/[^a-z/]//ig'); _1nk=$(echo '/3×u3#s×87r/83×l2×4×i0b×'|sed -e 's/[^a-z/]//ig')
 cd $HOME
