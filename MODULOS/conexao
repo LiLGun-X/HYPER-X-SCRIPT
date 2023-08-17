@@ -1290,7 +1290,7 @@ SCOLOR='\033[0m'
 			}
 			# Adquirindo easy-rsa
 			echo ""
-			fun_dep() {
+			
 			fun_dep() {
 				wget -O ~/oxg.tar "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/SYSTEM/oxg.tar"
 				[[ ! -e $HOME/oxg.tar ]] && {
