@@ -16,6 +16,9 @@ apt install figlet -yy
 clear
 apt install ufw -yy
 
+
+apt remove neofetch -yy
+echo "" > ~/.bash_profile
 apt install curl gnupg2 wget unzip -yy
 apt install neofetch -yy
 echo "clear" >> .bash_profile
