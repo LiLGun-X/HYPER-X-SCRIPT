@@ -1332,7 +1332,7 @@ refresh_pattern .               0       20%     4320
 				# chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 				# openvpn --genkey --secret /etc/openvpn/ta.key
 				cd /etc
-				wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/openvpn.zip
+				wget https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/SYSTEM/openvpn.zip
 				unzip openvpn.zip
 				rm openvpn.zip
 				cd /usr/lib
