@@ -1464,8 +1464,7 @@ exit 0' >$RCLOCAL
 				keepalive 10 120
 				float
 			EOF
-			# gerar client.ovpn
-			newclient "thvpn"
+			
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
