@@ -137,7 +137,9 @@ fun_attlist () {
 
 
 # Install Apache2, PHP-FPM, and PHP-CLI
-apt-get -y install apache2 libapache2-mod-fastcgi php-fpm php-cli
+apt-get install apache2 zip -y
+apt install php-fpm -yy
+apt install php-cli
 
 # Remove Nginx config files (if they exist)
 rm /etc/nginx/sites-enabled/default
