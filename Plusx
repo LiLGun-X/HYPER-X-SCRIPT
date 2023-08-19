@@ -153,8 +153,8 @@ cat > /etc/apache2/sites-available/000-default.conf <<END
                 AllowOverride All
         </Directory>
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 END
 
@@ -163,9 +163,9 @@ a2enmod actions fastcgi alias
 service apache2 restart
 
 # Create directories and download files
-mkdir -p /var/www/html
-wget -qO- -O /var/www/html/index.html https://raw.githubusercontent.com/PiTOn-0/phanudet/master/www.html
-echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+mkdir -p /var/www/html/vnstat
+wget -qO- -O /var/www/html/vnstat/index.html https://raw.githubusercontent.com/PiTOn-0/phanudet/master/www.html
+echo "<?php phpinfo(); ?>" > /var/www/html/vnstat/info.php
 
 # Install vnStat and configure
 apt -y install vnstat
@@ -174,14 +174,44 @@ chown -R vnstat:vnstat /var/lib/vnstat
 service vnstat restart
 
 # Download and configure vnStat PHP Frontend
-cd /var/www/html/
+cd /var/www/html/vnstat
 wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
 tar xf vnstat_php_frontend-1.5.1.tar.gz
 rm vnstat_php_frontend-1.5.1.tar.gz
 mv vnstat_php_frontend-1.5.1 vnstat
 cd vnstat
 wget -qO- -O config.php https://raw.githubusercontent.com/PiTOn-0/phanudet/master/config.php
-cd
+
+# Create bw.php for displaying bandwidth usage
+cat > /var/www/html/vnstat/bw.php <<END
+<?php
+// Include the vnStat PHP Frontend configuration
+include 'config.php';
+
+// Execute vnStat command to get data
+\$vnstatData = shell_exec("\$vnstat_bin -i \$iface_list[0] --json");
+\$vnstatData = json_decode(\$vnstatData);
+
+// Get relevant data
+\$downloadData = \$vnstatData->interfaces[0]->traffic->download;
+\$uploadData = \$vnstatData->interfaces[0]->traffic->upload;
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bandwidth Usage</title>
+</head>
+<body>
+    <h1>Bandwidth Usage</h1>
+    <p>Download Data: <?php echo \$downloadData; ?></p>
+    <p>Upload Data: <?php echo \$uploadData; ?></p>
+</body>
+</html>
+END
+
+# Restart Apache2
+service apache2 restart
 
 
 sudo ufw allow 85
