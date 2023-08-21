@@ -145,7 +145,26 @@ sudo apt update
 sudo ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
 # Install Apache2, PHP, vnStat
-sudo apt-get -y install apache2 php libapache2-mod-php vnstat
+
+apt-get install apache2 zip -y
+apt install php-fpm -yy
+apt install php-cli
+apt-get install vnstat -yy 
+sed -i "s/Listen 80/Listen 85/g" /etc/apache2/ports.conf
+							service apache2 restart
+							[[ ! -d /var/www/html ]] && {
+								mkdir /var/www/html
+							}
+							[[ ! -d /var/www/html/openvpn ]] && {
+								mkdir /var/www/html/openvpn
+							}
+							touch /var/www/html/openvpn/index.html
+							chmod -R 755 /var/www
+							/etc/init.d/apache2 restart
+
+
+
+
 
 # Download and install vnStat PHP Frontend
 cd /var/www/html/
@@ -158,7 +177,7 @@ sudo mv vnstat_php_frontend-1.5.1 vnstat
 sudo sed -i 's/MonthRotate .*/MonthRotate yes/' /etc/vnstat.conf
 
 # Create Apache2 site configuration for vnstat
-echo "<VirtualHost *:80>
+echo "<VirtualHost *:85>
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/html/vnstat
     <Directory />
@@ -183,7 +202,7 @@ sudo a2ensite vnstat.conf
 sudo service apache2 restart
 
 # Allow access on port 80 in UFW
-sudo ufw allow 80
+sudo ufw allow 85
 #  Create public_html directory and download files
 mkdir -p /home/vps/public_html
 wget -qO- -O /home/vps/public_html/index.html https://raw.githubusercontent.com/PiTOn-0/phanudet/master/www.html
