@@ -136,87 +136,54 @@ fun_attlist () {
 
 
 
-# Install Apache2, PHP-FPM, and PHP-CLI
-apt-get install apache2 zip -y
-apt install php-fpm -yy
-apt install php-cli
+#!/bin/bash
 
-# Remove Nginx config files (if they exist)
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
+# Update package list
+sudo apt update
 
-# Configure Apache2
-cat > /etc/apache2/sites-available/000-default.conf <<END
-<VirtualHost *:85>
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html
+# Set timezone to Asia/Bangkok
+sudo ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
-        <Directory /var/www/html>
-                AllowOverride All
-        </Directory>
+# Install Apache2, PHP, vnStat
+sudo apt-get -y install apache2 php libapache2-mod-php vnstat
 
-        ErrorLog \${APACHE_LOG_DIR}/error.log
-        CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-END
+# Download and install vnStat PHP Frontend
+cd /var/www/html/
+sudo wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+sudo tar xf vnstat_php_frontend-1.5.1.tar.gz
+sudo rm vnstat_php_frontend-1.5.1.tar.gz
+sudo mv vnstat_php_frontend-1.5.1 vnstat
 
-# Enable FastCGI for PHP
-a2enmod actions fastcgi alias
-service apache2 restart
+# Update vnStat configuration
+sudo sed -i 's/MonthRotate .*/MonthRotate yes/' /etc/vnstat.conf
 
-# Create directories and download files
-mkdir -p /var/www/html/vnstat
-wget -qO- -O /var/www/html/vnstat/index.html https://raw.githubusercontent.com/PiTOn-0/phanudet/master/www.html
-echo "<?php phpinfo(); ?>" > /var/www/html/vnstat/info.php
+# Create Apache2 site configuration for vnstat
+echo "<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/vnstat
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+    <Directory /var/www/html/vnstat>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+</VirtualHost>" | sudo tee /etc/apache2/sites-available/vnstat.conf
 
-# Install vnStat and configure
-apt -y install vnstat
-wget -qO- -O /etc/vnstat.conf https://raw.githubusercontent.com/PiTOn-0/phanudet/master/vnstat.conf
-chown -R vnstat:vnstat /var/lib/vnstat
-service vnstat restart
+# Disable default Apache2 site configuration
+sudo a2dissite 000-default.conf
 
-# Download and configure vnStat PHP Frontend
-cd /var/www/html/vnstat
-wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
-tar xf vnstat_php_frontend-1.5.1.tar.gz
-rm vnstat_php_frontend-1.5.1.tar.gz
-mv vnstat_php_frontend-1.5.1 vnstat
-cd vnstat
-wget -qO- -O config.php https://raw.githubusercontent.com/PiTOn-0/phanudet/master/config.php
-
-# Create bw.php for displaying bandwidth usage
-cat > /var/www/html/vnstat/bw.php <<END
-<?php
-// Include the vnStat PHP Frontend configuration
-include 'config.php';
-
-// Execute vnStat command to get data
-\$vnstatData = shell_exec("\$vnstat_bin -i \$iface_list[0] --json");
-\$vnstatData = json_decode(\$vnstatData);
-
-// Get relevant data
-\$downloadData = \$vnstatData->interfaces[0]->traffic->download;
-\$uploadData = \$vnstatData->interfaces[0]->traffic->upload;
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Bandwidth Usage</title>
-</head>
-<body>
-    <h1>Bandwidth Usage</h1>
-    <p>Download Data: <?php echo \$downloadData; ?></p>
-    <p>Upload Data: <?php echo \$uploadData; ?></p>
-</body>
-</html>
-END
+# Enable vnstat Apache2 site configuration
+sudo a2ensite vnstat.conf
 
 # Restart Apache2
-service apache2 restart
+sudo service apache2 restart
 
-
-sudo ufw allow 85
+# Allow access on port 80 in UFW
+sudo ufw allow 80
 
 
 }
