@@ -205,7 +205,7 @@ sudo service apache2 restart
 sudo ufw allow 85
 #  Create public_html directory and download files
 mkdir -p /home/vps/public_html
-wget -qO- -O /home/vps/public_html/index.html https://raw.githubusercontent.com/PiTOn-0/phanudet/master/www.html
+wget -qO- -O /home/vps/public_html/index.html https://raw.githubusercontent.com/LiLGun-X/Fuxk-Web/main/www.html
 echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
 
 }
