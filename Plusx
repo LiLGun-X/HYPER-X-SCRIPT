@@ -184,7 +184,10 @@ sudo service apache2 restart
 
 # Allow access on port 80 in UFW
 sudo ufw allow 80
-
+#  Create public_html directory and download files
+mkdir -p /home/vps/public_html
+wget -qO- -O /home/vps/public_html/index.html https://raw.githubusercontent.com/PiTOn-0/phanudet/master/www.html
+echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
 
 }
 fun_bar 'fun_attlist'
