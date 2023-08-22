@@ -146,6 +146,15 @@ sudo ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
 # Install Apache2, PHP, vnStat
 
+# Install PHP
+sudo apt install php
+
+# Install additional PHP modules (You can customize this list)
+sudo apt install php-mysql php-gd php-curl
+
+
+
+
 apt-get install apache2 zip -y
 apt install php-fpm -yy
 apt install php-cli
