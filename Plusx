@@ -166,47 +166,87 @@ sed -i "s/Listen 80/Listen 85/g" /etc/apache2/ports.conf
 
 
 
-# Download and install vnStat PHP Frontend
-cd /var/www/html/
-sudo wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
-sudo tar xf vnstat_php_frontend-1.5.1.tar.gz
-sudo rm vnstat_php_frontend-1.5.1.tar.gz
-sudo mv vnstat_php_frontend-1.5.1 vnstat
 
-# Update vnStat configuration
-sudo sed -i 's/MonthRotate .*/MonthRotate yes/' /etc/vnstat.conf
+apt-get -y install nginx php-fpm php-cli
+cd
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+cat > /etc/nginx/nginx.conf <<END
+user www-data;
+worker_processes 2;
+pid /var/run/nginx.pid;
+events {
+	multi_accept on;
+        worker_connections 1024;
+}
+http {
+	autoindex on;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        server_tokens off;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        client_max_body_size 32M;
+	client_header_buffer_size 8m;
+	large_client_header_buffers 8 8m;
+	fastcgi_buffer_size 8m;
+	fastcgi_buffers 8 8m;
+	fastcgi_read_timeout 600;
+        include /etc/nginx/conf.d/*.conf;
+}
+END
+	mkdir -p /home/vps/public_html
+	wget -qO- -O /home/vps/public_html/index.html https://raw.githubusercontent.com/LiLGun-X/Fuxk-Web/main/www.html
+	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+	args='$args'
+	uri='$uri'
+	document_root='$document_root'
+	fastcgi_script_name='$fastcgi_script_name'
+	cat > /etc/nginx/conf.d/vps.conf <<END
+server {
+    listen       80;
+    server_name  127.0.0.1 localhost;
+    access_log /var/log/nginx/vps-access.log;
+    error_log /var/log/nginx/vps-error.log error;
+    root   /home/vps/public_html;
+    location / {
+        index  index.html index.htm index.php;
+	try_files $uri $uri/ /index.php?$args;
+    }
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+END
+wget -qO- -O /etc/php/7.2/fpm/pool.d/www.conf https://raw.githubusercontent.com/PiTOn-0/phanudet/master/php
+service php7.2-fpm restart
+service nginx restart
 
-# Create Apache2 site configuration for vnstat
-echo "<VirtualHost *:85>
-    ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/html/vnstat
-    <Directory />
-        Options FollowSymLinks
-        AllowOverride None
-    </Directory>
-    <Directory /var/www/html/vnstat>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Order allow,deny
-        allow from all
-    </Directory>
-</VirtualHost>" | sudo tee /etc/apache2/sites-available/vnstat.conf
+apt -y install vnstat
+wget -qO- -O /etc/vnstat.conf https://raw.githubusercontent.com/PiTOn-0/phanudet/master/vnstat.conf
+sudo chown -R vnstat:vnstat /var/lib/vnstat
+service vnstat restart
 
-# Disable default Apache2 site configuration
-sudo a2dissite 000-default.conf
+cd /home/vps/public_html/
+wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+tar xf vnstat_php_frontend-1.5.1.tar.gz
+rm vnstat_php_frontend-1.5.1.tar.gz
+mv vnstat_php_frontend-1.5.1 vnstat
+cd vnstat
+wget -qO- -O config.php https://raw.githubusercontent.com/PiTOn-0/phanudet/master/config.php
+cd
 
-# Enable vnstat Apache2 site configuration
-sudo a2ensite vnstat.conf
 
-# Restart Apache2
-sudo service apache2 restart
+sudo ufw allow 80
 
-# Allow access on port 80 in UFW
-sudo ufw allow 85
-#  Create public_html directory and download files
-mkdir -p /home/vps/public_html
-wget -qO- -O /home/vps/public_html/index.html https://raw.githubusercontent.com/LiLGun-X/Fuxk-Web/main/www.html
-echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
 
 }
 fun_bar 'fun_attlist'
