@@ -13,8 +13,7 @@ clear
 gem install lolcat 
 clear
 apt install figlet -yy
-clear
-apt install ufw -yy
+
 
 
 apt remove neofetch -yy
@@ -141,8 +140,6 @@ fun_attlist () {
 # Update package list
 sudo apt update
 
-# Set timezone to Asia/Bangkok
-sudo ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
 # Install Apache2, PHP, vnStat
 
@@ -183,10 +180,10 @@ sudo rm /etc/apache2/sites-enabled/000-default.conf
 sudo mkdir -p /var/www/html
 
 # Download HTML file from GitHub
-sudo wget -qO- -O /var/www/html/index.html https://raw.githubusercontent.com/LiLGun-X/Fuxk-Web/main/www.html
+sudo wget -qO- -O /var/www/html/openvpn/index.html https://raw.githubusercontent.com/LiLGun-X/Fuxk-Web/main/openvpn.html
 
 # Create PHP info file
-sudo echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+sudo echo "<?php phpinfo(); ?>" > /var/www/html/openvpn/info.php
 
 # Configure virtual host
 sudo cat <<EOF > /etc/apache2/sites-available/000-default.conf
