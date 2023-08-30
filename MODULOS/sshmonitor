@@ -35,7 +35,7 @@ do
     fi
 done
 }
-echo -e "\E[44;1;37m Usuario         Status       Conexão     Tempo   \E[0m"
+echo -e "\E[44;1;37m ผู้ใช้         สถานะ       การเชื่อมต่อ     เวลา   \E[0m"
 echo ""
 echo ""
  while read usline
