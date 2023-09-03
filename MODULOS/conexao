@@ -1149,38 +1149,38 @@ refresh_pattern .               0       20%     4320
 					}
 					if [[ "$resp" = '1' ]]; then
 						clear
-						echo -e "\E[44;1;37m            Adicionar Host DNS            \E[0m"
+						echo -e "\E[44;1;37m            เพิ่มHost DNS            \E[0m"
 						echo ""
-						echo -e "\033[1;33mLista dos hosts atuais:\033[0m "
+						echo -e "\033[1;33mรายชื่อ Host ปัจจุบัน:\033[0m "
 						echo ""
 						i=0
 						for _host in $(grep -w "127.0.0.1" /etc/hosts | grep -v "localhost" | cut -d' ' -f2); do
 							echo -e "\033[1;32m$_host"
 						done
 						echo ""
-						echo -ne "\033[1;33mDigite o host a ser adicionado\033[1;37m : "
+						echo -ne "\033[1;33mHostที่ต้องการเพิ่ม\033[1;37m : "
 						read host
 						if [[ -z $host ]]; then
 							echo ""
-							echo -e "\E[41;1;37m        Campo Vazio ou invalido !       \E[0m"
+							echo -e "\E[41;1;37m        ช่องว่างหรือไม่ถูกต้อง !     \E[0m"
 							sleep 2
 							fun_openvpn
 						fi
 						if [[ "$(grep -w "$host" /etc/hosts | wc -l)" -gt "0" ]]; then
-							echo -e "\E[41;1;37m    Esse host ja está adicionado  !    \E[0m"
+							echo -e "\E[41;1;37m    เพิ่มโฮสต์นี้แล้ว   !    \E[0m"
 							sleep 2
 							fun_openvpn
 						fi
 						sed -i "3i\127.0.0.1 $host" /etc/hosts
 						echo ""
-						echo -e "\E[44;1;37m      Host adicionado com sucesso !      \E[0m"
+						echo -e "\E[44;1;37m      เพิ่มHost สำเร็จ !      \E[0m"
 						sleep 2
 						fun_openvpn
 					elif [[ "$resp" = '2' ]]; then
 						clear
-						echo -e "\E[44;1;37m            Remover Host DNS            \E[0m"
+						echo -e "\E[44;1;37m            ลบ Host DNS            \E[0m"
 						echo ""
-						echo -e "\033[1;33mLista dos hosts atuais:\033[0m "
+						echo -e "\033[1;33mรายชื่อ Host ปัจจุบัน:\033[0m "
 						echo ""
 						i=0
 						for _host in $(grep -w "127.0.0.1" /etc/hosts | grep -v "localhost" | cut -d' ' -f2); do
@@ -1191,7 +1191,7 @@ refresh_pattern .               0       20%     4320
 							echo -e "\033[1;33m[\033[1;31m$i\033[1;33m] \033[1;37m- \033[1;32m$_host\033[0m"
 						done
 						echo ""
-						echo -ne "\033[1;32mSelecione o host a ser removido \033[1;33m[\033[1;37m1\033[1;31m-\033[1;37m$i\033[1;33m]\033[1;37m: "
+						echo -ne "\033[1;32mเลือกโฮสต์ที่จะลบ \033[1;33m[\033[1;37m1\033[1;31m-\033[1;37m$i\033[1;33m]\033[1;37m: "
 						read option
 						if [[ -z $option ]]; then
 							echo ""
@@ -1203,17 +1203,17 @@ refresh_pattern .               0       20%     4320
 						hst=$(grep -v "127.0.0.1 $host" /etc/hosts)
 						echo "$hst" >/etc/hosts
 						echo ""
-						echo -e "\E[41;1;37m      Host removido com sucesso !      \E[0m"
+						echo -e "\E[41;1;37m     ลบ Host สำเร็จ!      \E[0m"
 						sleep 2
 						fun_openvpn
 					elif [[ "$resp" = '3' ]]; then
-						echo -e "\n\033[1;32mALTERANDO ARQUIVO \033[1;37m/etc/hosts\033[0m"
-						echo -e "\n\033[1;31mATENCAO!\033[0m"
-						echo -e "\n\033[1;33mPARA SALVAR USE AS TECLAS \033[1;32mctrl x y\033[0m"
+						echo -e "\n\033[1;32mกำลังเปลี่ยนไฟล์ \033[1;37m/etc/hosts\033[0m"
+						echo -e "\n\033[1;31mคำเตือน!\033[0m"
+						echo -e "\n\033[1;33mพื่อประหยัดการใช้การ \033[1;32mctrl x y\033[0m"
 						sleep 4
 						clear
 						nano /etc/hosts
-						echo -e "\n\033[1;32mALTERADO COM SUCESSO!\033[0m"
+						echo -e "\n\033[1;32mเปลี่ยนสำเร็จแล้ว!\033[0m"
 						sleep 3
 						fun_openvpn
 					elif [[ "$resp" = '0' ]]; then
@@ -1241,7 +1241,7 @@ refresh_pattern .               0       20%     4320
 			done
 		} || {
 			clear
-			echo -e "\E[44;1;37m              INSTALADOR OPENVPN               \E[0m"
+			echo -e "\E[44;1;37m              INSTALL OPENVPN               \E[0m"
 			echo ""
 			echo -e "\033[1;33mRESPONDA AS QUESTOES PARA INICIAR A INSTALACAO"
 			echo ""
