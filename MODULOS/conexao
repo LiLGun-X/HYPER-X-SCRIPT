@@ -2420,8 +2420,11 @@ fun_conexao
 }
 
 test (){
+if [[ -e /etc/squid ]]; then
+    fun_squid
+fi
 clear
-echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY test2              \E[0m"
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY test3              \E[0m"
 echo ""
 IP=$(wget -qO- ipv4.icanhazip.com)
 echo -ne "\033[1;32mกด Enter เพื่อยืนยัน IP คุณ: \033[1;37m"; read -e -i $IP ipdovps
