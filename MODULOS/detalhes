@@ -1,7 +1,9 @@
 #!/bin/bash
 clear
 
-echo ""
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <™> %H:%M:%S')
+echo -e "\033[1;37m $system                $date"
 echo " ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
 echo " ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
 echo " ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
@@ -14,7 +16,7 @@ echo -e "\033[1;31m• \033[1;32mSISTEMA OPERACIONAL\033[1;31m •\033[0m"
 echo ""
 name=$(cat /etc/lsb-release |grep DESCRIPTION |awk -F = {'print $2'})
 codename=$(cat /etc/lsb-release |grep CODENAME |awk -F = {'print $2'})
-echo -e "\033[1;33mNome: \033[1;37m$name"
+echo -e "\033[1;33mName: \033[1;37m$name"
 echo -e "\033[1;33mCodeName: \033[1;37m$codename"
 echo -e "\033[1;33mKernel: \033[1;37m$(uname -s)"
 echo -e "\033[1;33mKernel Release: \033[1;37m$(uname -r)"
@@ -26,9 +28,9 @@ echo ""
 fi
 else
 system=$(cat /etc/issue.net)
-echo -e "\033[1;31m• \033[1;32mSISTEMA OPERACIONAL\033[1;31m •\033[0m"
+echo -e "\033[1;31m• \033[1;32mระบบปฏิบัติการ\033[1;31m •\033[0m"
 echo ""
-echo -e "\033[1;33mNome: \033[1;37m$system"
+echo -e "\033[1;33mName: \033[1;37m$system"
 echo ""
 fi
 
