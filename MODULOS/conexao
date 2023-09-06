@@ -115,7 +115,7 @@ SCOLOR='\033[0m'
 			echo -e "\n\033[1;33mกรุณาใส่พอตที่คุณต้องการ \033[1;31m?"
 			echo -e "\n\033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mพอตพร็อกซี่ตัวอย่าง \033[1;33mEX: \033[1;37m80 8080"
 			echo ""
-			echo -ne "\033[1;32mกรุณาใส่พอต\033[1;37m: "
+			echo -ne "\033[1;32mพิมพ์PORT ที่ต้องการใช้\033[1;37m: "
 			read portass
 			[[ -z "$portass" ]] && {
 				echo -e "\n\033[1;31mPort ไม่ถูกต้อง!"
@@ -126,11 +126,11 @@ SCOLOR='\033[0m'
 				verif_ptrs $porta
 			done
 			[[ $(grep -wc '14' /etc/issue.net) != '0' ]] || [[ $(grep -wc '8' /etc/issue.net) != '0' ]] && {
-				echo -e "\n\033[1;32mกำลังติดตั้งพร็อกซี่\033[0m\n"
+				echo -e "\n\033[1;32mกำลังติดตั้งPROXY\033[0m\n"
 				fun_bar 'apt update -y' "apt install squid3 -y"
 			} || {
 				echo -e "\n\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mพร็อกซี่เวอร์ชั่น 3.3.X\n\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mพร็อกซี่เวอร์ชั่น 3.5.X\033[0m\n"
-				read -p "$(echo -e "\033[1;32mCONFIRM PORT? \033[1;37m: ")" -e -i 1 opc
+				read -p "$(echo -e "\033[1;32mเลือกเวอร์ชั่น? \033[1;37m: ")" -e -i 1 opc
 				[[ -z "$opc" ]] && {
 					echo -e "\n\033[1;31mกรุณาเลือกให้ถูกต้อง!"
 					sleep 2
@@ -143,7 +143,7 @@ SCOLOR='\033[0m'
 						fun_conexao
 					}
 				}
-				echo -e "\n\033[1;32mกำลังติดตั้งพร็อกซี่\033[0m\n"
+				echo -e "\n\033[1;32mกำลังติดตั้งPROXY\033[0m\n"
 				fun_bar 'apt update -y' "instsqd $opc"
 			}
 			if [[ -d "/etc/squid/" ]]; then
@@ -153,7 +153,7 @@ SCOLOR='\033[0m'
 				var_sqd="/etc/squid3/squid.conf"
 				var_pay="/etc/squid3/payload.txt"
 			else
-				echo -e "\n\033[1;33m[\033[1;31mERRO\033[1;33m]\033[1;37m: \033[1;33mO SQUID PROXY CORROMPEU\033[0m"
+				echo -e "\n\033[1;33m[\033[1;31mERROR\033[1;33m]\033[1;37m: \033[1;33mติดต้้งSQUID PROXY ไม่สำเร็จ033[0m"
 				sleep 2
 				fun_conexao
 			fi
@@ -229,7 +229,7 @@ refresh_pattern .               0       20%     4320
 
 	addpt_sqd() {
 		echo -e "\E[44;1;37m         เพิ่มพอตพร็อกซี่         \E[0m"
-		echo -e "\n\033[1;33mPORT ที่ใช้งานอยู่: \033[1;32m$sqdp\n"
+		echo -e "\n\033[1;33mPORT ที่ใช้งานอยู่\033[1;37m:\033[1;32m$sqdp\n"
 		if [[ -f "/etc/squid/squid.conf" ]]; then
 			var_sqd="/etc/squid/squid.conf"
 		elif [[ -f "/etc/squid3/squid.conf" ]]; then
@@ -241,7 +241,7 @@ refresh_pattern .               0       20%     4320
 			clear
 			fun_squid
 		fi
-		echo -ne "\033[1;32mใส่พอตที่คุณต้องการ \033[1;33m?\033[1;37m "
+		echo -ne "\033[1;32mใส่พอตที่คุณต้องการ \033[1;33m?\033[1;37m: "
 		read pt
 		[[ -z "$pt" ]] && {
 			echo -e "\n\033[1;31mPort ไม่ถูกต้อง!"
@@ -265,7 +265,7 @@ refresh_pattern .               0       20%     4320
 
 	rempt_sqd() {
 		echo -e "\E[41;1;37m        ลบ PORT SQUID        \E[0m"
-		echo -e "\n\033[1;33mPORT ที่ใช้งานอยู่: \033[1;32m$sqdp\n"
+		echo -e "\n\033[1;33mPORT ที่ใช้งานอยู่\033[1;37m : \033[1;32m$sqdp\n"
 		if [[ -f "/etc/squid/squid.conf" ]]; then
 			var_sqd="/etc/squid/squid.conf"
 		elif [[ -f "/etc/squid3/squid.conf" ]]; then
@@ -320,7 +320,7 @@ refresh_pattern .               0       20%     4320
 [\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mลบพอตพร็อกซี่\033[1;31m
 [\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mย้อนกลับ\033[0m"
 		echo ""
-		echo -ne "\033[1;32mSELLECT OPTION \033[1;33m?\033[1;31m?\033[1;37m "
+		echo -ne "\033[1;32mSELLECT OPTION \033[1;33m?\033[1;31m?\033[1;37m: "
 		read x
 		clear
 		case $x in
@@ -363,7 +363,7 @@ refresh_pattern .               0       20%     4320
 			echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mถอดติดตั้ง DROPBEAR\033[0m"
 			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mย้อนกลับ\033[0m"
 			echo ""
-			echo -ne "\033[1;32mChoose OPTION \033[1;33m?\033[1;37m "
+			echo -ne "\033[1;32mChoose OPTION \033[1;33m?\033[1;37m: "
 			read resposta
 			if [[ "$resposta" = '1' ]]; then
 				clear
@@ -389,7 +389,7 @@ refresh_pattern .               0       20%     4320
 				fi
 			elif [[ "$resposta" = '2' ]]; then
 				echo ""
-				echo -ne "\033[1;32mChoose Port \033[1;33m?\033[1;37m "
+				echo -ne "\033[1;32mเลือก PORT \033[1;33m?\033[1;37m:"
 				read pt
 				echo ""
 				verif_ptrs $pt
@@ -417,7 +417,7 @@ refresh_pattern .               0       20%     4320
 					rm -rf /etc/default/dropbear
 				}
 				fun_bar 'fun_dropunistall'
-				echo -e "\n\033[1;32mถอดติดตั้งDROPBEAR สำเร็จ !!\033[0m"
+				echo -e "\n\033[1;32mถอดติดตั้งDROPBEAR สำเร็จ !\033[0m"
 				sleep 3
 				clear
 				fun_conexao
@@ -438,7 +438,7 @@ refresh_pattern .               0       20%     4320
 			read resposta
 			[[ "$resposta" = 'y' ]] && {
 				echo -e "\n\033[1;33mกำหนด PORT สำหรับ DROPBEAR !\033[0m\n"
-				echo -ne "\033[1;32mพิมพ์ PORTต้องการใช้\033[1;33m?\033[1;37m "
+				echo -ne "\033[1;32mพิมพ์ PORTต้องการใช้\033[1;33m?\033[1;37m: "
 				read porta
 				[[ -z "$porta" ]] && {
 					echo -e "\n\033[1;31mPort ไม่ถูกต้อง!"
@@ -915,14 +915,14 @@ refresh_pattern .               0       20%     4320
 				echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mเปลี่ยน HOST DNS"
 				echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mย้อนกลับ"
 				echo ""
-				echo -ne "\033[1;32mSELLECT OPTION \033[1;33m?\033[1;31m?\033[1;37m "
+				echo -ne "\033[1;32mSELLECT OPTION \033[1;33m?\033[1;31m?\033[1;37m: "
 				read option
 				case $option in
 				1)
 					clear
 					echo -e "\E[44;1;37m         เปลี่ยน PORT OPENVPN         \E[0m"
 					echo ""
-					echo -e "\033[1;33mPORT: \033[1;32m$opnp"
+					echo -e "\033[1;33mPORT\033[1;37m : \033[1;32m$opnp"
 					echo ""
 					echo -ne "\033[1;32mพิมพ์PORTที่ต้องการใช้\033[1;33m?\033[1;37m "
 					read porta
@@ -953,7 +953,7 @@ refresh_pattern .               0       20%     4320
 					;;
 				2)
 					echo ""
-					echo -ne "\033[1;32mต้องการถอดการติดตั้ง OPENVPNหรือไม่ \033[1;31m? \033[1;33m[y/n]:\033[1;37m "
+					echo -ne "\033[1;32mต้องการถอดการติดตั้ง OPENVPNหรือไม่ \033[1;31m? \033[1;33m[y/n]\033[1;37m: "
 					read REMOVE
 					[[ "$REMOVE" = 'y' ]] && {
 						rmv_open() {
@@ -1139,7 +1139,7 @@ refresh_pattern .               0       20%     4320
 					echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mแก้ไขด้วยตนเอง"
 					echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mย้อนกลับ"
 					echo ""
-					echo -ne "\033[1;32mSELLECT OPTION \033[1;33m?\033[1;31m?\033[1;37m "
+					echo -ne "\033[1;32mSELLECT OPTION \033[1;33m?\033[1;31m?\033[1;37m:"
 					read resp
 					[[ -z "$resp" ]] && {
 						echo ""
@@ -1245,7 +1245,7 @@ refresh_pattern .               0       20%     4320
 			echo ""
 			echo -e "\033[1;33mตอบคำถามเพื่อเริ่มการติดตั้ง"
 			echo ""
-			echo -ne "\033[1;32mยืนยัน IP คุณ: \033[1;37m"
+			echo -ne "\033[1;32mยืนยัน IP คุณ \033[1;37m:"
 			read -e -i $IP IP
 			[[ -z "$IP" ]] && {
 				echo ""
@@ -1254,7 +1254,7 @@ refresh_pattern .               0       20%     4320
 				fun_conexao
 			}
 			echo ""
-			read -p "$(echo -e "\033[1;32mพิมพ์PORTที่ต้องการใช้? \033[1;37m")" -e -i 443 porta
+			read -p "$(echo -e "\033[1;32mพิมพ์PORTที่ต้องการใช้? \033[1;37m:")" -e -i 443 porta
 			[[ -z "$porta" ]] && {
 				echo ""
 				echo -e "\033[1;31mPort ไม่ถูกต้อง!"
@@ -1273,12 +1273,12 @@ refresh_pattern .               0       20%     4320
 			echo -e "\033[1;31m[\033[1;36m6\033[1;31m] \033[1;33mVerisign"
 			echo -e "\033[1;31m[\033[1;36m7\033[1;31m] \033[1;33mDNS Performace\033[0m"
 			echo ""
-			read -p "$(echo -e "\033[1;32mเลือกDNS ที่ต้องการใช้? \033[1;37m")" -e -i 2 DNS
+			read -p "$(echo -e "\033[1;32mเลือกDNS ที่ต้องการใช้? \033[1;37m:")" -e -i 2 DNS
 			echo ""
 			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;33mUDP"
 			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;33mTCP (\033[1;32mแนะนำ\033[1;33m)"
 			echo ""
-			read -p "$(echo -e "\033[1;32mเลือกโปรโตคอล OPENVPN? \033[1;37m")" -e -i 2 resp
+			read -p "$(echo -e "\033[1;32mเลือกโปรโตคอล OPENVPN? \033[1;37m:")" -e -i 2 resp
 			if [[ "$resp" = '1' ]]; then
 				PROTOCOL=udp
 			elif [[ "$resp" = '2' ]]; then
