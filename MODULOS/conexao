@@ -2447,6 +2447,7 @@ echo " "
 fun_bar 'apt-get update -y' 'apt-get -y install squid' 'sudo apt install squid'
 sleep 1
 if [[ -d "/etc/squid/" ]]; then
+var_sqd="/etc/squid/squid.conf"
 var_pay="/etc/squid/payload.txt"
 fi
 echo ".claro.com.br/
