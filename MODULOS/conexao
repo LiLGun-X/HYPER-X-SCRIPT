@@ -228,7 +228,7 @@ refresh_pattern .               0       20%     4320
 	}
 
 	addpt_sqd() {
-		echo -e "\E[44;1;37m         เพิ่มพอตพร็อกซี่         \E[0m"
+		echo -e "\E[44;1;37m         เพิ่มPORTพร็อกซี่         \E[0m"
 		echo -e "\n\033[1;33mPORT ที่ใช้งานอยู่\033[1;37m:\033[1;32m$sqdp\n"
 		if [[ -f "/etc/squid/squid.conf" ]]; then
 			var_sqd="/etc/squid/squid.conf"
