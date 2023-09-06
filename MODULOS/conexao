@@ -2069,6 +2069,9 @@ proxy_v2 (){
 if [[ -e /etc/squid ]]; then
     fun_squid
 fi
+if [[ -e /etc/squid3 ]]; then
+    fun_squid
+fi
 clear
 echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY test3              \E[0m"
 echo ""
