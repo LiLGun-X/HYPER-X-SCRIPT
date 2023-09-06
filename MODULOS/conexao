@@ -2421,7 +2421,7 @@ fun_conexao
 
 test (){
 clear
-echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY test1               \E[0m"
 echo ""
 IP=$(wget -qO- ipv4.icanhazip.com)
 echo -ne "\033[1;32mกด Enter เพื่อยืนยัน IP คุณ: \033[1;37m"; read -e -i $IP ipdovps
@@ -2444,20 +2444,12 @@ for porta in $(echo -e $portass); do
 done
 echo -e "\n\033[1;32mติดตั้ง SQUID PROXY\033[0m"
 echo " "
-fun_bar 'apt-get update -y' 'apt-get -y install squid' 'sudo apt install squid'
+ins() {
+apt-get -y install squid
+sudo apt install squid
+      }
+fun_bar 'ins'
 sleep 1
-if [[ -d "/etc/squid/" ]]; then
-var_sqd="/etc/squid/squid.conf"
-var_pay="/etc/squid/payload.txt"
-fi
-echo ".claro.com.br/
-.claro.com.sv/
-.facebook.net/
-.netclaro.com.br/
-.speedtest.net/
-.tim.com.br/
-.vivo.com.br/
-.oi.com.br/" > $var_pay
 cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
 echo "acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
 acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
@@ -2492,9 +2484,9 @@ http_access allow localnet
 http_access allow localhost
 http_access deny all
 
-#Portas" > $var_sqd
+#Portas" > /etc/squid/squid.conf
 for Pts in $(echo -e $portass); do
-echo -e "http_port $Pts" >> $var_sqd
+echo -e "http_port $Pts" >> /etc/squid/squid.conf
 [[ -f "/usr/sbin/ufw" ]] && ufw allow $Pts/tcp
 done
 echo -e "
@@ -2514,16 +2506,14 @@ refresh_pattern \/InRelease$ 0 0% 0 refresh-ims
 refresh_pattern \/(Translation-.*)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
 refresh_pattern .               0       20%     4320
 visible_hostname HYPER-X" > /etc/squid/squid.conf
-sqd_conf () {
-if [[ -d "/etc/squid/" ]]; then
-squid -k reconfigure
-service ssh restart
-service squid restart
-fi
-}
+
+sre() {
+/etc/init.d/squid start
+/etc/init.d/squid restart
+}			
 echo -e "\n\033[1;32mตั้งค่า SQUID PROXY\033[0m"
 echo ""
-fun_bar 'sqd_conf'
+fun_bar 'sre'
 echo -e "\n\033[1;32mติดตั้ง SQUID PROXY เรียบร้อยแล้ว!\033[0m"
 sleep 3.5s
 fun_conexao
