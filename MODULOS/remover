@@ -25,7 +25,7 @@ echo -e "\033[1;31m[\033[1;36m1\033[1;31m]\033[1;33m ลบบัญชีผู
 echo -e "\033[1;31m[\033[1;36m2\033[1;31m]\033[1;33m ลบบัญชีผู้ใช้ทั้งหมด"
 echo -e "\033[1;31m[\033[1;36m3\033[1;31m]\033[1;33m กลับ"
 echo ""
-read -p "$(echo -e "\033[1;32mChoose 033[1;31m ?\033[1;37m : ")" -e -i 1 resp
+read -p "$(echo -e "\033[1;32mเลือก\033[1;31m ?\033[1;37m : ")" -e -i 1 resp
 if [[ "$resp" = "1" ]]; then
 clear
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ลบบัญชีผู้ใช้ " ; tput sgr0
