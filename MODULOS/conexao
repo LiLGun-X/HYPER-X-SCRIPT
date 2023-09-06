@@ -2421,7 +2421,7 @@ fun_conexao
 
 test (){
 clear
-echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY test1               \E[0m"
+echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY test2              \E[0m"
 echo ""
 IP=$(wget -qO- ipv4.icanhazip.com)
 echo -ne "\033[1;32mกด Enter เพื่อยืนยัน IP คุณ: \033[1;37m"; read -e -i $IP ipdovps
@@ -2449,8 +2449,19 @@ apt-get -y install squid
 sudo apt install squid
       }
 fun_bar 'ins'
-cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
-echo "acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
+if [[ -d "/etc/squid/" ]]; then
+				var_sqd="/etc/squid/squid.conf"
+				var_pay="/etc/squid/payload.txt"
+				fi
+cat <<-EOF >$var_pay
+				.whatsapp.net/
+				.facebook.net/
+				.twitter.com/
+				.speedtest.net/
+			EOF
+			cat <<-EOF >$var_sqd
+http_port $porta
+acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
 acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
 acl localnet src 100.64.0.0/10          # RFC 6598 shared address space (CGN)
 acl localnet src 169.254.0.0/16         # RFC 3927 link-local (directly plugged>
@@ -2483,16 +2494,10 @@ http_access allow localnet
 http_access allow localhost
 http_access deny all
 
-http_port $portass
-http_port 3128
-
 cache_store_log none
 cache_log /dev/null
 logfile_rotate 0
 
-via off
-forwarded_for off
-dns_v4_first on
 refresh_pattern ^ftp:           1440    20%     10080
 refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
@@ -2501,10 +2506,21 @@ refresh_pattern \/Release(|\.gpg)$ 0 0% 0 refresh-ims
 refresh_pattern \/InRelease$ 0 0% 0 refresh-ims
 refresh_pattern \/(Translation-.*)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
 refresh_pattern .               0       20%     4320
-visible_hostname HYPER-X" > /etc/squid/squid.conf
-
-
-sre() {
+				 
+				#Portas
+			EOF
+			for Pts in $(echo -e $portass); do
+				echo -e "http_port $Pts" >>$var_sqd
+				[[ -f "/usr/sbin/ufw" ]] && ufw allow $Pts/tcp
+			done
+			cat <<-EOF >>$var_sqd
+				#Nome squid
+				visible_hostname HYPER-X
+				via off
+                forwarded_for off
+                dns_v4_first on
+			EOF
+			sre() {
 /etc/init.d/squid start
 /etc/init.d/squid restart
 }			
@@ -2515,6 +2531,7 @@ echo -e "\n\033[1;32mติดตั้ง SQUID PROXY เรียบร้อ�
 sleep 3.5s
 fun_conexao
 }
+
 
 
 
