@@ -2,7 +2,7 @@
 clear
 IP=$(wget -qO- ipv4.icanhazip.com)
 arq="/etc/Plus-torrent"
-echo -e "\E[44;1;37m           FIREWALL BLOQUEIO TORRENT           \E[0m"
+echo -e "\E[44;1;37m           ควบคุมความเร็วเซิร์ฟเวอร์           \E[0m"
 echo ""
 if [[ -e "$arq" ]]; then
 	fun_fireoff () {
@@ -34,26 +34,26 @@ fun_spn1 () {
 		done
 		tput cnorm
 	}
-	echo -ne "\033[1;31mREMOVENDO FIREWALL\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
+	echo -ne "\033[1;31mลบ FIREWALL\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
 	helice
 	echo -e "\e[1DOk"
 }
-read -p "$(echo -e "\033[1;32mDESEJA REMOVER REGRAS FIREWALL? \033[1;33m[s/n]:\033[1;37m") " -e -i n resp
-if [[ "$resp" = 's' ]]; then
+read -p "$(echo -e "\033[1;32mต้องการลบกฎไฟร์วอลล์? \033[1;33m[y/n]:\033[1;37m") " -e -i n resp
+if [[ "$resp" = 'y' ]]; then
 	echo ""	
 	fun_spn1
 	echo ""
-	echo -e "\033[1;33mTORRENT LIBERADO !\033[0m"
+	echo -e "\033[1;33mปล่อยทอร์เรนต์ !\033[0m"
 	echo ""
-	echo -e "\033[1;32mFIREWALL REMOVIDO COM SUCESSO !"
+	echo -e "\033[1;32mลบ ไฟล์วอลล์ สำเร็จ !"
 	echo ""
 	if [[ -e /etc/openvpn/openvpn-status.log ]]; then
-		echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m REINICIE O SISTEMA PRA CONCLUIR"
+		echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m รีสตาร์ทระบบให้เสร็จสมบูรณ์"
 		echo ""
-		read -p "$(echo -e "\033[1;32mREINICIAR AGORA \033[1;31m? \033[1;33m[s/n]:\033[1;37m ")" -e -i s respost
+		read -p "$(echo -e "\033[1;32mเริ่มต้นใหม่เดี๋ยวนี้ \033[1;31m? \033[1;33m[y/n]:\033[1;37m ")" -e -i s respost
 		echo ""
-		if [[ "$respost" = 's' ]]; then
-			echo -ne "\033[1;31mReiniciando" 
+		if [[ "$respost" = 'y' ]]; then
+			echo -ne "\033[1;31mกำลังเริ่มต้นใหม่" 
 			for i in $(seq 1 1 5); do
 				echo -n "."
 				sleep 01
@@ -69,18 +69,18 @@ else
 	menu
 fi
 else
-echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m FUNCAO BETA ULTILIZE POR SUA CONTA EM RISCO"
+echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m ฟังก์ชั่นเบต้าใช้ความเสี่ยงของคุณเอง"
 echo ""
-read -p "$(echo -ne "\033[1;32mDESEJA APLICAR REGRAS FIREWALL ? \033[1;33m[s/n]:\033[1;37m") " -e -i n resp
-if [[ "$resp" = 's' ]]; then
+read -p "$(echo -ne "\033[1;32mต้องการใช้กฎไฟร์วอลล์ ? \033[1;33m[y/n]:\033[1;37m") " -e -i n resp
+if [[ "$resp" = 'y' ]]; then
 echo ""
-echo -ne "\033[1;33mPARA CONTINUAR CONFIRME SEU IP: \033[1;37m"; read -e -i $IP IP
+echo -ne "\033[1;33mเพื่อยืนยัน IP ของคุณต่อไป: \033[1;37m"; read -e -i $IP IP
 if [[ -z "$IP" ]];then
 echo ""
-echo -e "\033[1;31mIP invalido\033[1;32m"
+echo -e "\033[1;31mIP ไม่ถูกต้อง\033[1;32m"
 sleep 1
 echo ""
-read -p "Digite seu IP: " IP
+read -p "ป้อน IP ของคุณ: " IP
 fi
 echo ""
 sleep 1
@@ -152,15 +152,15 @@ fun_spn2 () {
 		done
 		tput cnorm
 	}
-	echo -ne "\033[1;32mAPLICANDO FIREWALL\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
+	echo -ne "\033[1;32mการใช้ไฟร์วอลล์\033[1;32m.\033[1;33m.\033[1;31m. \033[1;32m"
 	helice
 	echo -e "\e[1DOk"
 }
 fun_spn2
 echo ""
-echo -e "\033[1;33mBLOQUEIO\033[1;37m TORRENT \033[1;33mAPLICADO !\033[0m"
+echo -e "\033[1;33mบล็อก\033[1;37m TORRENT \033[1;33mใช้ APP !\033[0m"
 echo ""
-echo -e "\033[1;32mFIREWALL APLICADO COM SUCESSO !"
+echo -e "\033[1;32mใช้ไฟร์วอลล์สำเร็จแล้ว !"
 sleep 3
 menu
 else
