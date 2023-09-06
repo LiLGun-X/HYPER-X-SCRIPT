@@ -2097,7 +2097,7 @@ clear
 
 echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
 echo ""
-echo -ne "\033[1;32mกด Enter เพื่อยืนยัน IP คุณ:"$IP 
+echo -e "\033[1;32mกด Enter เพื่อยืนยัน IP คุณ:"$IP 
 read -p "พิมพ์ ที่ต้องการใช้ : " -e -i 8080 PROXY
 echo ""
 #Install squid
@@ -2449,7 +2449,6 @@ apt-get -y install squid
 sudo apt install squid
       }
 fun_bar 'ins'
-sleep 1
 cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
 echo "acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
 acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
@@ -2484,16 +2483,13 @@ http_access allow localnet
 http_access allow localhost
 http_access deny all
 
-#Portas" > /etc/squid/squid.conf
-for Pts in $(echo -e $portass); do
-echo -e "http_port $Pts" >> /etc/squid/squid.conf
-[[ -f "/usr/sbin/ufw" ]] && ufw allow $Pts/tcp
-done
-echo -e "
+http_port $portass
+http_port 3128
+
 cache_store_log none
 cache_log /dev/null
 logfile_rotate 0
-#Nome squid
+
 via off
 forwarded_for off
 dns_v4_first on
@@ -2506,6 +2502,7 @@ refresh_pattern \/InRelease$ 0 0% 0 refresh-ims
 refresh_pattern \/(Translation-.*)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
 refresh_pattern .               0       20%     4320
 visible_hostname HYPER-X" > /etc/squid/squid.conf
+
 
 sre() {
 /etc/init.d/squid start
