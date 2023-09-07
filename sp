@@ -1,92 +1,76 @@
 #!/bin/bash
 
-IP=$(wget -4qO- "http://whatismyip.akamai.com/")
-IPX=$(wget -qO- http://whatismyip.akamai.com/)
+# กำหนดอินเทอร์เฟซของ OpenVPN
+OPENVPN_INTERFACE="tun0"
 
-echo ""
-echo "          ░▒█░▒█░▒█░░▒█░▒█▀▀█░▒█▀▀▀░▒█▀▀▄░░░░▀▄░▄▀"|lolcat
-echo "          ░▒█▀▀█░▒▀▄▄▄▀░▒█▄▄█░▒█▀▀▀░▒█▄▄▀░▀▀░░▒█░░"|lolcat
-echo "          ░▒█░▒█░░░▒█░░░▒█░░░░▒█▄▄▄░▒█░▒█░░░░▄▀▒▀▄"|lolcat
-echo "
-echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
-	echo "|1| Install-ProxyServer"
-	echo "|2| Restart/ProxyServer"
-	echo ""
-	read -p "Select a Function Script : " S
+# คำสั่งสำหรับดูแบนด์วิดท์ดาวน์โหลดและอัพโหลด
+rx_bytes=$(ifconfig $OPENVPN_INTERFACE | grep 'RX packets' | awk '{print $5}')
+tx_bytes=$(ifconfig $OPENVPN_INTERFACE | grep 'TX packets' | awk '{print $5}')
 
-case $S in
-1) # ==============================================
-clear
-echo -e "\E[44;1;37m              ติดตั้ง SQUID PROXY               \E[0m"
-echo ""
-echo "Server IP  : $IPX "
-read -p "Port Proxy : " -e -i 8080 PROXY
-echo ""
-#Install squid
-apt update
-apt -y install squid
+# แปลงแบนด์วิดท์จากไบต์เป็นหน่วย MB, GB, TB
+rx_mbps=$(echo "scale=2; $rx_bytes / 1024 / 1024 * 8" | bc)
+tx_mbps=$(echo "scale=2; $tx_bytes / 1024 / 1024 * 8" | bc)
 
-cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
-echo "acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
-acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
-acl localnet src 100.64.0.0/10          # RFC 6598 shared address space (CGN)
-acl localnet src 169.254.0.0/16         # RFC 3927 link-local (directly plugged>
-acl localnet src 172.16.0.0/12          # RFC 1918 local private network (LAN)
-acl localnet src 192.168.0.0/16         # RFC 1918 local private network (LAN)
-acl localnet src fc00::/7               # RFC 4193 local private network range
-acl localnet src fe80::/10              # RFC 4291 link-local (directly plugged>
+# แปลงให้อยู่ในหน่วย GB หรือ TB ตามขนาดข้อมูล
+if [ $(echo "$rx_mbps > 1024" | bc -l) -eq 1 ]; then
+    rx_gbps=$(echo "scale=2; $rx_mbps / 1024" | bc)
+    if [ $(echo "$rx_gbps > 1024" | bc -l) -eq 1 ]; then
+        rx_tbps=$(echo "scale=2; $rx_gbps / 1024" | bc)
+        rx_bandwidth="Download: $rx_tbps TB"
+    else
+        rx_bandwidth="Download: $rx_gbps GB"
+    fi
+else
+    rx_bandwidth="Download: $rx_mbps MB"
+fi
 
-acl SSL_ports port 443
-acl Safe_ports port 80          # http
-acl Safe_ports port 21          # ftp
-acl Safe_ports port 443         # https
-acl Safe_ports port 70          # gopher
-acl Safe_ports port 210         # wais
-acl Safe_ports port 1025-65535  # unregistered ports
-acl Safe_ports port 280         # http-mgmt
-acl Safe_ports port 488         # gss-http
-acl Safe_ports port 591         # filemaker
-acl Safe_ports port 777         # multiling http
-acl CONNECT method CONNECT
+if [ $(echo "$tx_mbps > 1024" | bc -l) -eq 1 ]; then
+    tx_gbps=$(echo "scale=2; $tx_mbps / 1024" | bc)
+    if [ $(echo "$tx_gbps > 1024" | bc -l) -eq 1 ]; then
+        tx_tbps=$(echo "scale=2; $tx_gbps / 1024" | bc)
+        tx_bandwidth="Upload: $tx_tbps TB"
+    else
+        tx_bandwidth="Upload: $tx_gbps GB"
+    fi
+else
+    tx_bandwidth="Upload: $tx_mbps MB"
+fi
 
-acl ip_server dst $IPX-$IPX/255.255.255.255
+# แสดงผลรายงานแบนด์วิดท์
+echo "OpenVPN Bandwidth Usage"
+echo $rx_bandwidth
+echo $tx_bandwidth
 
-http_access allow ip_server
-http_access allow localhost manager
-http_access deny manager
-http_access allow localnet
-http_access allow localhost
-http_access deny all
+# กำหนดวันที่สำหรับรายงาน (ตัวอย่างเช่นวันที่ 1 ของแต่ละเดือน)
+REPORT_DATE=$(date +%d)
 
-http_port $PROXY
-http_port 3128
+# กำหนดเดือนที่สำหรับรายงาน (ตัวอย่างเช่นเดือน 1 ของแต่ละปี)
+REPORT_MONTH=$(date +%m)
 
-cache_store_log none
-cache_log /dev/null
-logfile_rotate 0
+# กำหนดตำแหน่งของ vnstat
+VNSTAT_PATH="/usr/bin/vnstat"
 
-via off
-forwarded_for off
-dns_v4_first on
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern \/(Packages|Sources)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
-refresh_pattern \/Release(|\.gpg)$ 0 0% 0 refresh-ims
-refresh_pattern \/InRelease$ 0 0% 0 refresh-ims
-refresh_pattern \/(Translation-.*)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
-refresh_pattern .               0       20%     4320
-visible_hostname By TestX" > /etc/squid/squid.conf
+# ฟังก์ชันรายงานแบนด์วิดท์รายวัน
+report_daily_bandwidth() {
+    echo "OpenVPN Daily Bandwidth Usage"
+    $VNSTAT_PATH -d -i tun0
+}
 
-/etc/init.d/squid start
-/etc/init.d/squid restart
+# ฟังก์ชันรายงานแบนด์วิดท์รายสัปดาห์
+report_weekly_bandwidth() {
+    echo "OpenVPN Weekly Bandwidth Usage"
+    $VNSTAT_PATH -w -i tun0
+}
 
-echo ""
-	echo "Squid Proxy,Install finish."
-	echo "Port Proxy : $PROXY"
-	echo ""
-	echo ""
-	echo ""
-        sleep 2.5
-exit
-;;
+# ฟังก์ชันรายงานแบนด์วิดท์รายเดือน
+report_monthly_bandwidth() {
+    echo "OpenVPN Monthly Bandwidth Usage"
+    $VNSTAT_PATH -m -i tun0
+}
+
+# ตรวจสอบว่าต้องรายงานรายวัน, รายสัปดาห์, หรือรายเดือน
+if [ "$REPORT_DATE" = "01" ]; then
+    report_monthly_bandwidth
+else
+    report_daily_bandwidth
+fi
