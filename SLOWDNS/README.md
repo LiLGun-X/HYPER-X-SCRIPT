@@ -3,4 +3,4 @@ instalação automática - slowdns dnstt-server
 
 
 # Test 3XUI
-bash <(curl -Ls https://raw.githubusercontent.com/alireza0/x-ui/master/install.sh)
+bash <(https://raw.githubusercontent.com/LiLGun-X/HYPER-X-SCRIPT/main/SLOWDNS/3xui)
