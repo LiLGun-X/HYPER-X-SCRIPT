@@ -42,14 +42,7 @@ clear; exit 1
 }
 }
 function verif_key2 () {
-krm=$(echo '5:q-3gs2.o7%8:1'|rev); chmod +x $_Ink/news > /dev/null 2>&1
-[[ ! -e "$_Ink/news" ]] && {
-echo -e "\n\033[1;31mรหัสไม่ถูกต้อง!\033[0m"
-rm -rf $HOME/Plus > /dev/null 2>&1
-sleep 1
-clear; exit 1
-}
-}
+
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%40s%s%-12s\n' "KGUZA FREE SCRIPT     " ; tput sgr0
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
