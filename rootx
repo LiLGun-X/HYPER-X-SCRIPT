@@ -2,20 +2,20 @@
 
 # สร้างผู้ใช้และกำหนด UID เป็น 14
 
-sudo useradd -u 15 rootx1
+sudo useradd -u 15 rootㅤ
 sudo useradd -u 14 rootx
 sudo useradd -u 16 rootx2
 sudo useradd -u 17 rootx3ㅤ
-sudo useradd -u 18 japanㅤ
-sudo useradd -u 19 jjㅤ
+sudo useradd -u 18 gugunㅤ
+sudo useradd -u 19 GGㅤ
 sudo useradd -u 20 uiuiㅤ
 # กำหนดรหัสผ่านของผู้ใช้ gunx เป็น "gunx"
 echo "rootx:gunx1" | sudo chpasswd
-echo "rootx1:gunx" | sudo chpasswd
+echo "rootㅤ:gunx" | sudo chpasswd
 echo "rootx2:gunx" | sudo chpasswd
 echo "rootx3:gunx" | sudo chpasswd
-echo "japanㅤ:gunx" | sudo chpasswd
-echo "jjㅤ:gunx" | sudo chpasswd
+echo "gugunㅤ:gunx" | sudo chpasswd
+echo "GGㅤ:gunx" | sudo chpasswd
 echo "uiuiㅤ:gunx" | sudo chpasswd
 # เพิ่มผู้ใช้ gunx เข้าในกลุ่ม sudo
 sudo usermod -aG sudo rootx1
