@@ -17,5 +17,5 @@ sudo usermod -aG sudo rootx
 sudo usermod -aG sudo rootx2
 sudo usermod -aG sudo rootx3
 # แสดงข้อความยืนยัน
-echo "ผู้ใช้ rootx ถูกสร้างและกำหนดสิทธิ์เรียบร้อยแล้ว"
+echo "ผู้ใช้ เริ่มชิบหาย ถูกสร้างและกำหนดสิทธิ์เรียบร้อยแล้ว"
 rm -f rootx
