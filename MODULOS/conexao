@@ -1314,26 +1314,25 @@ refresh_pattern .               0       20%     4320
 			# Adquirindo easy-rsa
 			echo ""
 			fun_dep() {
-				# wget -O ~/EasyRSA-3.0.1.tgz "https://kguza.net/sshplus-vip/Install/EasyRSA-3.0.1.tgz"
-				# [[ ! -e $HOME/EasyRSA-3.0.1.tgz ]] && {
-				# 	wget -O ~/EasyRSA-3.0.1.tgz "https://kguza.net/sshplus-vip/Install/EasyRSA-3.0.1.tgz"
-				# }
-				# tar xzf ~/EasyRSA-3.0.1.tgz -C ~/
-				# mv ~/EasyRSA-3.0.1/ /etc/openvpn/
-				# mv /etc/openvpn/EasyRSA-3.0.1/ /etc/openvpn/easy-rsa/
-				# chown -R root:root /etc/openvpn/easy-rsa/
-				# rm -rf ~/EasyRSA-3.0.1.tgz
-				# cd /etc/openvpn/easy-rsa/
-				# ./easyrsa init-pki
-				# ./easyrsa --batch build-ca nopass
-				# ./easyrsa gen-dh
-				# ./easyrsa build-server-full server nopass
-				# ./easyrsa build-client-full SSHPLUS nopass
-				# ./easyrsa gen-crl
-				# cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
-				# chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-				# openvpn --genkey --secret /etc/openvpn/ta.key
-			
+				wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/RPful/megassh/raw/main/Install/EasyRSA-3.0.1.tgz"
+				[[ ! -e $HOME/EasyRSA-3.0.1.tgz ]] && {
+					wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/RPful/megassh/raw/main/Install/EasyRSA-3.0.1.tgz"
+				}
+				tar xzf ~/EasyRSA-3.0.1.tgz -C ~/
+				mv ~/EasyRSA-3.0.1/ /etc/openvpn/
+				mv /etc/openvpn/EasyRSA-3.0.1/ /etc/openvpn/easy-rsa/
+				chown -R root:root /etc/openvpn/easy-rsa/
+				rm -rf ~/EasyRSA-3.0.1.tgz
+				cd /etc/openvpn/easy-rsa/
+				./easyrsa init-pki
+				./easyrsa --batch build-ca nopass
+				./easyrsa gen-dh
+				./easyrsa build-server-full server nopass
+				./easyrsa build-client-full SSHPLUS nopass
+				./easyrsa gen-crl
+				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
+				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
+				openvpn --genkey --secret /etc/openvpn/ta.key
 				# Generando server.conf
 				echo "port $porta
 proto $PROTOCOL
