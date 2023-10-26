@@ -1328,7 +1328,7 @@ addpt_sqd() {
 				./easyrsa --batch build-ca nopass
 				./easyrsa gen-dh
 				./easyrsa build-server-full server nopass
-				./easyrsa build-client-full SSHPLUS nopass
+				./easyrsa build-client-full HYPER-X nopass
 				./easyrsa gen-crl
 				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
 				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
@@ -1486,7 +1486,7 @@ exit 0' >$RCLOCAL
 				float
 			EOF
 			# gerar client.ovpn
-			newclient "SSHPLUS"
+			newclient "HYPER-X"
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
@@ -2143,7 +2143,7 @@ exit 0' >$RCLOCAL
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-			echo -e "\E[44;1;37m                MODO DE CONEXAO                 \E[0m\n"
+			echo -e "\E[44;1;37m                MODO DE CONEXAO   XV              \E[0m\n"
 			echo -e "\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
 			[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
 				echo -e "\033[1;32mSERVICO: \033[1;33mCHISEL: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)"
