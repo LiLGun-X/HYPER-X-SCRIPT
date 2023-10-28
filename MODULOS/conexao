@@ -1314,14 +1314,15 @@ addpt_sqd() {
 			# Adquirindo easy-rsa
 			echo ""
 			fun_dep() {
-				wget -O ~/EasyRSA3.tar "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/SYSTEM/EasyRSA3.tar"
-[[ ! -e $HOME/EasyRSA3.tar ]] && {
-    wget -O ~/EasyRSA3.tar "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/SYSTEM/EasyRSA3.tar"
-}
-tar xf ~/EasyRSA3.tar -C ~/
-mv ~/EasyRSA3.tar /etc/openvpn/
-mv /etc/openvpn/EasyRSA3.tar /etc/openvpn/easy-rsa/
-				rm -rf ~/EasyRSA3.tgz
+				wget -O ~/EasyRSA-3.1.0.tgz "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/EasyRSA-3.1.0.tgz"
+				[[ ! -e $HOME/EasyRSA-3.1.0.tgz ]] && {
+					wget -O ~/EasyRSA-3.1.0.tgz "https://github.com/LiLGun-X/HYPER-X-SCRIPT/raw/main/INSTALL/EasyRSA-3.1.0.tgz"
+				}
+				tar xzf ~/EasyRSA-3.1.0.tgz -C ~/
+				mv ~/EasyRSA-3.1.0/ /etc/openvpn/
+				mv /etc/openvpn/EasyRSA-3.1.0/ /etc/openvpn/easy-rsa/
+				chown -R root:root /etc/openvpn/easy-rsa/
+				rm -rf ~/EasyRSA-3.1.0.tgz
 				cd /etc/openvpn/easy-rsa/
 				./easyrsa init-pki
 				./easyrsa --batch build-ca nopass
