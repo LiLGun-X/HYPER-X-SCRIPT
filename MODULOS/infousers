@@ -5,8 +5,8 @@ echo ""
 [[ ! -e /bin/versao ]] && rm -rf /bin/menu
 for users in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |sort |grep -v "nobody" |grep -vi polkitd |grep -vi system-`
 do
-if [[ $(grep -cw $users $HOME/userlist.gzn) == "1" ]]; then
-    lim=$(grep -w $users $HOME/userlist.gzn | cut -d' ' -f2)
+if [[ $(grep -cw $users $HOME/userlist.txt) == "1" ]]; then
+    lim=$(grep -w $users $HOME/userlist.txt | cut -d' ' -f2)
 else
     lim="1"
 fi
