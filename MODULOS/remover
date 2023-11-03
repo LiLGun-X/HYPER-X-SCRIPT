@@ -17,7 +17,7 @@ chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 [[ -e /var/www/html/openvpn/$user.zip ]] && rm /var/www/html/openvpn/$user.zip > /dev/null 2>&1
 } > /dev/null 2>&1
 [[ ! -e /usr/lib/sshplus ]] && rm -rf /bin/ > /dev/null 2>&1
-database="/root/userlist.gzn"
+database="/root/userlist.txt"
 clear
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ลบบัญชีผู้ใช้ " ; tput sgr0
 echo ""
@@ -58,7 +58,7 @@ else
 		pkill -f "$user" > /dev/null 2>&1
 		deluser --force $user > /dev/null 2>&1
 		echo -e "\E[41;1;37m ผู้ใช้ $user ลบเรียบร้อยแล้ว!! \E[0m"
-		grep -v ^$user[[:space:]] /root/userlist.gzn > /tmp/ph ; cat /tmp/ph > /root/userlist.gzn
+		grep -v ^$user[[:space:]] /root/userlist.txt > /tmp/ph ; cat /tmp/ph > /root/userlist.txt
 		rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 		if [[ -e /etc/openvpn/server.conf ]]; then
 			remove_ovp $user
@@ -70,7 +70,7 @@ else
 			deluser --force $user > /dev/null 2>&1
 			echo ""
 			echo -e "\E[41;1;37m ผู้ใช้ $user ลบเรียบร้อยแล้ว!! \E[0m"
-			grep -v ^$user[[:space:]] /root/userlist.gzn > /tmp/ph ; cat /tmp/ph > /root/userlist.gzn
+			grep -v ^$user[[:space:]] /root/userlist.txt > /tmp/ph ; cat /tmp/ph > /root/userlist.txt
 			rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
 				remove_ovp $user
@@ -82,7 +82,7 @@ else
 			pkill -f "$user" > /dev/null 2>&1
 			deluser --force $user > /dev/null 2>&1
 			echo -e "\E[41;1;37m ผู้ใช้ $user ลบเรียบร้อยแล้ว!! \E[0m"
-			grep -v ^$user[[:space:]] /root/userlist.gzn > /tmp/ph ; cat /tmp/ph > /root/userlist.gzn
+			grep -v ^$user[[:space:]] /root/userlist.txt > /tmp/ph ; cat /tmp/ph > /root/userlist.txt
 			rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
 				remove_ovp $user
@@ -107,7 +107,7 @@ elif [[ "$resp" = "2" ]]; then
 		   remove_ovp $user
 		fi
 		done
-		rm $HOME/userlist.gzn && touch $HOME/userlist.gzn
+		rm $HOME/userlist.txt && touch $HOME/userlist.txt
         rm *.zip > /dev/null 2>&1
 		echo -e "\n\033[1;32mต้องการลบผู้ใช้ทั้งหมดจริงๆ!!\033[0m"
 		sleep 2
