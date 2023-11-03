@@ -503,6 +503,10 @@ case "$x" in
    clear
    testc
    ;;
+   v | V)
+   clear
+   v2m
+   ;;
    20)
    clear
    detalhes
