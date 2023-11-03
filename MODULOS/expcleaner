@@ -32,7 +32,7 @@ for user in $(awk -F: '{print $1}' /etc/passwd); do
 	echo "ลบแล้ว"
 	pkill -f $user
 	userdel --force $user
-	grep -v ^$user[[:space:]] /root/userlist.gzn > /tmp/ph ; cat /tmp/ph > /root/userlist.gzn
+	grep -v ^$user[[:space:]] /root/userlist.txt > /tmp/ph ; cat /tmp/ph > /root/userlist.txt
 	if [[ -e /etc/openvpn/server.conf ]]; then
 		remove_ovp $user
 	fi
