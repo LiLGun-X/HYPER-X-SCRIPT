@@ -1,6 +1,6 @@
 #!/bin/bash
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%20s%s\n' "   เปลี่ยนขีดจำกัดสำหรับการเชื่อมต่อพร้อมกัน   " ; tput sgr0
-database="/root/usuarios.db"
+database="/root/userlist.txt"
 if [ ! -f "$database" ]; then
 	tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "ไฟล์ $database ไม่พบ" ; echo "" ; tput sgr0
 	exit 1
@@ -55,7 +55,7 @@ else
 						grep -v ^$usuario[[:space:]] /root/userlist.gzn > /tmp/a
 						sleep 1
 						mv /tmp/a /root/userlist.gzn
-						echo $usuario $sshnum >> /root/usuarios.db
+						echo $usuario $sshnum >> /root/userlist.txt
 						tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "ขีดจำกัดที่ใช้กับผู้ใช้ $usuario คือ $sshnum " ; tput sgr0
 						sleep 2
 						exit
