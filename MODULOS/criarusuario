@@ -322,7 +322,7 @@ gui=$(date "+%d/%m/%Y" -d "+$dias days")
 pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
 useradd -e $final -M -s /bin/false -p $pass $username >/dev/null 2>&1 &
 echo "$password" >/etc/SSHPlus/senha/$username
-echo "$username $sshlimiter" >>/root/userlist.gzn
+echo "$username $sshlimiter" >>/root/userlist.txt
 [[ -e /etc/openvpn/server.conf ]] && {
 	printf "\033[1;32m📝ต้องการสร้างไฟล์ .OVPNไหม\033[1;31m?\033[1;33m[Y/N]:\033[1;37m "; read resp
 	[[ "$resp" = @(y|Y) ]] && {
@@ -409,8 +409,9 @@ Link : $IP:85/openvpn/$username.zip  "'' https://notify-api.line.me/api/notify >
 }
 fi
 
-
-
+#######################################################################################
+#######################################################################################
+#######################################################################################
 if [[ -e /etc/openvpn/server/server.conf ]]; then
 new_client () {
 	# Generates the custom client.ovpn
@@ -726,7 +727,7 @@ gui=$(date "+%d/%m/%Y" -d "+$dias days")
 pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
 useradd -e $final -M -s /bin/false -p $pass $username >/dev/null 2>&1 &
 echo "$password" >/etc/SSHPlus/senha/$username
-echo "$username $sshlimiter" >>/root/userlist.gzn
+echo "$username $sshlimiter" >>/root/userlist.txt
 [[ -e /etc/openvpn/server/server.conf ]] && {
 	echo -ne "\033[1;32m📝ต้องการสร้างไฟล์ .OVPNไหม\033[1;31m?\033[1;33m[Y/N]:\033[1;37m "; read resp
 	[[ "$resp" = @(y|Y) ]] && {
