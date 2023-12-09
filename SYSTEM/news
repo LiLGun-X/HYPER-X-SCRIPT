@@ -22,10 +22,10 @@ else
 system=$(cut -d' ' -f1 /etc/issue.net)
 fi
 ip=$(who am i|awk '{ print $5}')
-ISP=$(curl -s https://ipapi.co/$IP/org )
 day=$(date '+%A')
 days=$(date +'%d/%m/%y เวลา:%H:%M:%S')
 IP=$(wget -qO- ipv4.icanhazip.com);
+ISP=$(curl -s https://ipapi.co/$IP/org )
 curl -X POST -H 'Authorization: Bearer AS5wVe8ahymLLtXC5UiBPFkLvBSZ475RkMEArpq8WHD' -F 'message='" 
 IP ที่ Login : ($ip)
 IPเครื่อง     : $IP
