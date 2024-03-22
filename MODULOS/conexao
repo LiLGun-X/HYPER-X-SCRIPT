@@ -2188,8 +2188,7 @@ stunnel_sm() {
             [openvpn]
             accept = $porta
             connect = 127.0.0.1:443
-        END
-
+END  # ใส่ END ที่นี่ เพื่อปิดส่วนของเอกสาร
         #membuat sertifikat
         cat /etc/openvpn/client-key.pem /etc/openvpn/client-cert.pem > /etc/stunnel/stunnel.pem
 
